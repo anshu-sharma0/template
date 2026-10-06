@@ -1,5 +1,4 @@
 import { brand } from "@/lib/brand";
-import { navItems } from "@/lib/home-data";
 import { Container } from "./Container";
 import { Divider } from "@/components/ui/Divider";
 
@@ -7,50 +6,46 @@ export function Footer() {
   return (
     <footer className="bg-text text-white">
       <Container className="py-12 md:py-16">
-        <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
-          <div className="max-w-md">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-10">
+          {/* Brand Column */}
+          <div className="max-w-md space-y-4">
             <div className="flex items-center gap-3">
-              <span className="grid size-10 place-items-center rounded-[var(--radius-pill)] bg-white font-display text-sm text-text">
+              <span className="grid size-9 place-items-center rounded-full bg-white font-display text-sm font-semibold text-text shadow-sm">
                 {brand.logo}
               </span>
-              <span className="font-display text-2xl">{brand.name}</span>
+              <span className="font-display text-2xl tracking-tight">{brand.name}</span>
             </div>
-            <p className="mt-4 text-sm leading-7 text-white/70">{brand.tagline}</p>
-            <p className="mt-6 max-w-sm font-display text-3xl leading-tight">
+            <p className="text-sm leading-relaxed text-white/75 font-serif italic">
               For the wishes, invitations and little moments that should feel personal.
             </p>
           </div>
 
-          <div>
-            <p className="text-sm font-medium text-white">Explore</p>
-            <div className="mt-4 grid gap-3">
-              {navItems.map((item) => (
-                <a key={item.href} href={item.href} className="text-sm text-white/70 transition hover:text-white">
-                  {item.label}
-                </a>
-              ))}
+          {/* Quick Links Column */}
+          <div className="flex flex-wrap gap-8 text-sm text-white/80">
+            <div className="space-y-3">
+              <p className="text-xs font-semibold uppercase tracking-wider text-white">Navigation</p>
+              <ul className="space-y-2.5">
+                <li><a href="#occasions" className="transition hover:text-white">Create</a></li>
+                <li><a href="#templates" className="transition hover:text-white">Designs</a></li>
+                <li><a href="#how-it-works" className="transition hover:text-white">How It Works</a></li>
+                <li><a href="#faq" className="transition hover:text-white">FAQ</a></li>
+              </ul>
             </div>
-          </div>
 
-          <div>
-            <p className="text-sm font-medium text-white">Products</p>
-            <div className="mt-4 grid gap-3 text-sm text-white/70">
-              <a href="#birthday-wish" className="transition hover:text-white">
-                Digital Birthday Wish
-              </a>
-              <a href="#wedding-invitation" className="transition hover:text-white">
-                Digital Wedding Invitation
-              </a>
-              <a href="#templates" className="transition hover:text-white">
-                Three premium templates
-              </a>
+            <div className="space-y-3">
+              <p className="text-xs font-semibold uppercase tracking-wider text-white">Legal</p>
+              <ul className="space-y-2.5">
+                <li><a href="#" className="transition hover:text-white">Privacy</a></li>
+                <li><a href="#" className="transition hover:text-white">Terms</a></li>
+              </ul>
             </div>
           </div>
         </div>
 
         <Divider className="my-8 border-white/15" />
-        <div className="flex flex-col gap-3 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 {brand.name}. Frontend foundation preview.</p>
+
+        <div className="flex flex-col gap-3 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 {brand.name}. All rights reserved.</p>
           <a href={`mailto:${brand.email}`} className="transition hover:text-white">
             {brand.email}
           </a>

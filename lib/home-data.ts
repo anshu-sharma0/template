@@ -1,58 +1,62 @@
 export const navItems = [
-  { label: "Birthday", href: "#birthday-wish" },
-  { label: "Wedding", href: "#wedding-invitation" },
-  { label: "Templates", href: "#templates" },
+  { label: "Create", href: "#occasions" },
+  { label: "Designs", href: "#templates" },
   { label: "How It Works", href: "#how-it-works" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export const occasions = [
   {
-    icon: "🎂",
-    title: "Birthday Wish",
-    badge: "Personal surprise",
+    label: "Birthday Wish",
+    title: "A birthday message they'll want to keep.",
     description:
-      "More than just a birthday message. Create a personalized digital surprise they'll remember.",
-    cta: "Create Birthday Wish",
+      "Turn your words, memories and photos into a beautiful digital surprise.",
+    cta: "Create a Birthday Wish",
     href: "#templates",
     theme: "birthday" as const,
-    decorative: "Floating love note",
+    previewVariant: "birthday" as const,
   },
   {
-    icon: "💍",
-    title: "Wedding Invitation",
-    badge: "Premium invite",
+    label: "Wedding Invitation",
+    title: "Invite them beautifully.",
     description:
-      "Invite them beautifully. Create a premium digital invitation for your special day.",
-    cta: "Create Wedding Invitation",
+      "Share your wedding day with a digital invitation designed to feel as special as the celebration itself.",
+    cta: "Create a Wedding Invitation",
     href: "#templates",
     theme: "wedding" as const,
-    decorative: "Champagne floral line",
+    previewVariant: "wedding" as const,
   },
 ];
 
 export const templates = [
   {
-    category: "Birthday Wish",
-    name: "Romantic Birthday",
-    description: "Turn a simple birthday wish into a little digital surprise.",
-    cta: "Try this design",
-    href: "#birthday-wish",
+    id: "birthday-wish",
+    name: "Birthday Wish",
+    category: "Birthday",
+    description: "Romantic, warm and personal.",
+    detail: "A personalized digital birthday surprise with custom photos, heartfelt notes, memory frame, and ambient music.",
+    cta: "Preview Design",
+    href: "#templates",
     preview: "birthday" as const,
   },
   {
-    category: "Elegant Wedding",
+    id: "elegant-wedding",
     name: "Elegant Wedding",
-    description: "An invitation that feels as beautiful as the day itself.",
-    cta: "Try this design",
-    href: "#wedding-invitation",
+    category: "Wedding",
+    description: "Timeless, graceful and refined.",
+    detail: "A graceful digital wedding invitation featuring delicate floral motifs, couple story, event schedule and RSVP info.",
+    cta: "Preview Design",
+    href: "#templates",
     preview: "wedding" as const,
   },
   {
-    category: "Luxury Wedding",
+    id: "luxury-wedding",
     name: "Luxury Wedding",
-    description: "Your story deserves a beautiful beginning.",
-    cta: "Try this design",
-    href: "#wedding-invitation",
+    category: "Wedding",
+    description: "Sophisticated, dramatic and unforgettable.",
+    detail: "A dramatic dark-mode luxury wedding keepsake with rich gold accents, editorial photography presentation and event details.",
+    cta: "Preview Design",
+    href: "#templates",
     preview: "luxuryWedding" as const,
   },
 ];
@@ -61,89 +65,103 @@ export const steps = [
   {
     number: "01",
     title: "Choose",
-    description: "Pick a beautiful design.",
+    description: "Pick a beautiful design for your moment.",
   },
   {
     number: "02",
-    title: "Make it yours",
-    description: "Add names, messages, photos and details.",
+    title: "Personalize",
+    description: "Add names, photos, messages and details.",
   },
   {
     number: "03",
-    title: "Share the moment",
-    description: "Get your personal link and send it.",
+    title: "Preview",
+    description: "See exactly how your creation will feel before sharing.",
+  },
+  {
+    number: "04",
+    title: "Share",
+    description: "Turn your creation into a beautiful private digital experience.",
+  },
+];
+
+export const featureHighlights = [
+  {
+    title: "Personal",
+    description: "Made around your words, memories and people.",
+  },
+  {
+    title: "Beautiful",
+    description: "Thoughtfully designed instead of looking like a generic template.",
+  },
+  {
+    title: "Interactive",
+    description: "More than a static card — something they can experience.",
+  },
+  {
+    title: "Shareable",
+    description: "Easy to send privately through WhatsApp or a link.",
   },
 ];
 
 export const testimonials = [
   {
-    quote: "She opened it at midnight and called me immediately.",
-    name: "Aarav",
-    occasion: "Birthday Wish",
-    city: "Mumbai",
+    quote: "It felt like giving them a real gift, not just sending another message.",
+    name: "Aarav & Meera",
+    context: "Birthday Wish",
   },
   {
-    quote: "It felt like I had given her an actual gift.",
-    name: "Meera",
-    occasion: "Birthday Wish",
-    city: "Bengaluru",
+    quote: "The invitation looked incredibly elegant on mobile.",
+    name: "Rahul & Isha",
+    context: "Wedding Invitation",
   },
   {
-    quote: "Everyone at the wedding loved the invitation.",
-    name: "Isha",
-    occasion: "Wedding Invitation",
-    city: "Jaipur",
+    quote: "The little details made the whole thing feel so personal.",
+    name: "Ananya S.",
+    context: "Birthday Wish",
   },
 ];
 
-export const pricing = [
-  {
-    title: "Birthday Wish",
-    price: "₹149",
-    description: "A personal digital surprise with message, photo moments and shareable preview.",
-    cta: "Create Yours",
-    href: "#birthday-wish",
-    tone: "birthday" as const,
-  },
-  {
-    title: "Wedding Invitation",
-    price: "₹1,499",
-    description: "A premium wedding microsite preview for your story, date and celebration details.",
-    cta: "Create Yours",
-    href: "#wedding-invitation",
-    tone: "wedding" as const,
-  },
-];
+export const PRICING_AMOUNT = "₹499";
+
+export const pricingConfig = {
+  price: PRICING_AMOUNT,
+  label: "Digital Creation",
+  subtitle: "One beautiful personalized digital experience.",
+  features: [
+    "Premium template",
+    "Personalization",
+    "Photos",
+    "Music",
+    "Shareable private link",
+  ],
+  cta: "Create Something Special",
+  href: "/create",
+};
 
 export const faqs = [
   {
-    question: "What exactly do I create?",
-    answer:
-      "You create a private digital experience: a birthday wish or wedding invitation that opens as a beautiful mobile-first page, not a flat image.",
-  },
-  {
-    question: "Do I need an account?",
-    answer:
-      "Not for this phase. The product flow is being designed around simple creation first, with account features planned only when they truly help.",
-  },
-  {
-    question: "Can I preview it before paying?",
-    answer:
-      "Yes. The experience is built around previewing exactly what the recipient will see before any purchase step exists.",
-  },
-  {
-    question: "Can I send it on WhatsApp?",
-    answer:
-      "Yes. These experiences are designed to be shared as a simple link through WhatsApp, Instagram, email or any chat app.",
-  },
-  {
-    question: "Does it work on mobile?",
-    answer:
-      "Yes. Mobile is the primary canvas, so typography, touch targets, previews and section spacing are designed for small screens first.",
+    question: "What can I create?",
+    answer: "You can currently create a digital birthday wish or wedding invitation.",
   },
   {
     question: "Can I add my own photos?",
-    answer:
-      "The visual system is ready for photo upload areas and image previews. Real uploads will come in a later backend phase.",
+    answer: "Yes. Personal photos are a core part of the experience.",
+  },
+  {
+    question: "Can I add music?",
+    answer: "Yes, where supported by the selected experience.",
+  },
+  {
+    question: "Will it work on phones?",
+    answer: "Yes. The experience is designed mobile-first.",
+  },
+  {
+    question: "Can I share it on WhatsApp?",
+    answer: "Yes. The final creation will be designed to be easy to share as a private link.",
+  },
+  {
+    question: "Can I preview it before sharing?",
+    answer: "Yes. Previewing is an important part of the creation experience.",
   },
 ];
+

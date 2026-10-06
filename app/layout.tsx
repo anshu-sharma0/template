@@ -14,17 +14,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${brand.name} | Digital Wishes & Wedding Invitations`,
-  description: brand.tagline,
+  title: `Create Beautiful Digital Birthday Wishes & Wedding Invitations | ${brand.name}`,
+  description:
+    "Create a beautiful digital birthday wish or wedding invitation made with love. Personalized with photos, custom notes and music, designed mobile-first and shareable as a private link.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col overflow-x-hidden">{children}</body>
     </html>
   );
 }

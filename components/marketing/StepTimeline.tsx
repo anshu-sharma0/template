@@ -1,27 +1,51 @@
 import { steps } from "@/lib/home-data";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "./SectionHeading";
+import { Sparkle } from "@/components/decorative/Sparkle";
 
 export function StepTimeline() {
   return (
     <Section id="how-it-works" background="warm" spacing="lg">
-      <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <SectionHeading
-          eyebrow="How it works"
-          title="From idea to unforgettable."
-          description="A guided creation flow that keeps the focus on the person, the feeling and the preview."
+      <SectionHeading
+        align="center"
+        eyebrow="How It Works"
+        title="Made simple. Made personal."
+        description="Four thoughtful steps to create a digital memory they will treasure."
+      />
+
+      {/* Visual Timeline Progression */}
+      <div className="relative mt-16 max-w-6xl mx-auto">
+        {/* Horizontal Connecting Line (Desktop) */}
+        <div
+          aria-hidden="true"
+          className="hidden lg:block absolute top-7 left-[8%] right-[8%] h-0.5 bg-[linear-gradient(90deg,var(--primary-soft)_0%,var(--accent)_50%,var(--primary-soft)_100%)] z-0"
         />
 
-        <ol className="relative grid gap-8 md:grid-cols-3 md:gap-4">
-          <span aria-hidden="true" className="absolute left-6 top-8 h-[calc(100%-4rem)] w-px bg-border md:left-0 md:right-0 md:top-9 md:mx-auto md:h-px md:w-[calc(100%-5rem)]" />
+        {/* Vertical Connecting Line (Mobile) */}
+        <div
+          aria-hidden="true"
+          className="lg:hidden absolute top-7 bottom-7 left-[2.25rem] w-0.5 bg-border z-0"
+        />
+
+        <ol className="grid gap-10 lg:grid-cols-4 lg:gap-6 relative z-10">
           {steps.map((step) => (
-            <li key={step.number} className="relative grid gap-4 pl-16 md:pl-0 md:pt-20">
-              <span className="absolute left-0 top-0 grid size-12 place-items-center rounded-[var(--radius-pill)] border border-border bg-surface font-display text-lg text-primary shadow-soft md:left-1/2 md:-translate-x-1/2">
+            <li key={step.number} className="relative flex lg:flex-col items-start lg:items-center gap-6 lg:text-center group">
+              {/* Step Circle Badge */}
+              <div className="relative z-10 flex size-14 shrink-0 items-center justify-center rounded-full border-2 border-surface bg-background font-display text-lg font-semibold text-primary shadow-soft transition-transform duration-300 group-hover:scale-110 group-hover:bg-surface">
                 {step.number}
-              </span>
-              <div className="rounded-[var(--radius-medium)] border border-border bg-surface p-5 shadow-soft">
-                <h3 className="font-display text-3xl leading-tight text-text">{step.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-text-muted">{step.description}</p>
+              </div>
+
+              {/* Step Card Content */}
+              <div className="flex-1 rounded-2xl border border-border bg-surface p-6 shadow-soft transition duration-300 group-hover:-translate-y-1 group-hover:shadow-lift w-full">
+                <div className="flex items-center justify-between lg:justify-center gap-2 mb-2">
+                  <h3 className="font-display text-2xl font-normal text-text">
+                    {step.title}
+                  </h3>
+                  <Sparkle className="text-accent text-sm lg:hidden" />
+                </div>
+                <p className="text-sm leading-6 text-text-muted">
+                  {step.description}
+                </p>
               </div>
             </li>
           ))}
@@ -30,3 +54,4 @@ export function StepTimeline() {
     </Section>
   );
 }
+
