@@ -1,0 +1,164 @@
+"use client";
+
+import { type ChangeEvent } from "react";
+import type { BirthdayWishData } from "@/lib/birthday-types";
+import { Sparkle } from "@/components/decorative/Sparkle";
+
+type PhotoFormProps = {
+  data: BirthdayWishData;
+  onChange: (updates: Partial<BirthdayWishData>) => void;
+};
+
+export function PhotoForm({ data, onChange }: PhotoFormProps) {
+  const handleMainPhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const result = event.target?.result as string;
+      if (result) {
+        onChange({ mainPhoto: result });
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleGalleryPhotoAdd = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const result = event.target?.result as string;
+      if (result) {
+        onChange({ photos: [...data.photos, result] });
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveMainPhoto = () => {
+    onChange({ mainPhoto: "" });
+  };
+
+  const handleRemoveGalleryPhoto = (index: number) => {
+    const updated = [...data.photos];
+    updated.splice(index, 1);
+    onChange({ photos: updated });
+  };
+
+  return (
+    <div className="space-y-6 animate-fade-in">
+      <div className="space-y-1">
+        <h2 className="font-display text-3xl font-normal text-text">
+          Add a few memories.
+        </h2>
+        <p className="text-sm text-text-muted">
+          Photos make the surprise feel truly personal.
+        </p>
+      </div>
+
+      {/* Main Hero Photo Slot */}
+      <div className="space-y-2">
+        <label className="block text-xs font-semibold uppercase tracking-wider text-text">
+          Main Featured Photo <span className="text-text-muted font-normal">(Optional)</span>
+        </label>
+
+        {data.mainPhoto ? (
+          <div className="relative aspect-4/3 w-full max-w-sm overflow-hidden rounded-2xl border-2 border-primary/30 bg-surface shadow-soft group">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={data.mainPhoto}
+              alt="Main birthday photo preview"
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-text/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+              <label className="cursor-pointer rounded-full bg-white px-4 py-2 text-xs font-semibold text-text shadow-sm hover:bg-surface-soft">
+                Replace
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleMainPhotoChange}
+                  className="sr-only"
+                />
+              </label>
+              <button
+                type="button"
+                onClick={handleRemoveMainPhoto}
+                className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-primary-strong"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        ) : (
+          <label className="flex aspect-video w-full max-w-sm cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border bg-surface-soft/60 p-6 text-center transition hover:border-primary/50 hover:bg-surface-soft">
+            <div className="flex size-12 items-center justify-center rounded-full bg-white text-primary shadow-xs mb-2">
+              <Sparkle className="text-xl" />
+            </div>
+            <p className="font-display text-lg text-text">+ Add Main Photo</p>
+            <p className="text-xs text-text-muted mt-1">
+              Select a favorite portrait or photo of {data.recipientName || "them"}
+            </p>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleMainPhotoChange}
+              className="sr-only"
+            />
+          </label>
+        )}
+      </div>
+
+      {/* Memory Gallery Photos */}
+      <div className="space-y-3 pt-4 border-t border-border/60">
+        <div>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-text">
+            Additional Memory Photos <span className="text-text-muted font-normal">(Optional)</span>
+          </label>
+          <p className="text-xs text-text-muted mt-0.5">
+            Add up to 4 extra favorite snapshots to build a photo gallery.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-md">
+          {data.photos.map((photoUrl, idx) => (
+            <div
+              key={idx}
+              className="relative aspect-square overflow-hidden rounded-xl border border-border bg-surface shadow-xs group"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={photoUrl}
+                alt={`Memory snapshot ${idx + 1}`}
+                className="h-full w-full object-cover"
+              />
+              <button
+                type="button"
+                onClick={() => handleRemoveGalleryPhoto(idx)}
+                aria-label={`Remove photo ${idx + 1}`}
+                className="absolute top-1.5 right-1.5 flex size-6 items-center justify-center rounded-full bg-text/70 text-white text-xs opacity-0 group-hover:opacity-100 transition"
+              >
+                ✕
+              </button>
+            </div>
+          ))}
+
+          {data.photos.length < 4 && (
+            <label className="flex aspect-square cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-border bg-surface-soft/60 p-3 text-center transition hover:border-primary/50 hover:bg-surface-soft">
+              <span className="text-xl text-primary font-bold">+</span>
+              <span className="text-xs font-medium text-text mt-1">Add Photo</span>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleGalleryPhotoAdd}
+                className="sr-only"
+              />
+            </label>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

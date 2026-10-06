@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { InvitationPreview, type InvitationPreviewVariant } from "@/components/invitation/InvitationPreview";
 import { cn } from "@/lib/cn";
 
@@ -7,6 +8,7 @@ type PhonePreviewProps = {
   size?: "sm" | "md" | "lg";
   floating?: boolean;
   label?: string;
+  children?: ReactNode;
 };
 
 const sizes = {
@@ -21,6 +23,7 @@ export function PhonePreview({
   size = "md",
   floating = false,
   label = "Digital experience preview",
+  children,
 }: PhonePreviewProps) {
   return (
     <div
@@ -35,8 +38,9 @@ export function PhonePreview({
     >
       <div className="absolute left-1/2 top-2 z-20 h-1.5 w-16 -translate-x-1/2 rounded-[var(--radius-pill)] bg-white/20" />
       <div className="relative h-full overflow-hidden rounded-[1.55rem] bg-surface">
-        <InvitationPreview variant={variant} />
+        {children ? children : <InvitationPreview variant={variant} />}
       </div>
     </div>
   );
 }
+
