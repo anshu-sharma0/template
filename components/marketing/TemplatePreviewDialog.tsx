@@ -4,19 +4,13 @@ import { Dialog } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { PhonePreview } from "./PhonePreview";
-import type { InvitationPreviewVariant } from "@/components/invitation/InvitationPreview";
-
-type Template = {
-  id: string;
-  name: string;
-  category: string;
-  description: string;
-  detail?: string;
-  preview: InvitationPreviewVariant;
-};
+import { CreationRenderer } from "@/components/renderers/CreationRenderer";
+import type { TemplateConfig, Creation } from "@/lib/creation-types";
+import { DEFAULT_BIRTHDAY_DATA } from "@/lib/birthday-data";
+import { DEFAULT_WEDDING_DATA } from "@/lib/wedding-data";
 
 type TemplatePreviewDialogProps = {
-  template: Template | null;
+  template: TemplateConfig | null;
   isOpen: boolean;
   onClose: () => void;
   onSelect: (templateId: string) => void;
@@ -30,18 +24,36 @@ export function TemplatePreviewDialog({
 }: TemplatePreviewDialogProps) {
   if (!template) return null;
 
+  const creation: Creation =
+    template.type === "birthday"
+      ? {
+          type: "birthday",
+          templateId: template.id,
+          data: DEFAULT_BIRTHDAY_DATA,
+        }
+      : {
+          type: "wedding",
+          templateId: template.id,
+          data: {
+            ...DEFAULT_WEDDING_DATA,
+            template: template.id === "luxury-wedding" ? "luxury" : "elegant",
+          },
+        };
+
   return (
     <Dialog isOpen={isOpen} onClose={onClose} title={template.name}>
       <div className="grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:items-center">
         {/* Device Preview */}
         <div className="flex justify-center bg-surface-soft/80 p-6 rounded-2xl border border-border/60">
-          <PhonePreview variant={template.preview} size="sm" className="shadow-lift" />
+          <PhonePreview size="sm" className="shadow-lift">
+            <CreationRenderer creation={creation} autoOpen />
+          </PhonePreview>
         </div>
 
         {/* Template Information & Actions */}
         <div className="flex flex-col justify-between space-y-5">
           <div>
-            <Badge tone={template.preview === "luxuryWedding" ? "champagne" : "rose"}>
+            <Badge tone={template.previewVariant === "luxuryWedding" ? "champagne" : "rose"}>
               {template.category}
             </Badge>
 
@@ -82,3 +94,4 @@ export function TemplatePreviewDialog({
     </Dialog>
   );
 }
+

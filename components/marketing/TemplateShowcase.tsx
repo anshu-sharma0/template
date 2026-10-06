@@ -1,24 +1,27 @@
 "use client";
 
 import { useState } from "react";
-import { templates } from "@/lib/home-data";
+import { getAllTemplates } from "@/lib/template-registry";
+import type { TemplateConfig } from "@/lib/creation-types";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "./SectionHeading";
 import { TemplateCard } from "./TemplateCard";
 import { TemplatePreviewDialog } from "./TemplatePreviewDialog";
 
 export function TemplateShowcase() {
-  const [selectedTemplate, setSelectedTemplate] = useState<(typeof templates)[number] | null>(null);
+  const allTemplates = getAllTemplates();
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateConfig | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const handleOpenPreview = (template: (typeof templates)[number]) => {
+  const handleOpenPreview = (template: TemplateConfig) => {
     setSelectedTemplate(template);
     setDialogOpen(true);
   };
 
   const handleSelectTemplate = (templateId: string) => {
     setDialogOpen(false);
-    window.location.href = `/create?template=${templateId}`;
+    const target = templateId === "birthday-wish" ? "/birthday/create" : `/wedding/create?template=${templateId === "luxury-wedding" ? "luxury" : "elegant"}`;
+    window.location.href = target;
   };
 
   return (
@@ -31,10 +34,10 @@ export function TemplateShowcase() {
       />
 
       <div className="mt-12 grid gap-8 md:grid-cols-3">
-        {templates.map((template) => (
+        {allTemplates.map((template) => (
           <TemplateCard
             key={template.id}
-            {...template}
+            template={template}
             onPreview={() => handleOpenPreview(template)}
           />
         ))}
@@ -49,3 +52,4 @@ export function TemplateShowcase() {
     </Section>
   );
 }
+
