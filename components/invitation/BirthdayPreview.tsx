@@ -10,7 +10,7 @@ type BirthdayPreviewProps = {
 };
 
 export function BirthdayPreview({
-  recipient = "Priya",
+  recipient = "Khushi",
   sender = "Aarav",
   message = "Every ordinary day feels brighter with you in it.",
   compact = false,
@@ -31,7 +31,7 @@ export function BirthdayPreview({
         <PhotoFrame className={compact ? "mx-auto w-32" : "mx-auto w-40"} variant="polaroid" />
 
         <div className="space-y-3">
-          <p className="mx-auto max-w-[14rem] text-sm leading-6 text-text-muted">{message}</p>
+          <p className="mx-auto max-w-56 text-sm leading-6 text-text-muted">{message}</p>
           <p className="font-display text-xl text-text">With all my love, {sender}</p>
           <MusicButton className="mx-auto" />
         </div>

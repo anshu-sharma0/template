@@ -29,7 +29,7 @@ export function RecipientForm({ data, onChange, errors }: RecipientFormProps) {
           id="recipientName"
           value={data.recipientName}
           onChange={(e) => onChange({ recipientName: e.target.value })}
-          placeholder="Their name (e.g. Priya)"
+          placeholder="Their name (e.g. Khushi)"
           className="text-lg"
           autoFocus
         />
@@ -55,11 +55,10 @@ export function RecipientForm({ data, onChange, errors }: RecipientFormProps) {
                 onClick={() =>
                   onChange({ relationship: isSelected ? "" : (rel as RelationshipOption) })
                 }
-                className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition ${
-                  isSelected
+                className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition ${isSelected
                     ? "border-primary bg-primary text-white shadow-xs"
                     : "border-border bg-surface text-text-muted hover:border-border/80 hover:text-text"
-                }`}
+                  }`}
               >
                 {rel}
               </button>

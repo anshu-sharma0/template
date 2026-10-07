@@ -64,7 +64,7 @@ export const MUSIC_TRACKS: MusicTrackOption[] = [
 ];
 
 export const DEFAULT_BIRTHDAY_DATA: BirthdayWishData = {
-  recipientName: "Priya",
+  recipientName: "Khushi",
   relationship: "Partner",
   age: "25",
   senderName: "Akshat",

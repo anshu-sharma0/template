@@ -21,19 +21,19 @@ export function hashManagementToken(token: string): string {
 /**
  * Generates a clean, URL-safe, unique slug.
  * Format: {prefix}-{name-slug}-{shortHash}
- * Example: birthday-priya-k8m2 or wedding-priya-akshat-9p4q
+ * Example: birthday-khushi-k8m2 or wedding-khushi-akshat-9p4q
  */
 export function generateUniqueSlug(type: "birthday" | "wedding", nameHint?: string): string {
   const cleanHint = nameHint
     ? nameHint
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "")
-        .slice(0, 20)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 20)
     : "";
 
   const randomSuffix = crypto.randomBytes(3).toString("hex"); // 6 hex chars
-  
+
   if (type === "birthday") {
     const base = cleanHint ? `hbd-${cleanHint}` : "birthday";
     return `${base}-${randomSuffix}`;
