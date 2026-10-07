@@ -8,6 +8,7 @@ import {
 import { normalizeBirthdayWish, normalizeWeddingInvitation } from "@/lib/creation-normalizer";
 import { validateBirthdayWish, validateWeddingInvitation } from "@/lib/creation-validator";
 import { TEMPLATE_REGISTRY } from "@/lib/template-registry";
+import { isCreationPaid } from "@/lib/services/orderService";
 
 export type DBStatus = "draft" | "published" | "archived";
 
@@ -243,7 +244,6 @@ export async function updateCreationByManageToken(
 
 /**
  * Publishes a creation. Generates unique public slug if not already published.
- * Safe & Idempotent.
  */
 export async function publishCreationByManageToken(
   rawToken: string

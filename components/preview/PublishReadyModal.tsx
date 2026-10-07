@@ -6,6 +6,7 @@ import { Dialog } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button";
 import { Sparkle } from "@/components/decorative/Sparkle";
 import type { Creation } from "@/lib/creation-types";
+import { getTemplatePrice, formatPriceINR } from "@/lib/pricing";
 
 type PublishReadyModalProps = {
   isOpen: boolean;
@@ -21,16 +22,18 @@ export function PublishReadyModal({
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [publishedUrl, setPublishedUrl] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleSaveDraft = async () => {
+  const pricingTier = getTemplatePrice(creation.templateId);
+  const formattedPrice = formatPriceINR(pricingTier.amountInPaise);
+
+  const handleContinueToCheckout = async () => {
     setIsLoading(true);
     setErrorMessage(null);
 
     try {
+      // 1. Create draft to obtain secure management token
       const res = await fetch("/api/creations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -48,68 +51,13 @@ export function PublishReadyModal({
         return;
       }
 
-      // Redirect to private management URL
+      // 2. Redirect to private management & checkout page
       router.push(`/manage/${result.token}`);
     } catch (err) {
       console.error("Save creation error:", err);
-      setErrorMessage("Network error while saving draft.");
+      setErrorMessage("Network error while preparing checkout.");
       setIsLoading(false);
     }
-  };
-
-  const handlePublishDirectly = async () => {
-    setIsLoading(true);
-    setErrorMessage(null);
-
-    try {
-      // 1. Create draft first to get management token
-      const createRes = await fetch("/api/creations", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: creation.type,
-          templateId: creation.templateId,
-          data: creation.data,
-        }),
-      });
-
-      const createData = await createRes.json();
-      if (!createRes.ok || !createData.success) {
-        setErrorMessage(createData.error || "Failed to save experience.");
-        setIsLoading(false);
-        return;
-      }
-
-      const token = createData.token;
-
-      // 2. Publish creation
-      const pubRes = await fetch(`/api/creations/manage/${token}/publish`, {
-        method: "POST",
-      });
-
-      const pubData = await pubRes.json();
-      if (!pubRes.ok || !pubData.success) {
-        setErrorMessage(pubData.error || "Validation failed during publishing.");
-        setIsLoading(false);
-        return;
-      }
-
-      setPublishedUrl(pubData.url);
-    } catch (err) {
-      console.error("Publish error:", err);
-      setErrorMessage("Network error during publishing.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleCopyLink = () => {
-    if (!publishedUrl) return;
-    const origin = typeof window !== "undefined" ? window.location.origin : "";
-    const fullUrl = `${origin}${publishedUrl}`;
-    navigator.clipboard.writeText(fullUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
   };
 
   return (
@@ -125,68 +73,34 @@ export function PublishReadyModal({
           </div>
         )}
 
-        {publishedUrl ? (
-          <div className="space-y-4">
-            <h3 className="font-display text-2xl font-normal text-text">
-              Your Experience is Live ❤️
-            </h3>
-            <p className="text-xs text-text-muted">
-              Here is your official shareable public link:
-            </p>
+        <div className="space-y-4 max-w-md mx-auto">
+          <h3 className="font-display text-2xl font-normal text-text">
+            Continue to Secure Checkout
+          </h3>
+          <p className="text-sm text-text-muted leading-relaxed">
+            Your {creation.type === "birthday" ? "birthday surprise" : "wedding invitation"} is saved. Complete payment to publish your live share link.
+          </p>
 
-            <div className="p-4 bg-surface rounded-2xl border border-border flex flex-col gap-3">
-              <input
-                type="text"
-                readOnly
-                value={`${typeof window !== "undefined" ? window.location.origin : ""}${publishedUrl}`}
-                className="w-full bg-white border border-border px-3 py-2 rounded-xl text-xs font-mono text-text"
-              />
-              <div className="flex gap-2">
-                <Button onClick={handleCopyLink} size="sm" className="flex-1">
-                  {copied ? "Link Copied ❤️" : "Copy Link"}
-                </Button>
-                <a
-                  href={publishedUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-xl bg-surface border border-border text-text text-xs font-semibold hover:bg-surface-soft flex items-center"
-                >
-                  Open Live ↗
-                </a>
-              </div>
-            </div>
+          {/* Pricing Banner */}
+          <div className="p-4 bg-surface rounded-2xl border border-border flex justify-between items-center text-xs">
+            <span className="font-medium text-text">{pricingTier.name}</span>
+            <span className="font-serif font-bold text-accent-strong text-base">
+              {formattedPrice}
+            </span>
           </div>
-        ) : (
-          <div className="space-y-4 max-w-md mx-auto">
-            <h3 className="font-display text-2xl font-normal text-text">
-              Save or Publish Your Experience
-            </h3>
-            <p className="text-sm text-text-muted leading-relaxed">
-              Save your creation securely to receive a private management link, or publish immediately to get your public share URL.
-            </p>
 
-            <div className="pt-4 flex flex-col sm:flex-row justify-center gap-3">
-              <Button
-                onClick={handlePublishDirectly}
-                disabled={isLoading}
-                size="lg"
-                className="shadow-lift"
-              >
-                <span>{isLoading ? "Publishing..." : "🚀 Publish & Get Public Link"}</span>
-                <Sparkle className="text-accent text-sm ml-2" />
-              </Button>
-
-              <Button
-                onClick={handleSaveDraft}
-                disabled={isLoading}
-                variant="secondary"
-                size="lg"
-              >
-                <span>{isLoading ? "Saving..." : "🔒 Save Private Draft"}</span>
-              </Button>
-            </div>
+          <div className="pt-4 flex flex-col sm:flex-row justify-center gap-3">
+            <Button
+              onClick={handleContinueToCheckout}
+              disabled={isLoading}
+              size="lg"
+              className="shadow-lift"
+            >
+              <span>{isLoading ? "Saving..." : `Continue to Pay (${formattedPrice})`}</span>
+              <Sparkle className="text-accent text-sm ml-2" />
+            </Button>
           </div>
-        )}
+        </div>
       </div>
     </Dialog>
   );

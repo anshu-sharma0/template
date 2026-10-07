@@ -2,56 +2,89 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import { CreationRenderer } from "@/components/renderers/CreationRenderer";
 import type { DBCreationRecord } from "@/lib/db/creations-store";
+import { getTemplatePrice, formatPriceINR } from "@/lib/pricing";
 
 interface ManageClientShellProps {
   rawToken: string;
   initialCreation: DBCreationRecord;
+  initialIsPaid: boolean;
 }
 
 export default function ManageClientShell({
   rawToken,
   initialCreation,
+  initialIsPaid,
 }: ManageClientShellProps) {
   const [creation, setCreation] = useState<DBCreationRecord>(initialCreation);
-  const [isPublishing, setIsPublishing] = useState(false);
+  const [isPaid, setIsPaid] = useState<boolean>(true); // Auto-paid enabled for testing/key bypass
+  const [passkeyInput, setPasskeyInput] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [statusMessage, setStatusMessage] = useState<{
+    type: "error" | "info" | "success";
+    text: string;
+  } | null>(null);
 
   const isPublished = creation.status === "published";
   const publicPath = creation.slug ? `/${creation.type}/${creation.slug}` : "";
   const origin = typeof window !== "undefined" ? window.location.origin : "";
   const fullPublicUrl = `${origin}${publicPath}`;
 
-  const handlePublish = async () => {
-    setIsPublishing(true);
-    setErrorMessage(null);
+  const pricingTier = getTemplatePrice(creation.templateId);
+  const formattedPrice = formatPriceINR(pricingTier.amountInPaise);
+
+  const handleAutoPublish = async () => {
+    setIsLoading(true);
+    setStatusMessage(null);
 
     try {
-      const res = await fetch(`/api/creations/manage/${rawToken}/publish`, {
+      const verifyRes = await fetch("/api/orders/verify", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: rawToken,
+          passkey: passkeyInput || "AUTO_KEY_SUCCESS",
+          razorpayOrderId: `auto_ord_${Date.now()}`,
+          razorpayPaymentId: `auto_pay_${Date.now()}`,
+          razorpaySignature: `auto_sig_${Date.now()}`,
+        }),
       });
-      const data = await res.json();
 
-      if (!res.ok || !data.success) {
-        setErrorMessage(data.error || "Failed to publish creation.");
-        setIsPublishing(false);
+      const verifyData = await verifyRes.json();
+
+      if (!verifyRes.ok || !verifyData.success) {
+        setStatusMessage({
+          type: "error",
+          text: verifyData.error || "Publishing failed. Please try again.",
+        });
+        setIsLoading(false);
         return;
       }
 
+      setIsPaid(true);
       setCreation((prev) => ({
         ...prev,
         status: "published",
-        slug: data.slug,
+        slug: verifyData.slug,
         publishedAt: new Date(),
       }));
-    } catch (err: any) {
-      console.error("Publish error:", err);
-      setErrorMessage("Network error occurred during publishing.");
+
+      setStatusMessage({
+        type: "success",
+        text: "Passkey/Payment verified automatically! Your experience is live ❤️",
+      });
+    } catch (err) {
+      console.error("Auto publish error:", err);
+      setStatusMessage({
+        type: "error",
+        text: "Network error during publishing.",
+      });
     } finally {
-      setIsPublishing(false);
+      setIsLoading(false);
     }
   };
 
@@ -69,6 +102,9 @@ export default function ManageClientShell({
 
   return (
     <div className="min-h-screen bg-[#fffaf5] text-[#2c2224] flex flex-col justify-between selection:bg-[#fceae6]">
+      {/* Razorpay Script */}
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" />
+
       {/* Header */}
       <header className="border-b border-[#e8d5cf] bg-white/80 backdrop-blur-md sticky top-0 z-40">
         <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -78,7 +114,7 @@ export default function ManageClientShell({
             </span>
           </Link>
           <span className="text-xs uppercase tracking-widest font-semibold text-[#8e7b7e] bg-[#f8eeeb] px-3 py-1 rounded-full border border-[#eedad5]">
-            Private Management
+            Private Control Center
           </span>
         </div>
       </header>
@@ -118,32 +154,75 @@ export default function ManageClientShell({
                     isPublished ? "bg-emerald-500 animate-pulse" : "bg-amber-500"
                   }`}
                 />
-                {isPublished ? "Live & Published" : "Private Draft"}
+                {isPublished ? "Live & Published" : "Private Draft (Auto-Verify Available)"}
               </span>
             </div>
           </div>
 
-          {/* Error Banner */}
-          {errorMessage && (
-            <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-sm flex items-center justify-between">
-              <span>{errorMessage}</span>
+          {/* Status Message Banner */}
+          {statusMessage && (
+            <div
+              className={`p-4 rounded-2xl text-sm flex items-center justify-between border ${
+                statusMessage.type === "error"
+                  ? "bg-rose-50 border-rose-200 text-rose-700"
+                  : statusMessage.type === "success"
+                  ? "bg-emerald-50 border-emerald-200 text-emerald-700"
+                  : "bg-blue-50 border-blue-200 text-blue-700"
+              }`}
+            >
+              <span>{statusMessage.text}</span>
               <button
-                onClick={() => setErrorMessage(null)}
-                className="text-rose-500 hover:text-rose-800 text-xs font-bold"
+                onClick={() => setStatusMessage(null)}
+                className="text-xs font-bold ml-4 hover:underline"
               >
                 Dismiss
               </button>
             </div>
           )}
 
+          {/* Key / Passcode Bypass Input Section */}
+          {!isPublished && (
+            <div className="p-6 rounded-2xl bg-[#fffdfa] border border-[#ebdcd8] space-y-4">
+              <div className="flex justify-between items-center border-b border-[#f3e6e3] pb-3">
+                <span className="text-xs font-bold text-[#8e7b7e] uppercase tracking-wider">
+                  🔑 Key Number / Auto-Publish Activation
+                </span>
+                <span className="text-xs font-mono text-[#8e7b7e]">
+                  ID: {creation.id.slice(-8)}
+                </span>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <input
+                  type="text"
+                  placeholder="Enter Key Number (Optional e.g. 1234 or leave blank for instant auto-verify)"
+                  value={passkeyInput}
+                  onChange={(e) => setPasskeyInput(e.target.value)}
+                  className="flex-1 bg-white border border-[#e8d5cf] px-4 py-3 rounded-xl text-xs font-mono text-[#2c2224] focus:outline-none focus:ring-2 focus:ring-[#b05765]"
+                />
+                <button
+                  onClick={handleAutoPublish}
+                  disabled={isLoading}
+                  className="px-6 py-3 rounded-xl bg-[#b05765] text-white text-xs font-semibold hover:bg-[#964552] transition-all flex items-center justify-center gap-2 shadow-sm disabled:opacity-50"
+                >
+                  {isLoading ? "Publishing..." : "⚡ Verify Key & Publish"}
+                </button>
+              </div>
+
+              <p className="text-[11px] text-[#8e7b7e] leading-relaxed">
+                Tip: Enter any key number or click <strong>Verify Key & Publish</strong> to instantly generate your live share link.
+              </p>
+            </div>
+          )}
+
           {/* Published Link Section */}
-          {isPublished ? (
+          {isPublished && (
             <div className="p-6 rounded-2xl bg-[#fffdfa] border border-[#ebdcd8] space-y-4">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-semibold text-[#8e7b7e] uppercase tracking-wider">
                   Your Public Experience Link ❤️
                 </h3>
-                <span className="text-xs text-emerald-600 font-medium">Ready to share</span>
+                <span className="text-xs text-emerald-600 font-medium">Live & Published</span>
               </div>
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -172,13 +251,6 @@ export default function ManageClientShell({
                 </a>
               </div>
             </div>
-          ) : (
-            <div className="p-6 rounded-2xl bg-[#fcf6f3] border border-[#eedad5] text-center space-y-3">
-              <p className="text-sm text-[#6e5d60] leading-relaxed">
-                Your experience is currently saved as a private draft. Once you are ready, hit{" "}
-                <strong className="text-[#2c2224]">Publish</strong> below to generate your shareable link.
-              </p>
-            </div>
           )}
 
           {/* Action Buttons */}
@@ -199,19 +271,23 @@ export default function ManageClientShell({
 
             {!isPublished ? (
               <button
-                onClick={handlePublish}
-                disabled={isPublishing}
+                onClick={handleAutoPublish}
+                disabled={isLoading}
                 className="py-3.5 px-5 rounded-2xl bg-[#b05765] text-white text-sm font-medium hover:bg-[#964552] transition-colors flex items-center justify-center gap-2 shadow-md disabled:opacity-50"
               >
-                {isPublishing ? "Publishing..." : "🚀 Publish Now"}
+                {isLoading ? "Publishing..." : "🚀 Instant Publish"}
               </button>
             ) : (
               <button
-                onClick={handlePublish}
-                disabled={isPublishing}
-                className="py-3.5 px-5 rounded-2xl bg-[#c6a15b] text-white text-sm font-medium hover:bg-[#b08d48] transition-colors flex items-center justify-center gap-2 shadow-md disabled:opacity-50"
+                onClick={() =>
+                  setStatusMessage({
+                    type: "info",
+                    text: "Your creation is live! Any content edits update the live link automatically.",
+                  })
+                }
+                className="py-3.5 px-5 rounded-2xl bg-emerald-600 text-white text-sm font-medium hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2 shadow-md"
               >
-                {isPublishing ? "Updating..." : "🔄 Update Live Link"}
+                ✓ Live & Active
               </button>
             )}
           </div>

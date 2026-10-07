@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { getCreationByManageToken } from "@/lib/db/creations-store";
+import { isCreationPaid } from "@/lib/services/orderService";
 import { notFound } from "next/navigation";
 import ManageClientShell from "@/components/management/ManageClientShell";
 
@@ -47,5 +48,13 @@ export default async function ManagePage({
     );
   }
 
-  return <ManageClientShell rawToken={token} initialCreation={creation} />;
+  const initialIsPaid = await isCreationPaid(creation.id);
+
+  return (
+    <ManageClientShell
+      rawToken={token}
+      initialCreation={creation}
+      initialIsPaid={initialIsPaid}
+    />
+  );
 }
