@@ -26,8 +26,8 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-[#e8d5cf]/70 bg-[#fffaf5]/85 backdrop-blur-md transition-all">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-40 w-full border-b border-[#e8d5cf]/70 bg-[#fffaf5]/90 backdrop-blur-md transition-all">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 relative z-50">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
           <span className="grid size-9 place-items-center rounded-full bg-[#b05765] text-white font-serif font-bold text-sm shadow-sm transition-transform group-hover:scale-105">
@@ -47,8 +47,8 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={`px-3.5 py-2 rounded-full text-xs font-semibold transition-colors ${isActive
-                    ? "bg-[#fceae6] text-[#b05765]"
-                    : "text-[#6e5d60] hover:text-[#2c2224] hover:bg-[#f8eeeb]"
+                  ? "bg-[#fceae6] text-[#b05765]"
+                  : "text-[#6e5d60] hover:text-[#2c2224] hover:bg-[#f8eeeb]"
                   }`}
               >
                 {link.label}
@@ -102,47 +102,60 @@ export function Header() {
           </div>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle Button */}
         <button
           onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-          className="md:hidden p-2 rounded-xl text-[#2c2224] hover:bg-[#f8eeeb]"
+          className="md:hidden p-2 rounded-xl text-[#2c2224] hover:bg-[#f8eeeb] transition-colors"
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? "✕" : "☰"}
         </button>
       </div>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Floating Backdrop Overlay (Does NOT push content down) */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-[#e8d5cf] bg-[#fffaf5] px-4 py-4 space-y-2">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={`block px-4 py-2.5 rounded-xl text-sm font-medium ${pathname === link.href
-                  ? "bg-[#fceae6] text-[#b05765] font-bold"
-                  : "text-[#2c2224] hover:bg-[#f8eeeb]"
-                }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <div
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="fixed inset-0 top-16 bg-black/40 backdrop-blur-xs z-40 md:hidden animate-in fade-in duration-200"
+        />
+      )}
 
-          <div className="pt-3 border-t border-[#eedad5] flex flex-col gap-2">
+      {/* Absolute Floating Mobile Navigation Drawer */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 z-50 border-b border-[#e8d5cf] bg-[#fffaf5]/95 backdrop-blur-xl px-5 py-5 space-y-3 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="space-y-1">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block px-4 py-3 rounded-xl text-sm font-semibold transition-all ${isActive
+                    ? "bg-[#fceae6] text-[#b05765]"
+                    : "text-[#2c2224] hover:bg-[#f8eeeb]"
+                    }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="pt-3 border-t border-[#eedad5] flex gap-2.5">
             <Link
               href="/birthday/create"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 rounded-xl bg-[#b05765] text-white text-xs font-semibold"
+              className="flex-1 text-center py-3 rounded-xl bg-[#b05765] text-white text-xs font-semibold shadow-sm hover:bg-[#964552] transition-colors"
             >
-              🎂 Create Birthday Wish
+              Create Birthday Wish
             </Link>
             <Link
               href="/wedding/create"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 rounded-xl bg-[#c6a15b] text-white text-xs font-semibold"
+              className="flex-1 text-center py-3 rounded-xl bg-[#c6a15b] text-white text-xs font-semibold shadow-sm hover:bg-[#b08d48] transition-colors"
             >
-              💍 Create Wedding Invitation
+              Create Wedding Invitation
             </Link>
           </div>
         </div>
