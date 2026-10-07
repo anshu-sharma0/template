@@ -15,7 +15,7 @@ import { Sparkle } from "@/components/decorative/Sparkle";
 export default function BirthdayLandingPage() {
   return (
     <PageWrapper>
-      <Header />
+      {/* <Header /> */}
 
       <main>
         {/* Birthday Hero Section */}

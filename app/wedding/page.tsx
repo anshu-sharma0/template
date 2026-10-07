@@ -16,7 +16,7 @@ export default function WeddingLandingPage() {
 
   return (
     <PageWrapper>
-      <Header />
+      {/* <Header /> */}
 
       <main>
         {/* Hero Section */}

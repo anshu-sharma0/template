@@ -1,22 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { brand } from "@/lib/brand";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { Header } from "@/components/navigation/Header";
+import { Footer } from "@/components/navigation/Footer";
 
 export const metadata: Metadata = {
   title: `Create Beautiful Digital Birthday Wishes & Wedding Invitations | ${brand.name}`,
   description:
-    "Create a beautiful digital birthday wish or wedding invitation made with love. Personalized with photos, custom notes and music, designed mobile-first and shareable as a private link.",
+    "Create a beautiful digital birthday wish or wedding invitation made with love. Personalized with photos, custom notes, music, countdowns, venue maps and instant shareable links.",
 };
 
 export default function RootLayout({
@@ -27,9 +18,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
+      className="h-full scroll-smooth antialiased font-sans"
     >
-      <body className="min-h-full flex flex-col overflow-x-hidden">{children}</body>
+      <body className="min-h-full flex flex-col overflow-x-hidden bg-[#fffaf5] text-[#2c2224]">
+        <Header />
+        <div className="flex-1">{children}</div>
+        <Footer />
+      </body>
     </html>
   );
 }

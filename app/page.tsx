@@ -1,5 +1,3 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { Section } from "@/components/layout/Section";
 import { Hero } from "@/components/marketing/Hero";
@@ -19,32 +17,29 @@ import { faqs, testimonials } from "@/lib/home-data";
 export default function Home() {
   return (
     <PageWrapper>
-      {/* 1. Header */}
-      <Header />
-
       <main>
-        {/* 2. Hero */}
+        {/* 1. Hero */}
         <Hero />
 
-        {/* 3. Occasion Selection */}
+        {/* 2. Occasion Selection */}
         <OccasionSection />
 
-        {/* 4. Featured Templates */}
+        {/* 3. Featured Templates */}
         <TemplateShowcase />
 
-        {/* 5. Emotional Story Section */}
+        {/* 4. Emotional Story Section */}
         <EmotionalStory />
 
-        {/* 6. How It Works */}
+        {/* 5. How It Works Section */}
         <StepTimeline />
 
-        {/* 7. Interactive Experience Preview */}
+        {/* 6. Interactive Experience Preview */}
         <ExperiencePreview />
 
-        {/* 8. Why This Feels Special */}
+        {/* 7. Feature Highlights Section */}
         <FeatureHighlights />
 
-        {/* 9. Testimonials */}
+        {/* 8. Testimonials */}
         <Section background="default" spacing="lg">
           <SectionHeading
             align="center"
@@ -59,18 +54,15 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* 10. Simple Pricing Preview */}
+        {/* 9. Simple Pricing Preview */}
         <PricingPreview />
 
-        {/* 11. FAQ */}
+        {/* 10. FAQ Section */}
         <FAQ items={faqs} />
 
-        {/* 12. Final CTA */}
+        {/* 11. Final CTA */}
         <CTASection />
       </main>
-
-      {/* 13. Footer */}
-      <Footer />
     </PageWrapper>
   );
 }
