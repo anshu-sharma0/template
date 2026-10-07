@@ -1,159 +1,177 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageWrapper } from "@/components/layout/PageWrapper";
-import { Section } from "@/components/layout/Section";
-import { SectionHeading } from "@/components/marketing/SectionHeading";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
-import { PhonePreview } from "@/components/marketing/PhonePreview";
+import {
+  HeroSection,
+  FeatureGridSection,
+  ProcessStepsSection,
+  FAQSection,
+  CTASection,
+  SectionHeader,
+} from "@/components/sections";
+import { DeviceFramePreview } from "@/components/interactive/DeviceFramePreview";
 import { BirthdayWishRenderer } from "@/components/birthday/BirthdayWishRenderer";
 import { DEFAULT_BIRTHDAY_DATA } from "@/lib/birthday-data";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 import { Heart } from "@/components/decorative/Heart";
-import { Petal } from "@/components/decorative/Petal";
-import { Sparkle } from "@/components/decorative/Sparkle";
 
 export default function BirthdayLandingPage() {
+  const birthdayFeatures = [
+    {
+      icon: "🕯️",
+      title: "Blow Candles Animation",
+      description: "Recipients tap or blow on screen to blow virtual birthday cake candles with sound & sparkles.",
+      badge: "Interactive",
+    },
+    {
+      icon: "🎁",
+      title: "Secret Scratch Reveal",
+      description: "Add a scratch card layer for secret wishes, gift vouchers, or surprise photo reveals.",
+      badge: "Surprise",
+    },
+    {
+      icon: "🎵",
+      title: "Personal Birthday Song",
+      description: "Background music auto-plays as they open their digital wish card.",
+      badge: "Custom Audio",
+    },
+    {
+      icon: "📸",
+      title: "Memory Photo Book",
+      description: "Upload high-res photos capturing your favourite moments together.",
+      badge: "Galleries",
+    },
+  ];
+
+  const birthdayFaqs = [
+    {
+      question: "How does the recipient open their birthday surprise?",
+      answer: "You get a private shareable link (e.g. digitalmoments.com/birthday/sarah). When they click it on WhatsApp or SMS, it opens directly in their phone browser without installing any app.",
+    },
+    {
+      question: "Can I edit the photos or message after sharing?",
+      answer: "Yes! You can manage and update your creation anytime using your private management token.",
+    },
+    {
+      question: "Is it mobile friendly?",
+      answer: "100%! All our birthday templates are engineered specifically for mobile touchscreens with responsive animations.",
+    },
+  ];
+
   return (
     <PageWrapper>
-      {/* <Header /> */}
-
       <main>
-        {/* Birthday Hero Section */}
-        <section className="relative overflow-hidden bg-[linear-gradient(180deg,#fffaf5_0%,#fff0ec_55%,#fffdf9_100%)] pb-16 pt-12 md:pb-24 md:pt-20">
-          <Petal className="absolute left-[8%] top-16 rotate-12 opacity-80 pointer-events-none motion-safe:animate-petal-drift" />
-          <Petal className="absolute right-[10%] top-24 -rotate-45 opacity-70 pointer-events-none motion-safe:animate-petal-drift-delayed" />
-          <Sparkle className="absolute left-[18%] bottom-16 text-accent text-xl opacity-75 pointer-events-none" />
+        {/* 1. Birthday Hero Section */}
+        <HeroSection
+          eyebrow="Digital Birthday Surprise"
+          title="Make their birthday feel a little more"
+          highlightText="special."
+          description="Turn your words, photos and memories into a beautiful digital birthday surprise made just for them."
+          primaryAction={{ label: "Create a Birthday Wish 🎂", href: "/birthday/create" }}
+          secondaryAction={{ label: "See Live Example 👇", href: "#birthday-preview" }}
+          metrics={[
+            { value: "35,000+", label: "Birthday Wishes Sent" },
+            { value: "4.9 ★", label: "Recipient Rating" },
+            { value: "Free", label: "Instant Preview" },
+          ]}
+        />
 
-          <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:items-center lg:px-8">
-            <div className="mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
-              <Badge tone="rose" className="mx-auto lg:mx-0">
-                Digital Birthday Surprise
-              </Badge>
+        {/* 2. Interactive Device Frame Preview */}
+        <section id="birthday-preview" className="py-16 sm:py-24 bg-[#fffaf5]">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeader
+              eyebrow="Recipient Experience"
+              title="It opens like a digital gift box"
+              description="From the first tap to the final note, every moment is crafted to feel personal and heartfelt."
+              align="center"
+              badgeTone="rose"
+            />
 
-              <h1 className="mt-6 font-display text-5xl leading-[1.06] text-text md:text-7xl lg:text-8xl">
-                Make their birthday feel <br className="hidden sm:inline" />
-                a little more <span className="text-primary italic font-serif">special.</span>
-              </h1>
+            <div className="mt-8 max-w-5xl mx-auto grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center rounded-3xl border border-[#e8d5cf] bg-white p-6 sm:p-10 shadow-xl">
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#b05765]/20 bg-[#fceae6] px-3.5 py-1.5 text-xs font-semibold text-[#b05765]">
+                  <Heart className="text-sm" />
+                  <span>What They Experience</span>
+                </div>
 
-              <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-text-muted md:text-xl md:leading-9 lg:mx-0">
-                Turn your words, photos and memories into a beautiful digital birthday surprise made just for them.
-              </p>
+                <h3 className="font-serif text-3xl font-bold text-[#2c2224] leading-tight">
+                  &quot;Someone made something special for you ❤️&quot;
+                </h3>
 
-              <div className="mt-8 flex flex-col gap-3.5 sm:flex-row sm:justify-center lg:justify-start">
-                <Button href="/birthday/create" size="lg" className="shadow-lift">
-                  Create a Birthday Wish
-                </Button>
-                <Button href="#birthday-preview" variant="secondary" size="lg">
-                  See an Example
-                </Button>
+                <p className="text-sm text-[#6e5d60] leading-relaxed">
+                  When they tap the private link, an intimate cover invites them to reveal their birthday surprise.
+                </p>
+
+                <ul className="space-y-3 text-xs text-[#2c2224]">
+                  <li className="flex items-center gap-3">
+                    <span className="flex size-5 items-center justify-center rounded-full bg-[#fceae6] text-[#b05765] font-bold text-xs">✓</span>
+                    <span>Personal birthday greeting & portrait</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <span className="flex size-5 items-center justify-center rounded-full bg-[#fceae6] text-[#b05765] font-bold text-xs">✓</span>
+                    <span>Heartfelt personal note from you</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <span className="flex size-5 items-center justify-center rounded-full bg-[#fceae6] text-[#b05765] font-bold text-xs">✓</span>
+                    <span>Sweet photo memories gallery & music</span>
+                  </li>
+                </ul>
+
+                <div className="pt-2">
+                  <Button href="/birthday/create" size="lg" className="bg-[#b05765] text-white hover:bg-[#964552]">
+                    Create a Birthday Wish ✨
+                  </Button>
+                </div>
               </div>
-            </div>
 
-            {/* Hero Phone Preview */}
-            <div className="relative mx-auto flex min-h-128 w-full max-w-lg items-center justify-center">
-              <div className="absolute inset-4 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(176,87,101,0.18)_0%,transparent_70%)] blur-3xl pointer-events-none" />
-              <PhonePreview size="lg" floating variant="birthday" className="relative z-10 shadow-phone" />
+              {/* Interactive Device Preview Component */}
+              <div className="flex justify-center">
+                <DeviceFramePreview defaultDevice="mobile" showDeviceToggle={false}>
+                  <BirthdayWishRenderer data={DEFAULT_BIRTHDAY_DATA} autoOpen />
+                </DeviceFramePreview>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Birthday Experience Preview Section */}
-        <Section id="birthday-preview" background="default" spacing="lg">
-          <SectionHeading
-            align="center"
-            eyebrow="Recipient Experience"
-            title="It opens like a digital gift."
-            description="From the first tap to the final note, every moment is crafted to feel personal."
-          />
+        {/* 3. Birthday Feature Grid */}
+        <FeatureGridSection
+          eyebrow="Interactive Elements"
+          title="Designed for memorable surprises"
+          description="Combine candles, audio, photos, and scratch cards to build an unforgettable birthday memory."
+          features={birthdayFeatures}
+          columns={2}
+          variant="card"
+          badgeTone="rose"
+        />
 
-          <div className="mt-12 max-w-4xl mx-auto grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center rounded-3xl border border-border bg-surface p-6 sm:p-10 shadow-lift">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/40 px-3.5 py-1.5 text-xs font-semibold text-primary">
-                <Heart className="text-sm" />
-                <span>What they see</span>
-              </div>
+        {/* 4. How It Works Steps */}
+        <ProcessStepsSection
+          eyebrow="3-Minute Creation"
+          title="Simple steps to send a birthday wish"
+          description="Create your surprise in 3 easy steps and share instantly via WhatsApp or link."
+          steps={[
+            { number: "01", icon: "👤", title: "Add Recipient Details", description: "Enter their name, birthday message, & portrait photo.", tag: "Personalise" },
+            { number: "02", icon: "📸", title: "Upload Photos & Audio", description: "Add your favorite memories and background birthday music track.", tag: "Media" },
+            { number: "03", icon: "🚀", title: "Share Private Link", description: "Get your instant link or QR code to send on WhatsApp.", tag: "Instant" },
+          ]}
+        />
 
-              <h3 className="font-display text-4xl text-text font-normal leading-tight">
-                “Someone made something special for you ❤️”
-              </h3>
+        {/* 5. Birthday FAQ */}
+        <FAQSection
+          eyebrow="Birthday FAQs"
+          title="Common Questions About Birthday Wishes"
+          description="Everything you need to know about creating and sending digital birthday cards."
+          items={birthdayFaqs}
+        />
 
-              <p className="text-base text-text-muted leading-relaxed">
-                When they tap the private link, an intimate cover invites them to reveal their birthday surprise.
-              </p>
-
-              <ul className="space-y-3 text-sm text-text-muted">
-                <li className="flex items-center gap-3">
-                  <span className="flex size-5 items-center justify-center rounded-full bg-primary-soft text-primary font-bold text-xs">✓</span>
-                  <span>Personal birthday greeting & portrait</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <span className="flex size-5 items-center justify-center rounded-full bg-primary-soft text-primary font-bold text-xs">✓</span>
-                  <span>Heartfelt personal note from you</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <span className="flex size-5 items-center justify-center rounded-full bg-primary-soft text-primary font-bold text-xs">✓</span>
-                  <span>Sweet photo memories gallery & music</span>
-                </li>
-              </ul>
-
-              <div className="pt-2">
-                <Button href="/birthday/create" size="lg">
-                  Create a Birthday Wish
-                </Button>
-              </div>
-            </div>
-
-            <div className="flex justify-center bg-[linear-gradient(135deg,#fff8f3,#f6dce0)] p-6 rounded-2xl border border-border/70">
-              <PhonePreview size="md" className="shadow-phone">
-                <BirthdayWishRenderer data={DEFAULT_BIRTHDAY_DATA} autoOpen />
-              </PhonePreview>
-            </div>
-          </div>
-        </Section>
-
-        {/* Single Design Selection Section */}
-        <Section background="surface" spacing="lg">
-          <SectionHeading
-            align="center"
-            eyebrow="Template Design"
-            title="Designed for beautiful moments."
-            description="Our curated design for birthday surprises, warm and ready to personalize."
-          />
-
-          <div className="mt-12 max-w-xl mx-auto">
-            <article className="overflow-hidden rounded-3xl border border-border bg-background shadow-lift text-center p-8">
-              <Badge tone="rose" className="mx-auto">
-                Birthday Wish
-              </Badge>
-
-              <h3 className="mt-4 font-display text-4xl font-normal text-text">
-                Romantic Birthday
-              </h3>
-
-              <p className="mt-2 text-base text-text-muted leading-relaxed">
-                A warm, emotional and beautifully personal birthday experience.
-              </p>
-
-              <div className="my-8 flex justify-center bg-[linear-gradient(135deg,#fff8f3,#f6dce0)] p-6 rounded-2xl border border-border/60">
-                <PhonePreview size="sm" className="shadow-soft">
-                  <BirthdayWishRenderer data={DEFAULT_BIRTHDAY_DATA} autoOpen />
-                </PhonePreview>
-              </div>
-
-              <div className="flex flex-col sm:flex-row justify-center gap-3">
-                <Button href="/birthday/create" size="lg" className="flex-1 shadow-soft">
-                  Use This Design
-                </Button>
-                <Button href="/birthday/preview" variant="outline" size="lg">
-                  Preview Design
-                </Button>
-              </div>
-            </article>
-          </div>
-        </Section>
+        {/* 6. Final Birthday CTA */}
+        <CTASection
+          eyebrow="Start Creating Now"
+          title="Make their birthday extra memorable"
+          description="Takes less than 3 minutes to create a personalized digital birthday wish."
+          primaryAction={{ label: "Create Birthday Wish 🎂", href: "/birthday/create" }}
+        />
       </main>
-
-      <Footer />
     </PageWrapper>
   );
 }

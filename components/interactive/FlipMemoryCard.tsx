@@ -1,0 +1,54 @@
+"use client";
+
+import { useState, type ReactNode } from "react";
+import { cn } from "@/lib/cn";
+
+export interface FlipMemoryCardProps {
+  front: ReactNode;
+  back: ReactNode;
+  height?: string;
+  trigger?: "click" | "hover";
+  className?: string;
+}
+
+export function FlipMemoryCard({
+  front,
+  back,
+  height = "h-64",
+  trigger = "click",
+  className,
+}: FlipMemoryCardProps) {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  return (
+    <div
+      className={cn("group perspective-1000 w-full cursor-pointer", height, className)}
+      onClick={() => trigger === "click" && setIsFlipped(!isFlipped)}
+      onMouseEnter={() => trigger === "hover" && setIsFlipped(true)}
+      onMouseLeave={() => trigger === "hover" && setIsFlipped(false)}
+    >
+      <div
+        className={cn(
+          "relative size-full rounded-3xl transition-transform duration-700 transform-style-3d shadow-md hover:shadow-xl",
+          isFlipped && "rotate-y-180"
+        )}
+      >
+        {/* Front Face */}
+        <div className="absolute inset-0 size-full rounded-3xl bg-white p-6 border border-[#e8d5cf] backface-hidden flex flex-col justify-between">
+          {front}
+          <div className="mt-2 text-right text-[10px] font-bold text-[#b05765] uppercase tracking-wider">
+            Tap to flip 🔄
+          </div>
+        </div>
+
+        {/* Back Face */}
+        <div className="absolute inset-0 size-full rounded-3xl bg-gradient-to-br from-[#fff0ea] via-[#fceae6] to-[#fffaf5] p-6 border border-[#b05765]/40 backface-hidden rotate-y-180 flex flex-col justify-between">
+          {back}
+          <div className="mt-2 text-right text-[10px] font-bold text-[#b05765] uppercase tracking-wider">
+            Tap to flip 🔄
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

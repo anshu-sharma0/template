@@ -1,141 +1,192 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { PageWrapper } from "@/components/layout/PageWrapper";
-import { Section } from "@/components/layout/Section";
-import { SectionHeading } from "@/components/marketing/SectionHeading";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
-import { PhonePreview } from "@/components/marketing/PhonePreview";
+import {
+  HeroSection,
+  FeatureGridSection,
+  ProcessStepsSection,
+  FAQSection,
+  CTASection,
+  SectionHeader,
+} from "@/components/sections";
+import { DeviceFramePreview } from "@/components/interactive/DeviceFramePreview";
 import { WeddingRenderer } from "@/components/wedding/WeddingRenderer";
 import { DEFAULT_WEDDING_DATA } from "@/lib/wedding-data";
-import { Floral } from "@/components/decorative/Floral";
-import { Sparkle } from "@/components/decorative/Sparkle";
+import { Button } from "@/components/ui/Button";
 
 export default function WeddingLandingPage() {
   const luxuryData = { ...DEFAULT_WEDDING_DATA, template: "luxury" as const };
 
+  const weddingFeatures = [
+    {
+      icon: "💌",
+      title: "Interactive Guest RSVP",
+      description: "Guests can respond with attendance, guest count, dietary preferences, and secret host wishes.",
+      badge: "RSVP Ready",
+    },
+    {
+      icon: "📍",
+      title: "Google Maps Venue Directions",
+      description: "Direct 1-tap navigation link for ceremony and reception venues so no guest gets lost.",
+      badge: "Maps",
+    },
+    {
+      icon: "⏳",
+      title: "Live Event Countdown",
+      description: "Real-time ticker counting down the days, hours, and minutes until the wedding ceremony.",
+      badge: "Countdown",
+    },
+    {
+      icon: "💍",
+      title: "Couple Story Timeline",
+      description: "Share how you met, the proposal story, and your favorite journey milestones.",
+      badge: "Storybook",
+    },
+  ];
+
+  const weddingFaqs = [
+    {
+      question: "How do guests submit RSVPs?",
+      answer: "Guests fill out a clean form embedded directly in the digital invitation. All responses sync to your private management dashboard in real-time.",
+    },
+    {
+      question: "Can we include multiple events (Haldi, Mehendi, Sangeet, Wedding)?",
+      answer: "Yes! You can add custom dates, timings, venues, and descriptions for all wedding functions.",
+    },
+    {
+      question: "Can we track how many guests opened the invitation?",
+      answer: "Yes, your private management dashboard includes live view analytics and RSVP count summaries.",
+    },
+  ];
+
   return (
     <PageWrapper>
-      {/* <Header /> */}
-
       <main>
-        {/* Hero Section */}
-        <section className="relative overflow-hidden bg-[linear-gradient(180deg,#fffdf9_0%,#f5ead7_60%,#fffdf9_100%)] pb-16 pt-12 md:pb-24 md:pt-20">
-          <Floral className="absolute left-[8%] top-16 opacity-70 pointer-events-none" />
-          <Floral className="absolute right-[10%] top-24 opacity-60 pointer-events-none" />
-          <Sparkle className="absolute left-[15%] bottom-16 text-accent text-xl opacity-75 pointer-events-none" />
+        {/* 1. Wedding Hero Section */}
+        <HeroSection
+          eyebrow="Digital Wedding Invitation"
+          title="Invite them to your"
+          highlightText="forever."
+          description="Create a beautiful digital wedding invitation filled with your story, your people and the moments that matter."
+          primaryAction={{ label: "Create Our Invitation 💍", href: "/wedding/create" }}
+          secondaryAction={{ label: "Explore Designs 👇", href: "#wedding-templates" }}
+          metrics={[
+            { value: "24,000+", label: "Weddings Celebrated" },
+            { value: "99.8%", label: "RSVP Response Rate" },
+            { value: "Free", label: "Instant Draft" },
+          ]}
+        />
 
-          <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 px-5 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:items-center lg:px-8">
-            <div className="mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
-              <Badge tone="champagne" className="mx-auto lg:mx-0">
-                Digital Wedding Invitation
-              </Badge>
+        {/* 2. Template Showcase Section */}
+        <section id="wedding-templates" className="py-16 sm:py-24 bg-[#fffaf5]">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeader
+              eyebrow="Two Distinct Themes"
+              title="Designed for unforgettable celebrations"
+              description="Choose a design style that matches the spirit of your special day."
+              align="center"
+              badgeTone="gold"
+            />
 
-              <h1 className="mt-6 font-display text-5xl leading-[1.06] text-text md:text-7xl lg:text-8xl">
-                Invite them to <br className="hidden sm:inline" />
-                your <span className="text-primary italic font-serif">forever.</span>
-              </h1>
+            <div className="mt-8 grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
+              {/* Template 01 — Elegant Wedding */}
+              <article className="overflow-hidden rounded-3xl border border-[#e8d5cf] bg-white shadow-xl text-center p-6 sm:p-8 flex flex-col justify-between">
+                <div>
+                  <span className="inline-block rounded-full bg-[#fceae6] px-3.5 py-1 text-xs font-bold text-[#b05765] uppercase">
+                    Template 01 — Elegant
+                  </span>
 
-              <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-text-muted md:text-xl md:leading-9 lg:mx-0">
-                Create a beautiful digital wedding invitation filled with your story, your people and the moments that matter.
-              </p>
+                  <h3 className="mt-4 font-serif text-3xl font-bold text-[#2c2224]">
+                    Elegant Botanical
+                  </h3>
 
-              <div className="mt-8 flex flex-col gap-3.5 sm:flex-row sm:justify-center lg:justify-start">
-                <Button href="/wedding/create" size="lg" className="shadow-lift">
-                  Create Our Invitation
-                </Button>
-                <Button href="#wedding-templates" variant="secondary" size="lg">
-                  Explore Designs
-                </Button>
-              </div>
-            </div>
+                  <p className="mt-2 text-xs text-[#6e5d60] leading-relaxed">
+                    Timeless, graceful, and beautifully understated design with soft champagne accents.
+                  </p>
 
-            {/* Hero Phone Preview */}
-            <div className="relative mx-auto flex min-h-128 w-full max-w-lg items-center justify-center">
-              <div className="absolute inset-4 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(198,161,91,0.18)_0%,transparent_70%)] blur-3xl pointer-events-none" />
-              <PhonePreview size="lg" floating variant="wedding" className="relative z-10 shadow-phone" />
+                  <div className="my-6">
+                    <DeviceFramePreview defaultDevice="mobile" showDeviceToggle={false}>
+                      <WeddingRenderer data={DEFAULT_WEDDING_DATA} autoOpen />
+                    </DeviceFramePreview>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row justify-center gap-3 pt-4 border-t border-[#eedad5]">
+                  <Button href="/wedding/create?template=elegant" size="lg" className="flex-1 bg-[#b05765] text-white hover:bg-[#964552]">
+                    Use Elegant Theme ✨
+                  </Button>
+                </div>
+              </article>
+
+              {/* Template 02 — Luxury Wedding */}
+              <article className="overflow-hidden rounded-3xl border border-[#4a3a3e] bg-gradient-to-b from-[#191514] via-[#2c2224] to-[#3d282c] text-white shadow-2xl text-center p-6 sm:p-8 flex flex-col justify-between">
+                <div>
+                  <span className="inline-block rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold text-[#c6a15b] border border-[#c6a15b]/40 uppercase">
+                    Template 02 — Luxury
+                  </span>
+
+                  <h3 className="mt-4 font-serif text-3xl font-bold text-white">
+                    Royal Luxury
+                  </h3>
+
+                  <p className="mt-2 text-xs text-white/70 leading-relaxed">
+                    Sophisticated, romantic, dark mode design with gold foil details & ambient music.
+                  </p>
+
+                  <div className="my-6">
+                    <DeviceFramePreview defaultDevice="mobile" showDeviceToggle={false}>
+                      <WeddingRenderer data={luxuryData} autoOpen />
+                    </DeviceFramePreview>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row justify-center gap-3 pt-4 border-t border-white/10">
+                  <Button href="/wedding/create?template=luxury" size="lg" className="flex-1 bg-gradient-to-r from-[#c6a15b] to-[#a07c39] text-white hover:opacity-90">
+                    Use Luxury Theme 👑
+                  </Button>
+                </div>
+              </article>
             </div>
           </div>
         </section>
 
-        {/* Template Showcase Section */}
-        <Section id="wedding-templates" background="surface" spacing="lg">
-          <SectionHeading
-            align="center"
-            eyebrow="Two Distinct Designs"
-            title="Designed for unforgettable celebrations."
-            description="Choose a start point that matches the spirit of your wedding."
-          />
+        {/* 3. Wedding Feature Grid */}
+        <FeatureGridSection
+          eyebrow="Wedding Features"
+          title="Everything you need for your wedding invitation"
+          description="Integrated RSVP management, Google maps directions, couple story, and countdowns."
+          features={weddingFeatures}
+          columns={2}
+          variant="card"
+          badgeTone="gold"
+        />
 
-          <div className="mt-12 grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
-            {/* Template 01 — Elegant Wedding */}
-            <article className="overflow-hidden rounded-3xl border border-border bg-background shadow-lift text-center p-8 flex flex-col justify-between">
-              <div>
-                <Badge tone="champagne" className="mx-auto">
-                  Template 01
-                </Badge>
+        {/* 4. Wedding Process Steps */}
+        <ProcessStepsSection
+          eyebrow="Simple Workflow"
+          title="How to create your wedding invitation"
+          description="Set up your couple details, wedding event schedule, photo gallery, and RSVP form."
+          steps={[
+            { number: "01", icon: "💍", title: "Couple Details & Story", description: "Add couple names, wedding date, & love story notes.", tag: "Details" },
+            { number: "02", icon: "📍", title: "Events & Venue Maps", description: "Add schedule for Sangeet, Ceremony, & Reception venues.", tag: "Schedule" },
+            { number: "03", icon: "💌", title: "Share & Collect RSVPs", description: "Send on WhatsApp. Guests RSVP directly into your dashboard.", tag: "Instant" },
+          ]}
+        />
 
-                <h3 className="mt-4 font-display text-4xl font-normal text-text">
-                  Elegant Wedding
-                </h3>
+        {/* 5. Wedding FAQ */}
+        <FAQSection
+          eyebrow="Wedding FAQs"
+          title="Questions About Digital Wedding Invites"
+          description="Everything you need to know about managing RSVPs and customizing wedding designs."
+          items={weddingFaqs}
+        />
 
-                <p className="mt-2 text-base text-text-muted leading-relaxed">
-                  Timeless, graceful and beautifully understated.
-                </p>
-
-                <div className="my-8 flex justify-center bg-[linear-gradient(135deg,#fffdf9,#f3e8d8)] p-6 rounded-2xl border border-border/60">
-                  <PhonePreview size="sm" className="shadow-soft">
-                    <WeddingRenderer data={DEFAULT_WEDDING_DATA} autoOpen />
-                  </PhonePreview>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row justify-center gap-3">
-                <Button href="/wedding/create?template=elegant" size="lg" className="flex-1 shadow-soft">
-                  Use Elegant
-                </Button>
-                <Button href="/wedding/preview?template=elegant" variant="outline" size="lg">
-                  Preview Design
-                </Button>
-              </div>
-            </article>
-
-            {/* Template 02 — Luxury Wedding */}
-            <article className="overflow-hidden rounded-3xl border border-border bg-[linear-gradient(180deg,#191514_0%,#3d282c_100%)] text-white shadow-lift text-center p-8 flex flex-col justify-between">
-              <div>
-                <Badge tone="champagne" className="mx-auto bg-white/10 text-accent border-accent/40">
-                  Template 02
-                </Badge>
-
-                <h3 className="mt-4 font-display text-4xl font-normal text-white">
-                  Luxury Wedding
-                </h3>
-
-                <p className="mt-2 text-base text-white/70 leading-relaxed">
-                  Sophisticated, romantic and made for an unforgettable celebration.
-                </p>
-
-                <div className="my-8 flex justify-center bg-white/5 p-6 rounded-2xl border border-white/10">
-                  <PhonePreview size="sm" className="shadow-soft">
-                    <WeddingRenderer data={luxuryData} autoOpen />
-                  </PhonePreview>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row justify-center gap-3">
-                <Button href="/wedding/create?template=luxury" size="lg" className="flex-1 bg-[linear-gradient(135deg,#c6a15b,#8a6934)] text-white shadow-soft">
-                  Use Luxury
-                </Button>
-                <Button href="/wedding/preview?template=luxury" variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
-                  Preview Design
-                </Button>
-              </div>
-            </article>
-          </div>
-        </Section>
+        {/* 6. Final Wedding CTA */}
+        <CTASection
+          eyebrow="Start Planning Now"
+          title="Create your dream digital wedding invite"
+          description="Build your personalized invitation and collect guest RSVPs with ease."
+          primaryAction={{ label: "Create Wedding Invite 💍", href: "/wedding/create" }}
+        />
       </main>
-
-      <Footer />
     </PageWrapper>
   );
 }

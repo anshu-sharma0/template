@@ -19,8 +19,8 @@ export default function ManageClientShell({
   initialIsPaid,
 }: ManageClientShellProps) {
   const [creation, setCreation] = useState<DBCreationRecord>(initialCreation);
-  const [isPaid, setIsPaid] = useState<boolean>(true); // Testing / instant activation enabled
-  const [passkeyInput, setPasskeyInput] = useState<string>("");
+  const [, setIsPaid] = useState<boolean>(initialIsPaid);
+  const [passkeyInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
