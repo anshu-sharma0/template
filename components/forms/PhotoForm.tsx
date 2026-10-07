@@ -1,6 +1,6 @@
 "use client";
 
-import { type ChangeEvent } from "react";
+import { useState, type ChangeEvent, type DragEvent } from "react";
 import type { BirthdayWishData } from "@/lib/birthday-types";
 import { Sparkle } from "@/components/decorative/Sparkle";
 
@@ -10,32 +10,68 @@ type PhotoFormProps = {
 };
 
 export function PhotoForm({ data, onChange }: PhotoFormProps) {
-  const handleMainPhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const [isUploading, setIsUploading] = useState(false);
+  const [isDraggingMain, setIsDraggingMain] = useState(false);
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const result = event.target?.result as string;
-      if (result) {
-        onChange({ mainPhoto: result });
+  const uploadFileToCloudinary = async (file: File): Promise<string | null> => {
+    setIsUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("category", "birthday");
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await res.json();
+      if (res.ok && result.success && result.url) {
+        setIsUploading(false);
+        return result.url;
       }
-    };
-    reader.readAsDataURL(file);
+    } catch (err) {
+      console.warn("Cloudinary API upload warning, fallback to data URL:", err);
+    }
+
+    // Fallback: Data URL if server upload fails offline
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setIsUploading(false);
+        resolve((e.target?.result as string) || null);
+      };
+      reader.readAsDataURL(file);
+    });
   };
 
-  const handleGalleryPhotoAdd = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleMainPhotoChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    const url = await uploadFileToCloudinary(file);
+    if (url) {
+      onChange({ mainPhoto: url });
+    }
+  };
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const result = event.target?.result as string;
-      if (result) {
-        onChange({ photos: [...data.photos, result] });
-      }
-    };
-    reader.readAsDataURL(file);
+  const handleMainPhotoDrop = async (e: DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    setIsDraggingMain(false);
+    const file = e.dataTransfer.files?.[0];
+    if (!file) return;
+    const url = await uploadFileToCloudinary(file);
+    if (url) {
+      onChange({ mainPhoto: url });
+    }
+  };
+
+  const handleGalleryPhotoAdd = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const url = await uploadFileToCloudinary(file);
+    if (url) {
+      onChange({ photos: [...data.photos, url] });
+    }
   };
 
   const handleRemoveMainPhoto = () => {
@@ -59,13 +95,20 @@ export function PhotoForm({ data, onChange }: PhotoFormProps) {
         </p>
       </div>
 
-      {/* Main Hero Photo Slot */}
+      {/* Main Hero Photo Slot with Drag & Drop */}
       <div className="space-y-2">
         <label className="block text-xs font-semibold uppercase tracking-wider text-text">
           Main Featured Photo <span className="text-text-muted font-normal">(Optional)</span>
         </label>
 
-        {data.mainPhoto ? (
+        {isUploading ? (
+          <div className="flex aspect-video w-full max-w-sm items-center justify-center rounded-2xl border border-primary/30 bg-surface-soft p-6">
+            <div className="flex items-center gap-3 text-xs text-primary font-semibold">
+              <span className="size-2.5 rounded-full bg-primary animate-ping" />
+              <span>Uploading image...</span>
+            </div>
+          </div>
+        ) : data.mainPhoto ? (
           <div className="relative aspect-4/3 w-full max-w-sm overflow-hidden rounded-2xl border-2 border-primary/30 bg-surface shadow-soft group">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -93,13 +136,27 @@ export function PhotoForm({ data, onChange }: PhotoFormProps) {
             </div>
           </div>
         ) : (
-          <label className="flex aspect-video w-full max-w-sm cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border bg-surface-soft/60 p-6 text-center transition hover:border-primary/50 hover:bg-surface-soft">
+          <label
+            onDragOver={(e) => {
+              e.preventDefault();
+              setIsDraggingMain(true);
+            }}
+            onDragLeave={() => setIsDraggingMain(false)}
+            onDrop={handleMainPhotoDrop}
+            className={`flex aspect-video w-full max-w-sm cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition ${
+              isDraggingMain
+                ? "border-primary bg-primary-soft/30 scale-98"
+                : "border-border bg-surface-soft/60 hover:border-primary/50 hover:bg-surface-soft"
+            }`}
+          >
             <div className="flex size-12 items-center justify-center rounded-full bg-white text-primary shadow-xs mb-2">
               <Sparkle className="text-xl" />
             </div>
-            <p className="font-display text-lg text-text">+ Add Main Photo</p>
+            <p className="font-display text-lg text-text">
+              {isDraggingMain ? "Drop Image Here" : "+ Add Main Photo"}
+            </p>
             <p className="text-xs text-text-muted mt-1">
-              Select a favorite portrait or photo of {data.recipientName || "them"}
+              Drag & drop or click to upload
             </p>
             <input
               type="file"
