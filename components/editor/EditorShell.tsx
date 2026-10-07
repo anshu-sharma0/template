@@ -1,102 +1,88 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { brand } from "@/lib/brand";
-import {
-  DEFAULT_BIRTHDAY_DATA,
-  loadSavedBirthdayWish,
-  saveBirthdayWishDraft,
-} from "@/lib/birthday-data";
+import { DEFAULT_BIRTHDAY_DATA } from "@/lib/birthday-data";
 import type { BirthdayWishData } from "@/lib/birthday-types";
+import { useCreationState } from "@/lib/hooks/useCreationState";
 import { Button } from "@/components/ui/Button";
 import { PhonePreview } from "@/components/marketing/PhonePreview";
-import { BirthdayWishRenderer } from "@/components/birthday/BirthdayWishRenderer";
+import { CreationRenderer } from "@/components/renderers/CreationRenderer";
 import { BirthdayStepIndicator } from "./BirthdayStepIndicator";
 import { RecipientForm } from "@/components/forms/RecipientForm";
 import { MessageForm } from "@/components/forms/MessageForm";
 import { PhotoForm } from "@/components/forms/PhotoForm";
 import { MusicForm } from "@/components/forms/MusicForm";
 import { PreviewSheet } from "./PreviewSheet";
+import { DraftRestoreDialog } from "./DraftRestoreDialog";
 import { Sparkle } from "@/components/decorative/Sparkle";
 
 export function EditorShell() {
-  const [data, setData] = useState<BirthdayWishData>(DEFAULT_BIRTHDAY_DATA);
+  const {
+    creation,
+    data,
+    isHydrated,
+    hasSavedDraft,
+    isSavedLocally,
+    toastMessage,
+    updateData,
+    restoreDraft,
+    startFresh,
+    validation,
+  } = useCreationState<BirthdayWishData>("birthday", "birthday-wish", DEFAULT_BIRTHDAY_DATA);
+
   const [currentStep, setCurrentStep] = useState(1);
-  const [isSavedLocally, setIsSavedLocally] = useState(true);
   const [isMobilePreviewOpen, setIsMobilePreviewOpen] = useState(false);
-  const [errors, setErrors] = useState<{ recipientName?: string; message?: string }>({});
+  const [showErrors, setShowErrors] = useState(false);
+  const [showRestoreModal, setShowRestoreModal] = useState(true);
 
-  // Load saved draft on mount
-  useEffect(() => {
-    const saved = loadSavedBirthdayWish();
-    if (saved) {
-      setData(saved);
-    }
-  }, []);
-
-  // Update data and save to localStorage
-  const handleDataChange = (updates: Partial<BirthdayWishData>) => {
-    const next = { ...data, ...updates };
-    setData(next);
-    saveBirthdayWishDraft(next);
-    setIsSavedLocally(true);
-
-    // Clear validation errors when typing
-    if (updates.recipientName && errors.recipientName) {
-      setErrors((prev) => ({ ...prev, recipientName: undefined }));
-    }
-    if (updates.message && errors.message) {
-      setErrors((prev) => ({ ...prev, message: undefined }));
-    }
-  };
-
-  // Step validation
-  const validateStep = (step: number): boolean => {
-    if (step === 1) {
-      if (!data.recipientName.trim()) {
-        setErrors((prev) => ({
-          ...prev,
-          recipientName: "Tell us their name first ❤️",
-        }));
-        return false;
-      }
-    }
-    if (step === 2) {
-      if (!data.message.trim()) {
-        setErrors((prev) => ({
-          ...prev,
-          message: "Write a short note from the heart ❤️",
-        }));
-        return false;
-      }
-    }
-    return true;
-  };
+  if (!isHydrated) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background text-text">
+        <div className="flex items-center gap-3 text-sm text-text-muted">
+          <span className="size-2 rounded-full bg-primary animate-pulse" />
+          <span>Loading birthday editor...</span>
+        </div>
+      </div>
+    );
+  }
 
   const handleNextStep = () => {
-    if (validateStep(currentStep)) {
-      if (currentStep < 5) {
-        setCurrentStep((prev) => prev + 1);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
+    if (currentStep === 1 && !validation.errors.recipientName) {
+      setCurrentStep(2);
+      setShowErrors(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (currentStep === 2 && !validation.errors.message) {
+      setCurrentStep(3);
+      setShowErrors(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (currentStep >= 3 && currentStep < 5) {
+      setCurrentStep((prev) => prev + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      setShowErrors(true);
     }
   };
 
   const handlePrevStep = () => {
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1);
+      setShowErrors(false);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
-  const handleStepClick = (stepNumber: number) => {
-    if (stepNumber < currentStep || validateStep(currentStep)) {
-      setCurrentStep(stepNumber);
-    }
-  };
+  const activeErrors = showErrors ? validation.errors : {};
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-text">
+      {/* Top Toast Banner */}
+      {toastMessage && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-full border border-primary/20 bg-text text-white px-5 py-2 text-xs font-semibold shadow-lift animate-fade-in">
+          {toastMessage}
+        </div>
+      )}
+
       {/* Top Header */}
       <header className="sticky top-0 z-30 border-b border-border/80 bg-background/90 py-3.5 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -113,7 +99,7 @@ export function EditorShell() {
           <div className="flex items-center gap-4">
             {/* Auto-save Status */}
             <span className="hidden sm:flex items-center gap-1.5 text-xs text-text-muted">
-              <span className="size-2 rounded-full bg-success" />
+              <span className={`size-2 rounded-full ${isSavedLocally ? "bg-success" : "bg-accent animate-pulse"}`} />
               <span>{isSavedLocally ? "Saved locally" : "Saving..."}</span>
             </span>
 
@@ -137,40 +123,23 @@ export function EditorShell() {
       {/* Main Split Layout */}
       <main className="flex-1 mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-          {/* Left Column: Editor Controls & Step Form */}
+          {/* Left Column: Form & Controls */}
           <div className="flex flex-col justify-between min-h-[calc(100vh-12rem)] space-y-8">
             <div className="space-y-8">
-              {/* Progress Step Indicator */}
-              <BirthdayStepIndicator
-                currentStep={currentStep}
-                onStepClick={handleStepClick}
-              />
+              <BirthdayStepIndicator currentStep={currentStep} onStepClick={setCurrentStep} />
 
-              {/* Step Forms */}
               <div className="rounded-3xl border border-border/80 bg-surface p-6 sm:p-8 shadow-soft">
                 {currentStep === 1 && (
-                  <RecipientForm
-                    data={data}
-                    onChange={handleDataChange}
-                    errors={errors}
-                  />
+                  <RecipientForm data={data} onChange={updateData} errors={activeErrors} />
                 )}
 
                 {currentStep === 2 && (
-                  <MessageForm
-                    data={data}
-                    onChange={handleDataChange}
-                    errors={errors}
-                  />
+                  <MessageForm data={data} onChange={updateData} errors={activeErrors} />
                 )}
 
-                {currentStep === 3 && (
-                  <PhotoForm data={data} onChange={handleDataChange} />
-                )}
+                {currentStep === 3 && <PhotoForm data={data} onChange={updateData} />}
 
-                {currentStep === 4 && (
-                  <MusicForm data={data} onChange={handleDataChange} />
-                )}
+                {currentStep === 4 && <MusicForm data={data} onChange={updateData} />}
 
                 {currentStep === 5 && (
                   <div className="space-y-6 animate-fade-in text-center py-4">
@@ -191,11 +160,7 @@ export function EditorShell() {
                         <span>See Fullscreen Surprise</span>
                         <Sparkle className="text-accent text-sm ml-2" />
                       </Button>
-                      <Button
-                        onClick={() => setCurrentStep(1)}
-                        variant="secondary"
-                        size="lg"
-                      >
+                      <Button onClick={() => setCurrentStep(1)} variant="secondary" size="lg">
                         Keep Editing
                       </Button>
                     </div>
@@ -204,7 +169,7 @@ export function EditorShell() {
               </div>
             </div>
 
-            {/* Bottom Form Navigation Buttons */}
+            {/* Navigation Bar */}
             <div className="flex items-center justify-between border-t border-border/60 pt-6">
               <Button
                 type="button"
@@ -236,12 +201,12 @@ export function EditorShell() {
                 <span className="font-semibold uppercase tracking-widest text-primary">
                   Live Interactive Preview
                 </span>
-                <span className="text-[11px] text-text-muted">Updates as you type</span>
+                <span className="text-[11px] text-text-muted">Updates live</span>
               </div>
 
               <div className="flex justify-center py-2">
                 <PhonePreview size="md" className="shadow-phone">
-                  <BirthdayWishRenderer data={data} autoOpen={false} />
+                  <CreationRenderer creation={creation} autoOpen={false} />
                 </PhonePreview>
               </div>
             </div>
@@ -255,6 +220,22 @@ export function EditorShell() {
         onClose={() => setIsMobilePreviewOpen(false)}
         data={data}
       />
+
+      {/* Draft Restore Dialog */}
+      {hasSavedDraft && (
+        <DraftRestoreDialog
+          isOpen={showRestoreModal}
+          type="birthday"
+          onRestore={() => {
+            restoreDraft();
+            setShowRestoreModal(false);
+          }}
+          onStartFresh={() => {
+            startFresh();
+            setShowRestoreModal(false);
+          }}
+        />
+      )}
     </div>
   );
 }

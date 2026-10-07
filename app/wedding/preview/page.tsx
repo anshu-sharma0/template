@@ -1,52 +1,59 @@
 "use client";
 
-import { useEffect, useState, use } from "react";
-import { DEFAULT_WEDDING_DATA, loadSavedWeddingData } from "@/lib/wedding-data";
-import type { WeddingInvitationData, WeddingTemplateVariant } from "@/lib/wedding-types";
-import { WeddingRenderer } from "@/components/wedding/WeddingRenderer";
+import { useState, use } from "react";
+import { useRouter } from "next/navigation";
+import { DEFAULT_WEDDING_DATA } from "@/lib/wedding-data";
+import type { WeddingInvitationData } from "@/lib/wedding-types";
+import { useCreationState } from "@/lib/hooks/useCreationState";
+import { CreationRenderer } from "@/components/renderers/CreationRenderer";
 import { PhonePreview } from "@/components/marketing/PhonePreview";
+import { PreviewToolbar } from "@/components/preview/PreviewToolbar";
+import { PublishReadyModal } from "@/components/preview/PublishReadyModal";
 
 type PageProps = {
   searchParams: Promise<{ template?: string }>;
 };
 
 export default function WeddingPreviewStandalonePage({ searchParams }: PageProps) {
+  const router = useRouter();
   const resolvedParams = use(searchParams);
-  const [data, setData] = useState<WeddingInvitationData>(DEFAULT_WEDDING_DATA);
+  const initialTemplateId = resolvedParams.template === "luxury" ? "luxury-wedding" : "elegant-wedding";
 
-  useEffect(() => {
-    const overrideTemplate = resolvedParams.template as WeddingTemplateVariant | undefined;
-    const saved = loadSavedWeddingData(overrideTemplate);
-    if (saved) {
-      setData(saved);
-    }
-  }, [resolvedParams.template]);
+  const { creation, setTemplate } = useCreationState<WeddingInvitationData>(
+    "wedding",
+    initialTemplateId,
+    DEFAULT_WEDDING_DATA
+  );
+
+  const [restartKey, setRestartKey] = useState(0);
+  const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen flex-col bg-charcoal text-white">
-      {/* Top Floating Control Bar */}
-      <header className="sticky top-0 z-40 flex items-center justify-between border-b border-white/10 bg-charcoal/90 px-6 py-4 backdrop-blur-md">
-        <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-wider text-accent">
-          <span className="size-2 rounded-full bg-accent animate-pulse" />
-          <span>Full Wedding Invitation Preview ({data.template})</span>
-        </div>
-
-        <a
-          href="/wedding/create"
-          className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs font-semibold text-white transition hover:bg-white/20"
-        >
-          <span>← Back to Editing</span>
-        </a>
-      </header>
+      {/* Reusable Preview Toolbar */}
+      <PreviewToolbar
+        creation={creation}
+        onBackToEdit={() => router.push("/wedding/create")}
+        onTemplateChange={setTemplate}
+        onRestartExperience={() => setRestartKey((prev) => prev + 1)}
+        onPublishClick={() => setIsPublishModalOpen(true)}
+      />
 
       {/* Main Fullscreen Preview Stage */}
       <main className="flex flex-1 items-center justify-center p-4 sm:p-8 overflow-y-auto">
         <div className="relative w-full max-w-88">
           <PhonePreview size="lg" className="mx-auto shadow-phone">
-            <WeddingRenderer data={data} autoOpen={false} />
+            <CreationRenderer key={restartKey} creation={creation} autoOpen />
           </PhonePreview>
         </div>
       </main>
+
+      {/* Publish Ready Modal */}
+      <PublishReadyModal
+        isOpen={isPublishModalOpen}
+        onClose={() => setIsPublishModalOpen(false)}
+        type="wedding"
+      />
     </div>
   );
 }

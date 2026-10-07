@@ -1,16 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { brand } from "@/lib/brand";
 import type { WeddingInvitationData, WeddingTemplateVariant } from "@/lib/wedding-types";
-import {
-  DEFAULT_WEDDING_DATA,
-  loadSavedWeddingData,
-  saveWeddingDataDraft,
-} from "@/lib/wedding-data";
+import { DEFAULT_WEDDING_DATA } from "@/lib/wedding-data";
+import { useCreationState } from "@/lib/hooks/useCreationState";
 import { Button } from "@/components/ui/Button";
 import { PhonePreview } from "@/components/marketing/PhonePreview";
-import { WeddingRenderer } from "./WeddingRenderer";
+import { CreationRenderer } from "@/components/renderers/CreationRenderer";
 import { WeddingStepIndicator } from "./WeddingStepIndicator";
 import { CoupleForm } from "./forms/CoupleForm";
 import { WeddingInvitationForm } from "./forms/WeddingInvitationForm";
@@ -20,6 +17,7 @@ import { StoryForm } from "./forms/StoryForm";
 import { GalleryForm } from "./forms/GalleryForm";
 import { ExtrasForm } from "./forms/ExtrasForm";
 import { WeddingPreviewSheet } from "./WeddingPreviewSheet";
+import { DraftRestoreDialog } from "@/components/editor/DraftRestoreDialog";
 import { Sparkle } from "@/components/decorative/Sparkle";
 
 type WeddingEditorShellProps = {
@@ -27,74 +25,79 @@ type WeddingEditorShellProps = {
 };
 
 export function WeddingEditorShell({ initialTemplate }: WeddingEditorShellProps) {
-  const [data, setData] = useState<WeddingInvitationData>(() =>
-    loadSavedWeddingData(initialTemplate)
-  );
+  const initialTemplateId = initialTemplate === "luxury" ? "luxury-wedding" : "elegant-wedding";
+
+  const {
+    creation,
+    data,
+    isHydrated,
+    hasSavedDraft,
+    isSavedLocally,
+    toastMessage,
+    updateData,
+    setTemplate,
+    restoreDraft,
+    startFresh,
+    validation,
+  } = useCreationState<WeddingInvitationData>("wedding", initialTemplateId, DEFAULT_WEDDING_DATA);
+
   const [currentStep, setCurrentStep] = useState(1);
-  const [isSavedLocally, setIsSavedLocally] = useState(true);
   const [isMobilePreviewOpen, setIsMobilePreviewOpen] = useState(false);
-  const [errors, setErrors] = useState<{
-    brideName?: string;
-    groomName?: string;
-    weddingDate?: string;
-  }>({});
+  const [showErrors, setShowErrors] = useState(false);
+  const [showRestoreModal, setShowRestoreModal] = useState(true);
 
-  useEffect(() => {
-    if (initialTemplate && data.template !== initialTemplate) {
-      setData((prev) => ({ ...prev, template: initialTemplate }));
-    }
-  }, [initialTemplate]);
-
-  const handleDataChange = (updates: Partial<WeddingInvitationData>) => {
-    const next = { ...data, ...updates };
-    setData(next);
-    saveWeddingDataDraft(next);
-    setIsSavedLocally(true);
-
-    if (updates.brideName && errors.brideName) setErrors((p) => ({ ...p, brideName: undefined }));
-    if (updates.groomName && errors.groomName) setErrors((p) => ({ ...p, groomName: undefined }));
-    if (updates.weddingDate && errors.weddingDate) setErrors((p) => ({ ...p, weddingDate: undefined }));
-  };
-
-  const validateStep = (step: number): boolean => {
-    if (step === 1) {
-      const errs: typeof errors = {};
-      if (!data.brideName.trim()) errs.brideName = "Add the bride's name to continue ❤️";
-      if (!data.groomName.trim()) errs.groomName = "Add the groom's name to continue ❤️";
-      if (!data.weddingDate.trim()) errs.weddingDate = "Select your wedding date to continue ❤️";
-
-      if (Object.keys(errs).length > 0) {
-        setErrors(errs);
-        return false;
-      }
-    }
-    return true;
-  };
+  if (!isHydrated) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background text-text">
+        <div className="flex items-center gap-3 text-sm text-text-muted">
+          <span className="size-2 rounded-full bg-primary animate-pulse" />
+          <span>Loading wedding invitation editor...</span>
+        </div>
+      </div>
+    );
+  }
 
   const handleNextStep = () => {
-    if (validateStep(currentStep)) {
-      if (currentStep < 8) {
-        setCurrentStep((prev) => prev + 1);
+    if (currentStep === 1) {
+      if (validation.valid || (!validation.errors.brideName && !validation.errors.groomName && !validation.errors.weddingDate)) {
+        setCurrentStep(2);
+        setShowErrors(false);
         window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        setShowErrors(true);
       }
+    } else if (currentStep < 8) {
+      setCurrentStep((prev) => prev + 1);
+      setShowErrors(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   const handlePrevStep = () => {
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1);
+      setShowErrors(false);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   const handleStepClick = (stepNumber: number) => {
-    if (stepNumber < currentStep || validateStep(currentStep)) {
+    if (stepNumber < currentStep || !validation.errors.brideName) {
       setCurrentStep(stepNumber);
     }
   };
 
+  const activeErrors = showErrors ? validation.errors : {};
+
   return (
     <div className="flex min-h-screen flex-col bg-background text-text">
+      {/* Top Toast Banner */}
+      {toastMessage && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-full border border-primary/20 bg-text text-white px-5 py-2 text-xs font-semibold shadow-lift animate-fade-in">
+          {toastMessage}
+        </div>
+      )}
+
       {/* Top Header */}
       <header className="sticky top-0 z-30 border-b border-border/80 bg-background/90 py-3.5 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -109,22 +112,22 @@ export function WeddingEditorShell({ initialTemplate }: WeddingEditorShellProps)
           </a>
 
           <div className="flex items-center gap-3">
-            {/* Template Switcher Dropdown */}
+            {/* Safe Template Switcher Dropdown */}
             <div className="flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs">
               <span className="text-text-muted font-medium hidden sm:inline">Design:</span>
               <select
-                value={data.template}
-                onChange={(e) => handleDataChange({ template: e.target.value as WeddingTemplateVariant })}
+                value={creation.templateId}
+                onChange={(e) => setTemplate(e.target.value)}
                 className="bg-transparent font-semibold text-text focus:outline-none cursor-pointer"
               >
-                <option value="elegant">Elegant Wedding</option>
-                <option value="luxury">Luxury Wedding</option>
+                <option value="elegant-wedding">Elegant Wedding</option>
+                <option value="luxury-wedding">Luxury Wedding</option>
               </select>
             </div>
 
             {/* Auto-save Status */}
             <span className="hidden sm:flex items-center gap-1.5 text-xs text-text-muted">
-              <span className="size-2 rounded-full bg-success" />
+              <span className={`size-2 rounded-full ${isSavedLocally ? "bg-success" : "bg-accent animate-pulse"}`} />
               <span>{isSavedLocally ? "Saved locally" : "Saving..."}</span>
             </span>
 
@@ -160,31 +163,31 @@ export function WeddingEditorShell({ initialTemplate }: WeddingEditorShellProps)
               {/* Step Forms */}
               <div className="rounded-3xl border border-border/80 bg-surface p-6 sm:p-8 shadow-soft">
                 {currentStep === 1 && (
-                  <CoupleForm data={data} onChange={handleDataChange} errors={errors} />
+                  <CoupleForm data={data} onChange={updateData} errors={activeErrors} />
                 )}
 
                 {currentStep === 2 && (
-                  <WeddingInvitationForm data={data} onChange={handleDataChange} />
+                  <WeddingInvitationForm data={data} onChange={updateData} />
                 )}
 
                 {currentStep === 3 && (
-                  <EventsForm data={data} onChange={handleDataChange} />
+                  <EventsForm data={data} onChange={updateData} />
                 )}
 
                 {currentStep === 4 && (
-                  <VenueForm data={data} onChange={handleDataChange} />
+                  <VenueForm data={data} onChange={updateData} />
                 )}
 
                 {currentStep === 5 && (
-                  <StoryForm data={data} onChange={handleDataChange} />
+                  <StoryForm data={data} onChange={updateData} />
                 )}
 
                 {currentStep === 6 && (
-                  <GalleryForm data={data} onChange={handleDataChange} />
+                  <GalleryForm data={data} onChange={updateData} />
                 )}
 
                 {currentStep === 7 && (
-                  <ExtrasForm data={data} onChange={handleDataChange} />
+                  <ExtrasForm data={data} onChange={updateData} />
                 )}
 
                 {currentStep === 8 && (
@@ -252,7 +255,7 @@ export function WeddingEditorShell({ initialTemplate }: WeddingEditorShellProps)
 
               <div className="flex justify-center py-2">
                 <PhonePreview size="md" className="shadow-phone">
-                  <WeddingRenderer data={data} autoOpen={false} />
+                  <CreationRenderer creation={creation} autoOpen={false} />
                 </PhonePreview>
               </div>
             </div>
@@ -266,6 +269,23 @@ export function WeddingEditorShell({ initialTemplate }: WeddingEditorShellProps)
         onClose={() => setIsMobilePreviewOpen(false)}
         data={data}
       />
+
+      {/* Draft Restore Dialog */}
+      {hasSavedDraft && (
+        <DraftRestoreDialog
+          isOpen={showRestoreModal}
+          type="wedding"
+          onRestore={() => {
+            restoreDraft();
+            setShowRestoreModal(false);
+          }}
+          onStartFresh={() => {
+            startFresh();
+            setShowRestoreModal(false);
+          }}
+        />
+      )}
     </div>
   );
 }
+
