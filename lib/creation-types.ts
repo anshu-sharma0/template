@@ -1,6 +1,5 @@
 import type { BirthdayWishData } from "./birthday-types";
-import type { WeddingInvitationData, WeddingTemplateVariant } from "./wedding-types";
-
+import type { WeddingInvitationData } from "./wedding-types";
 export type CreationType = "birthday" | "wedding";
 
 export type TemplateCapabilities = {

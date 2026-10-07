@@ -31,6 +31,7 @@ export function useCreationState<TData>(
       if (raw) {
         const parsed = JSON.parse(raw);
         if (parsed && parsed.data) {
+           // eslint-disable-next-line react-hooks/set-state-in-effect
           setHasSavedDraft(true);
         }
       }
@@ -90,8 +91,8 @@ export function useCreationState<TData>(
     const nextData = { ...data, ...updates };
     const normalized =
       type === "birthday"
-        ? (normalizeBirthdayWish(nextData as any) as unknown as TData)
-        : (normalizeWeddingInvitation(nextData as any) as unknown as TData);
+        ? (normalizeBirthdayWish(nextData as unknown as Partial<import("@/lib/birthday-types").BirthdayWishData>) as unknown as TData)
+        : (normalizeWeddingInvitation(nextData as unknown as Partial<import("@/lib/wedding-types").WeddingInvitationData>) as unknown as TData);
 
     setData(normalized);
 
@@ -124,7 +125,7 @@ export function useCreationState<TData>(
     // If wedding, also sync template property inside data object
     if (type === "wedding" && data && typeof data === "object") {
       const variant = newTemplateId === "luxury-wedding" ? "luxury" : "elegant";
-      updateData({ template: variant } as any);
+      updateData({ template: variant } as unknown as Partial<TData>);
     }
 
     showToast(`Template changed to ${config.name} ✨`);
@@ -136,19 +137,19 @@ export function useCreationState<TData>(
       ? {
         type: "birthday",
         templateId,
-        data: data as any,
+        data: data as unknown as import("@/lib/birthday-types").BirthdayWishData,
       }
       : {
         type: "wedding",
         templateId,
-        data: data as any,
+        data: data as unknown as import("@/lib/wedding-types").WeddingInvitationData,
       };
 
   // Validation state
   const validation =
     type === "birthday"
-      ? validateBirthdayWish(data as any)
-      : validateWeddingInvitation(data as any);
+      ? validateBirthdayWish(data as unknown as import("@/lib/birthday-types").BirthdayWishData)
+      : validateWeddingInvitation(data as unknown as import("@/lib/wedding-types").WeddingInvitationData);
 
   return {
     creation,

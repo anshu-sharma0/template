@@ -1,6 +1,5 @@
 import type { WeddingInvitationData } from "@/lib/wedding-types";
 import { MUSIC_TRACKS } from "@/lib/birthday-data";
-import { MusicButton } from "@/components/invitation/MusicButton";
 import { Input } from "@/components/ui/Input";
 
 type ExtrasFormProps = {
