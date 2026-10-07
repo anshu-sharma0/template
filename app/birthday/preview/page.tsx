@@ -45,7 +45,7 @@ export default function BirthdayPreviewStandalonePage() {
       <PublishReadyModal
         isOpen={isPublishModalOpen}
         onClose={() => setIsPublishModalOpen(false)}
-        type="birthday"
+        creation={creation}
       />
     </div>
   );

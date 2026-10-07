@@ -52,7 +52,7 @@ export default function WeddingPreviewStandalonePage({ searchParams }: PageProps
       <PublishReadyModal
         isOpen={isPublishModalOpen}
         onClose={() => setIsPublishModalOpen(false)}
-        type="wedding"
+        creation={creation}
       />
     </div>
   );
