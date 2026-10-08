@@ -67,7 +67,7 @@ export function RecipientForm({ data, onChange, errors }: RecipientFormProps) {
         </div>
       </div>
 
-      {/* Special Age (Optional) */}
+      {/* Special Age & Birthday Date (Optional) */}
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="space-y-2">
           <label htmlFor="age" className="block text-xs font-semibold uppercase tracking-wider text-text">
@@ -78,6 +78,18 @@ export function RecipientForm({ data, onChange, errors }: RecipientFormProps) {
             value={data.age || ""}
             onChange={(e) => onChange({ age: e.target.value })}
             placeholder="e.g. 25"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="birthDate" className="block text-xs font-semibold uppercase tracking-wider text-text">
+            Birthday Date <span className="text-text-muted font-normal">(Optional)</span>
+          </label>
+          <Input
+            id="birthDate"
+            type="date"
+            value={data.birthDate || ""}
+            onChange={(e) => onChange({ birthDate: e.target.value })}
           />
         </div>
       </div>

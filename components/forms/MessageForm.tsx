@@ -99,6 +99,24 @@ export function MessageForm({ data, onChange, errors }: MessageFormProps) {
           </p>
         )}
       </div>
+
+      {/* Optional Birthday Quote */}
+      <div className="pt-4 border-t border-border/60 space-y-2">
+        <label htmlFor="quote" className="block text-xs font-semibold uppercase tracking-wider text-text">
+          Memorable Birthday Quote <span className="text-text-muted font-normal">(Optional)</span>
+        </label>
+        <Textarea
+          id="quote"
+          rows={2}
+          value={data.quote || ""}
+          onChange={(e) => onChange({ quote: e.target.value })}
+          placeholder="e.g. Another year of you means another year of making the world a little softer, a little brighter..."
+          className="text-sm font-serif italic"
+        />
+        <p className="text-xs text-text-muted">
+          A poetic quote displayed in an editorial monument card.
+        </p>
+      </div>
     </div>
   );
 }

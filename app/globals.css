@@ -176,6 +176,20 @@ select {
   100% { background-position: 200% center; }
 }
 
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-220px) scale(1.2);
+    opacity: 0;
+  }
+}
+
 @media (min-width: 768px) {
   :root {
     --type-display: 6rem;

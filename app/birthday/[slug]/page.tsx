@@ -4,12 +4,22 @@ import { getPublishedCreationBySlug } from "@/lib/db/creations-store";
 import { CreationRenderer } from "@/components/renderers/CreationRenderer";
 import type { BirthdayWishData } from "@/lib/birthday-types";
 
+import { DEFAULT_BIRTHDAY_DATA } from "@/lib/birthday-data";
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+
+  if (slug === "demo" || slug === "sample") {
+    return {
+      title: "Happy Birthday, Khushi ❤️ — A Special Keepsake",
+      description: "A beautiful interactive digital birthday keepsake created with love.",
+    };
+  }
+
   const creation = await getPublishedCreationBySlug(slug);
 
   if (!creation || creation.type !== "birthday" || creation.status !== "published") {
@@ -46,10 +56,32 @@ export async function generateMetadata({
 
 export default async function PublicBirthdayPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ open?: string }>;
 }) {
   const { slug } = await params;
+  const sp = searchParams ? await searchParams : {};
+  const autoOpen = sp?.open === "1";
+
+  if (slug === "demo" || slug === "sample") {
+    return (
+      <main className="min-h-screen w-full bg-linear-to-b from-[#fffbf8] via-[#fff5f7] to-[#fff0f3] flex justify-center">
+        <div className="w-full max-w-md min-h-screen shadow-2xl bg-white">
+          <CreationRenderer
+            creation={{
+              type: "birthday",
+              templateId: "birthday-wish",
+              data: DEFAULT_BIRTHDAY_DATA,
+            }}
+            autoOpen={autoOpen}
+          />
+        </div>
+      </main>
+    );
+  }
+
   const creation = await getPublishedCreationBySlug(slug);
 
   if (!creation || creation.type !== "birthday" || creation.status !== "published") {
@@ -57,15 +89,17 @@ export default async function PublicBirthdayPage({
   }
 
   return (
-    <main className="min-h-screen w-full bg-[#110e14]">
-      <CreationRenderer
-        creation={{
-          type: "birthday",
-          templateId: creation.templateId,
-          data: creation.data as BirthdayWishData,
-        }}
-        autoOpen
-      />
+    <main className="min-h-screen w-full bg-linear-to-b from-[#fffbf8] via-[#fff5f7] to-[#fff0f3] flex justify-center">
+      <div className="w-full max-w-md min-h-screen shadow-2xl bg-white">
+        <CreationRenderer
+          creation={{
+            type: "birthday",
+            templateId: creation.templateId,
+            data: creation.data as BirthdayWishData,
+          }}
+          autoOpen={autoOpen}
+        />
+      </div>
     </main>
   );
 }

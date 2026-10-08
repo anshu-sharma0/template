@@ -29,15 +29,31 @@ export type MusicTrackOption = {
   sampleUrl?: string;
 };
 
+export type MemoryItem = {
+  photoUrl: string;
+  caption: string;
+  dateOrLocation?: string;
+};
+
+export type SpecialReasonItem = {
+  title: string;
+  description: string;
+  emoji: string;
+};
+
 export type BirthdayWishData = {
   recipientName: string;
   relationship?: RelationshipOption | "";
   age?: string;
+  birthDate?: string;
   senderName?: string;
   message: string;
   messageStyle?: MessageStylePreset | "";
   mainPhoto?: string;
   photos: string[];
+  memories?: MemoryItem[];
+  specialReasons?: SpecialReasonItem[];
+  quote?: string;
   music: string; // "romantic" | "acoustic" | "ambient" | "none"
 };
 
