@@ -10,12 +10,12 @@ export type BadgeProps = {
 };
 
 const tones: Record<BadgeTone, string> = {
-  rose: "bg-primary-soft text-primary-strong",
-  champagne: "bg-accent-soft text-accent-strong",
-  lavender: "bg-lavender text-charcoal",
-  neutral: "bg-surface-soft text-text-muted",
-  gold: "bg-amber-100 text-amber-800 border border-amber-300",
-  emerald: "bg-emerald-100 text-emerald-800 border border-emerald-300",
+  rose: "bg-[var(--love-surface-blush)] text-[var(--love-crimson)] border border-[var(--love-border)]",
+  champagne: "bg-[var(--love-surface-cream)] text-amber-900 border border-amber-200",
+  lavender: "bg-purple-50 text-[var(--love-text-heading)] border border-purple-200",
+  neutral: "bg-[var(--love-surface-blush)] text-[var(--love-text-muted)] border border-[var(--love-border-subtle)]",
+  gold: "bg-amber-50 text-amber-900 border border-amber-300",
+  emerald: "bg-emerald-50 text-emerald-800 border border-emerald-200",
   sage: "bg-emerald-50 text-emerald-900 border border-emerald-200",
 };
 

@@ -76,7 +76,7 @@ export default function BirthdayLandingPage() {
         />
 
         {/* 2. Interactive Device Frame Preview */}
-        <section id="birthday-preview" className="py-16 sm:py-24 bg-[#fffaf5]">
+        <section id="birthday-preview" className="py-16 sm:py-24 bg-[var(--love-canvas-ivory)]">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeader
               eyebrow="Recipient Experience"

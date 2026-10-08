@@ -10,8 +10,8 @@ export function Card({ children, className, interactive = false, ...props }: Car
   return (
     <div
       className={cn(
-        "rounded-[var(--radius-medium)] border border-border bg-surface shadow-soft",
-        interactive && "transition duration-300 hover:-translate-y-1 hover:shadow-lift",
+        "rounded-2xl border border-[var(--love-border)] bg-white shadow-love-card",
+        interactive && "transition duration-300 hover:-translate-y-1 hover:shadow-love-lift",
         className,
       )}
       {...props}

@@ -68,7 +68,7 @@ export function TestimonialSection({
           {testimonials.map((item, idx) => (
             <div
               key={idx}
-              className="group relative flex flex-col justify-between rounded-3xl bg-white p-6 sm:p-8 border border-[#e8d5cf]/80 shadow-sm transition-all duration-300 hover:shadow-xl hover:border-[#b05765]/40 hover:-translate-y-1"
+              className="group relative flex flex-col justify-between rounded-3xl bg-white p-6 sm:p-8 border border-[var(--love-border)] shadow-love-card transition-all duration-300 hover:shadow-love-lift hover:border-pink-300 hover:-translate-y-1"
             >
               <div>
                 {/* Header: Rating & Occasion */}
@@ -77,26 +77,26 @@ export function TestimonialSection({
                     {"★".repeat(item.rating || 5)}
                   </div>
                   {item.occasion && (
-                    <span className="rounded-full bg-[#fceae6] px-3 py-1 text-[10px] font-bold text-[#b05765] uppercase">
+                    <span className="rounded-full bg-[var(--love-surface-blush)] border border-[var(--love-border)] px-3 py-1 text-[10px] font-bold text-[var(--love-crimson)] uppercase">
                       {item.occasion}
                     </span>
                   )}
                 </div>
 
                 {/* Quote */}
-                <p className="text-sm text-[#2c2224] leading-relaxed italic font-serif">
+                <p className="text-sm text-[var(--love-text-heading)] leading-relaxed italic font-serif">
                   &quot;{item.quote}&quot;
                 </p>
               </div>
 
               {/* Author Footer */}
-              <div className="mt-6 pt-4 border-t border-[#eedad5]/60 flex items-center gap-3">
-                <div className="grid size-10 place-items-center rounded-full bg-linear-to-tr from-[#b05765] to-[#e09f87] text-white font-bold text-sm shadow-xs">
+              <div className="mt-6 pt-4 border-t border-[var(--love-border-subtle)] flex items-center gap-3">
+                <div className="grid size-10 place-items-center rounded-full bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white font-bold text-sm shadow-xs">
                   {item.name.charAt(0)}
                 </div>
                 <div>
-                  <div className="font-bold text-xs text-[#2c2224]">{item.name}</div>
-                  <div className="text-[11px] text-[#8e7b7e]">{item.role}</div>
+                  <div className="font-bold text-xs text-[var(--love-text-heading)]">{item.name}</div>
+                  <div className="text-[11px] text-[var(--love-text-muted)]">{item.role}</div>
                 </div>
               </div>
             </div>

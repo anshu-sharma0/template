@@ -63,7 +63,7 @@ export function PublishReadyModal({
   return (
     <Dialog isOpen={isOpen} onClose={onClose} title="Your Creation is Ready ❤️">
       <div className="space-y-6 py-2 text-center">
-        <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-accent-soft text-accent-strong text-2xl">
+        <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--love-surface-blush)] text-[var(--love-crimson)] text-2xl border border-[var(--love-border)]">
           ✨
         </div>
 
@@ -74,17 +74,17 @@ export function PublishReadyModal({
         )}
 
         <div className="space-y-4 max-w-md mx-auto">
-          <h3 className="font-display text-2xl font-normal text-text">
+          <h3 className="font-serif text-2xl font-bold text-[var(--love-text-heading)]">
             Continue to Secure Checkout
           </h3>
-          <p className="text-sm text-text-muted leading-relaxed">
+          <p className="text-sm text-[var(--love-text-muted)] leading-relaxed">
             Your {creation.type === "birthday" ? "birthday surprise" : "wedding invitation"} is saved. Complete payment to publish your live share link.
           </p>
 
           {/* Pricing Banner */}
-          <div className="p-4 bg-surface rounded-2xl border border-border flex justify-between items-center text-xs">
-            <span className="font-medium text-text">{pricingTier.name}</span>
-            <span className="font-serif font-bold text-accent-strong text-base">
+          <div className="p-4 bg-[var(--love-surface-blush)] rounded-2xl border border-[var(--love-border)] flex justify-between items-center text-xs shadow-2xs">
+            <span className="font-semibold text-[var(--love-text-heading)]">{pricingTier.name}</span>
+            <span className="font-serif font-bold text-[var(--love-crimson)] text-base">
               {formattedPrice}
             </span>
           </div>
@@ -94,10 +94,10 @@ export function PublishReadyModal({
               onClick={handleContinueToCheckout}
               disabled={isLoading}
               size="lg"
-              className="shadow-lift"
+              className="bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white shadow-love-lift hover:opacity-95"
             >
               <span>{isLoading ? "Saving..." : `Continue to Pay (${formattedPrice})`}</span>
-              <Sparkle className="text-accent text-sm ml-2" />
+              <Sparkle className="text-white text-sm ml-2" />
             </Button>
           </div>
         </div>

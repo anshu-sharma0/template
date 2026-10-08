@@ -60,18 +60,18 @@ export function CountdownTimerCard({
   return (
     <div
       className={cn(
-        "relative rounded-3xl p-6 sm:p-8 text-center border shadow-lg overflow-hidden",
+        "relative rounded-3xl p-6 sm:p-8 text-center border shadow-love-card overflow-hidden",
         variant === "glass"
-          ? "bg-white/80 backdrop-blur-md border-[#e8d5cf]"
-          : "bg-gradient-to-br from-white via-[#fffaf5] to-[#fff0ea] border-[#e8d5cf]",
+          ? "bg-white/80 backdrop-blur-md border-[var(--love-border)]"
+          : "bg-gradient-to-br from-white via-[var(--love-surface-blush)] to-[var(--love-surface-rose)] border-[var(--love-border)]",
         className
       )}
     >
-      {title && <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#2c2224]">{title}</h3>}
-      {subtitle && <p className="mt-1 text-xs text-[#6e5d60]">{subtitle}</p>}
+      {title && <h3 className="font-serif text-xl sm:text-2xl font-bold text-[var(--love-text-heading)]">{title}</h3>}
+      {subtitle && <p className="mt-1 text-xs text-[var(--love-text-muted)]">{subtitle}</p>}
 
       {timeLeft.isExpired ? (
-        <div className="my-6 rounded-2xl bg-[#fceae6] p-4 font-serif text-lg font-bold text-[#b05765]">
+        <div className="my-6 rounded-2xl bg-[var(--love-surface-blush)] border border-[var(--love-border)] p-4 font-serif text-lg font-bold text-[var(--love-crimson)]">
           🎉 The Celebration Has Begun! 🎉
         </div>
       ) : (
@@ -79,12 +79,12 @@ export function CountdownTimerCard({
           {units.map((unit, i) => (
             <div
               key={i}
-              className="flex flex-col items-center rounded-2xl bg-white p-3 sm:p-4 border border-[#e8d5cf] shadow-xs"
+              className="flex flex-col items-center rounded-2xl bg-white p-3 sm:p-4 border border-[var(--love-border)] shadow-xs"
             >
-              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b05765]">
+              <span className="font-serif text-2xl sm:text-3xl font-bold text-[var(--love-crimson)]">
                 {String(unit.value).padStart(2, "0")}
               </span>
-              <span className="text-[10px] font-bold text-[#8e7b7e] uppercase tracking-wider mt-1">
+              <span className="text-[10px] font-bold text-[var(--love-text-muted)] uppercase tracking-wider mt-1">
                 {unit.label}
               </span>
             </div>

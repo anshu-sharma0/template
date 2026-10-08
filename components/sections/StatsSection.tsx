@@ -35,12 +35,10 @@ export function StatsSection({
   className,
 }: StatsSectionProps) {
   const containerBg = {
-    solid: "bg-white border border-[#e8d5cf]",
-    glass: "bg-white/80 backdrop-blur-md border border-[#e8d5cf]",
-    gradient: "bg-gradient-to-r from-[#2c2224] via-[#3a2c30] to-[#2c2224] text-white border border-[#4a3a3e]",
+    solid: "bg-white border border-[var(--love-border)] shadow-love-card",
+    glass: "bg-white/80 backdrop-blur-md border border-[var(--love-border)] shadow-love-card",
+    gradient: "bg-gradient-to-r from-[var(--love-surface-blush)] via-white to-[var(--love-surface-rose)] text-[var(--love-text-heading)] border border-[var(--love-border)] shadow-love-card",
   };
-
-  const isDark = variant === "gradient";
 
   return (
     <section className={cn("py-16 sm:py-20 relative overflow-hidden", className)}>
@@ -48,39 +46,39 @@ export function StatsSection({
         {title && (
           <SectionHeader
             eyebrow={eyebrow}
-            title={<span className={isDark ? "text-white" : "text-[#2c2224]"}>{title}</span>}
-            description={<span className={isDark ? "text-[#caaeb3]" : "text-[#6e5d60]"}>{description}</span>}
-            badgeTone="gold"
+            title={title}
+            description={description}
+            badgeTone="rose"
             align="center"
           />
         )}
 
-        <div className={cn("rounded-3xl p-8 sm:p-12 shadow-xl", containerBg[variant])}>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#e8d5cf]/20">
+        <div className={cn("rounded-3xl p-8 sm:p-12 shadow-love-card", containerBg[variant])}>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[var(--love-border-subtle)]">
             {stats.map((stat, idx) => (
               <div key={idx} className={cn("flex flex-col items-center text-center p-4", idx > 0 && "sm:pl-8")}>
                 {stat.icon && (
-                  <span className="grid size-12 place-items-center rounded-2xl bg-[#b05765]/20 text-2xl text-[#b05765] mb-4">
+                  <span className="grid size-12 place-items-center rounded-2xl bg-[var(--love-surface-blush)] text-2xl text-[var(--love-crimson)] border border-[var(--love-border)] mb-4">
                     {stat.icon}
                   </span>
                 )}
                 
-                <div className={cn("font-serif text-3xl sm:text-4xl font-bold tracking-tight", isDark ? "text-white" : "text-[#2c2224]")}>
+                <div className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-[var(--love-text-heading)]">
                   {stat.value}
                 </div>
 
-                <div className={cn("mt-1 text-sm font-semibold", isDark ? "text-[#fceae6]" : "text-[#b05765]")}>
+                <div className="mt-1 text-sm font-semibold text-[var(--love-crimson)]">
                   {stat.label}
                 </div>
 
                 {stat.description && (
-                  <div className={cn("mt-1.5 text-xs", isDark ? "text-[#caaeb3]" : "text-[#8e7b7e]")}>
+                  <div className="mt-1.5 text-xs text-[var(--love-text-muted)]">
                     {stat.description}
                   </div>
                 )}
 
                 {stat.trend && (
-                  <span className="mt-3 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-bold text-emerald-400 border border-emerald-500/20">
+                  <span className="mt-3 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600 border border-emerald-500/20">
                     {stat.trend}
                   </span>
                 )}

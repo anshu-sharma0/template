@@ -15,7 +15,7 @@ export interface ScratchCardProps {
 export function ScratchCard({
   children,
   coverText = "✨ Scratch here to reveal secret message! 🎁",
-  coverColor = "#b05765",
+  coverColor = "#e11d48",
   finishPercent = 50,
   onScratchedComplete,
   className,
@@ -94,7 +94,7 @@ export function ScratchCard({
   };
 
   return (
-    <div className={cn("relative overflow-hidden rounded-3xl border-2 border-[#e8d5cf] bg-white shadow-lg", className)}>
+    <div className={cn("relative overflow-hidden rounded-3xl border-2 border-[var(--love-border)] bg-white shadow-love-card", className)}>
       {/* Underlying Content */}
       <div className="p-6">{children}</div>
 

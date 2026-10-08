@@ -29,22 +29,22 @@ export function FlipMemoryCard({
     >
       <div
         className={cn(
-          "relative size-full rounded-3xl transition-transform duration-700 transform-style-3d shadow-md hover:shadow-xl",
+          "relative size-full rounded-3xl transition-transform duration-700 transform-style-3d shadow-love-card hover:shadow-love-lift",
           isFlipped && "rotate-y-180"
         )}
       >
         {/* Front Face */}
-        <div className="absolute inset-0 size-full rounded-3xl bg-white p-6 border border-[#e8d5cf] backface-hidden flex flex-col justify-between">
+        <div className="absolute inset-0 size-full rounded-3xl bg-white p-6 border border-[var(--love-border)] backface-hidden flex flex-col justify-between">
           {front}
-          <div className="mt-2 text-right text-[10px] font-bold text-[#b05765] uppercase tracking-wider">
+          <div className="mt-2 text-right text-[10px] font-bold text-[var(--love-crimson)] uppercase tracking-wider">
             Tap to flip 🔄
           </div>
         </div>
 
         {/* Back Face */}
-        <div className="absolute inset-0 size-full rounded-3xl bg-gradient-to-br from-[#fff0ea] via-[#fceae6] to-[#fffaf5] p-6 border border-[#b05765]/40 backface-hidden rotate-y-180 flex flex-col justify-between">
+        <div className="absolute inset-0 size-full rounded-3xl bg-gradient-to-br from-white via-[var(--love-surface-blush)] to-[var(--love-surface-rose)] p-6 border border-[var(--love-border)] backface-hidden rotate-y-180 flex flex-col justify-between">
           {back}
-          <div className="mt-2 text-right text-[10px] font-bold text-[#b05765] uppercase tracking-wider">
+          <div className="mt-2 text-right text-[10px] font-bold text-[var(--love-crimson)] uppercase tracking-wider">
             Tap to flip 🔄
           </div>
         </div>

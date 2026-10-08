@@ -32,23 +32,23 @@ export function RSVPFormSection({
   };
 
   return (
-    <div className={cn("mx-auto max-w-lg rounded-3xl bg-white p-6 sm:p-8 border border-[#e8d5cf] shadow-xl", className)}>
+    <div className={cn("mx-auto max-w-lg rounded-3xl bg-white p-6 sm:p-8 border border-[var(--love-border)] shadow-love-card", className)}>
       <div className="text-center">
         <span className="text-3xl">💌</span>
-        <h3 className="mt-2 font-serif text-2xl font-bold text-[#2c2224]">{title}</h3>
-        <p className="mt-1 text-xs text-[#6e5d60]">{subtitle}</p>
+        <h3 className="mt-2 font-serif text-2xl font-bold text-[var(--love-text-heading)]">{title}</h3>
+        <p className="mt-1 text-xs text-[var(--love-text-muted)]">{subtitle}</p>
       </div>
 
       {submitted ? (
-        <div className="my-8 rounded-2xl bg-[#fceae6] p-6 text-center animate-in fade-in duration-300">
+        <div className="my-8 rounded-2xl bg-[var(--love-surface-blush)] border border-[var(--love-border)] p-6 text-center animate-in fade-in duration-300">
           <span className="text-4xl">✨</span>
-          <h4 className="mt-2 font-serif text-lg font-bold text-[#b05765]">RSVP Received!</h4>
-          <p className="mt-1 text-xs text-[#6e5d60]">
-            Thank you, <strong className="text-[#2c2224]">{name}</strong>! We&apos;ve saved your response.
+          <h4 className="mt-2 font-serif text-lg font-bold text-[var(--love-crimson)]">RSVP Received!</h4>
+          <p className="mt-1 text-xs text-[var(--love-text-body)]">
+            Thank you, <strong className="text-[var(--love-text-heading)]">{name}</strong>! We&apos;ve saved your response.
           </p>
           <button
             onClick={() => setSubmitted(false)}
-            className="mt-4 rounded-full bg-[#b05765] px-4 py-2 text-xs font-semibold text-white"
+            className="mt-4 rounded-full bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] px-4 py-2 text-xs font-semibold text-white shadow-love-lift cursor-pointer"
           >
             Submit Another Response
           </button>
@@ -56,19 +56,19 @@ export function RSVPFormSection({
       ) : (
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
-            <label className="block text-xs font-bold text-[#2c2224] mb-1">Your Full Name *</label>
+            <label className="block text-xs font-bold text-[var(--love-text-heading)] mb-1">Your Full Name *</label>
             <input
               type="text"
               required
               placeholder="e.g. Rahul Sharma"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-xl border border-[#e8d5cf] bg-[#fffaf5] px-4 py-2.5 text-xs text-[#2c2224] focus:border-[#b05765] focus:outline-none"
+              className="w-full rounded-xl border border-[var(--love-border)] bg-[var(--love-canvas-ivory)] px-4 py-2.5 text-xs text-[var(--love-text-heading)] focus:border-[var(--love-crimson)] focus:outline-none"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#2c2224] mb-1">Attendance Status</label>
+            <label className="block text-xs font-bold text-[var(--love-text-heading)] mb-1">Attendance Status</label>
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
@@ -76,8 +76,8 @@ export function RSVPFormSection({
                 className={cn(
                   "rounded-xl py-2.5 text-xs font-bold transition-all border cursor-pointer",
                   status === "attending"
-                    ? "bg-[#b05765] text-white border-[#b05765] shadow-xs"
-                    : "bg-[#fffaf5] text-[#6e5d60] border-[#e8d5cf]"
+                    ? "bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white border-[var(--love-crimson)] shadow-love-lift"
+                    : "bg-[var(--love-canvas-ivory)] text-[var(--love-text-body)] border-[var(--love-border)]"
                 )}
               >
                 🎉 Joyfully Attend
@@ -88,8 +88,8 @@ export function RSVPFormSection({
                 className={cn(
                   "rounded-xl py-2.5 text-xs font-bold transition-all border cursor-pointer",
                   status === "declined"
-                    ? "bg-[#2c2224] text-white border-[#2c2224] shadow-xs"
-                    : "bg-[#fffaf5] text-[#6e5d60] border-[#e8d5cf]"
+                    ? "bg-stone-600 text-white border-stone-600 shadow-xs"
+                    : "bg-[var(--love-canvas-ivory)] text-[var(--love-text-body)] border-[var(--love-border)]"
                 )}
               >
                 😔 Regretfully Decline
@@ -99,11 +99,11 @@ export function RSVPFormSection({
 
           {status === "attending" && (
             <div>
-              <label className="block text-xs font-bold text-[#2c2224] mb-1">Number of Guests</label>
+              <label className="block text-xs font-bold text-[var(--love-text-heading)] mb-1">Number of Guests</label>
               <select
                 value={guests}
                 onChange={(e) => setGuests(Number(e.target.value))}
-                className="w-full rounded-xl border border-[#e8d5cf] bg-[#fffaf5] px-4 py-2.5 text-xs text-[#2c2224] focus:border-[#b05765] focus:outline-none"
+                className="w-full rounded-xl border border-[var(--love-border)] bg-[var(--love-canvas-ivory)] px-4 py-2.5 text-xs text-[var(--love-text-heading)] focus:border-[var(--love-crimson)] focus:outline-none cursor-pointer"
               >
                 <option value={1}>1 Guest (Just Me)</option>
                 <option value={2}>2 Guests (+1 Partner)</option>
@@ -114,19 +114,19 @@ export function RSVPFormSection({
           )}
 
           <div>
-            <label className="block text-xs font-bold text-[#2c2224] mb-1">Personal Wish / Note</label>
+            <label className="block text-xs font-bold text-[var(--love-text-heading)] mb-1">Personal Wish / Note</label>
             <textarea
               rows={3}
               placeholder="Write a message for the hosts..."
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              className="w-full rounded-xl border border-[#e8d5cf] bg-[#fffaf5] px-4 py-2.5 text-xs text-[#2c2224] focus:border-[#b05765] focus:outline-none resize-none"
+              className="w-full rounded-xl border border-[var(--love-border)] bg-[var(--love-canvas-ivory)] px-4 py-2.5 text-xs text-[var(--love-text-heading)] focus:border-[var(--love-crimson)] focus:outline-none resize-none"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full rounded-full bg-[#b05765] py-3 text-xs font-bold text-white shadow-md hover:bg-[#964552] transition-colors"
+            className="w-full rounded-full bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] py-3 text-xs font-bold text-white shadow-love-lift hover:opacity-95 transition-all cursor-pointer"
           >
             Send RSVP Confirmation ✨
           </button>

@@ -37,25 +37,25 @@ export function ShareModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-200">
-      <div className={cn("relative w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl border border-[#e8d5cf]", className)}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md p-4 animate-in fade-in duration-200">
+      <div className={cn("relative w-full max-w-md rounded-3xl bg-white p-6 shadow-love-card border border-[var(--love-border)]", className)}>
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 grid size-8 place-items-center rounded-full bg-[#f8eeeb] text-xs font-bold text-[#6e5d60] hover:text-[#2c2224]"
+          className="absolute top-4 right-4 grid size-8 place-items-center rounded-full bg-[var(--love-surface-blush)] text-xs font-bold text-[var(--love-text-muted)] hover:text-[var(--love-crimson)] cursor-pointer"
         >
           ✕
         </button>
 
         <div className="text-center">
           <span className="text-3xl">🚀</span>
-          <h3 className="mt-2 font-serif text-xl font-bold text-[#2c2224]">{title}</h3>
-          <p className="mt-1 text-xs text-[#6e5d60]">Send this link to recipient or guests</p>
+          <h3 className="mt-2 font-serif text-xl font-bold text-[var(--love-text-heading)]">{title}</h3>
+          <p className="mt-1 text-xs text-[var(--love-text-muted)]">Send this link to recipient or guests</p>
         </div>
 
         {/* Copy Link Input */}
         <div className="mt-6 space-y-2">
-          <label className="block text-[11px] font-bold text-[#2c2224] uppercase tracking-wider">
+          <label className="block text-[11px] font-bold text-[var(--love-text-heading)] uppercase tracking-wider">
             Shareable URL
           </label>
           <div className="flex items-center gap-2">
@@ -63,13 +63,13 @@ export function ShareModal({
               type="text"
               readOnly
               value={shareUrl}
-              className="flex-1 rounded-xl border border-[#e8d5cf] bg-[#fffaf5] px-3.5 py-2 text-xs font-mono text-[#2c2224] select-all focus:outline-none"
+              className="flex-1 rounded-xl border border-[var(--love-border)] bg-[var(--love-canvas-ivory)] px-3.5 py-2 text-xs font-mono text-[var(--love-text-heading)] select-all focus:outline-none"
             />
             <button
               onClick={copyToClipboard}
               className={cn(
                 "rounded-xl px-4 py-2 text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer",
-                copied ? "bg-emerald-600 text-white" : "bg-[#b05765] text-white hover:bg-[#964552]"
+                copied ? "bg-emerald-600 text-white" : "bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white shadow-love-lift hover:opacity-95"
               )}
             >
               {copied ? "Copied! ✓" : "Copy Link"}
@@ -78,7 +78,7 @@ export function ShareModal({
         </div>
 
         {/* Action Buttons */}
-        <div className="mt-6 grid grid-cols-2 gap-3 pt-4 border-t border-[#eedad5]">
+        <div className="mt-6 grid grid-cols-2 gap-3 pt-4 border-t border-[var(--love-border-subtle)]">
           <a
             href={whatsappUrl}
             target="_blank"
@@ -91,7 +91,7 @@ export function ShareModal({
 
           <a
             href={mailUrl}
-            className="flex items-center justify-center gap-2 rounded-xl bg-[#2c2224] py-2.5 text-xs font-bold text-white shadow-xs hover:bg-[#3a2c30] transition-colors"
+            className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[var(--love-crimson)] to-[#b05765] py-2.5 text-xs font-bold text-white shadow-xs hover:opacity-95 transition-all"
           >
             <span>✉️</span>
             <span>Email</span>

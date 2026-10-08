@@ -76,7 +76,7 @@ export default function WeddingLandingPage() {
         />
 
         {/* 2. Template Showcase Section */}
-        <section id="wedding-templates" className="py-16 sm:py-24 bg-[#fffaf5]">
+        <section id="wedding-templates" className="py-16 sm:py-24 bg-[var(--love-canvas-ivory)]">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeader
               eyebrow="Two Distinct Themes"

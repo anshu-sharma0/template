@@ -37,12 +37,12 @@ export function SectionHeader({
         </Badge>
       )}
 
-      <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#2c2224] leading-[1.15]">
+      <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--love-text-heading)] leading-[1.15]">
         {title}
       </h2>
 
       {description && (
-        <p className="mt-4 text-base sm:text-lg text-[#6e5d60] leading-relaxed max-w-2xl">
+        <p className="mt-4 text-base sm:text-lg text-[var(--love-text-body)] leading-relaxed max-w-2xl">
           {description}
         </p>
       )}

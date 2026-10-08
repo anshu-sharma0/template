@@ -34,7 +34,7 @@ export function Dialog({ isOpen, onClose, title, children, className }: DialogPr
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-fade-in">
       {/* Backdrop overlay */}
       <div
-        className="fixed inset-0 bg-text/40 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-black/40 backdrop-blur-md transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -45,14 +45,14 @@ export function Dialog({ isOpen, onClose, title, children, className }: DialogPr
         aria-modal="true"
         aria-labelledby={title ? "dialog-title" : undefined}
         className={cn(
-          "relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-border bg-surface p-6 sm:p-8 shadow-lift transition-all",
+          "relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-[var(--love-border)] bg-white p-6 sm:p-8 shadow-love-lift transition-all",
           className,
         )}
       >
         {/* Header bar if title exists */}
-        <div className="flex items-center justify-between pb-4 mb-4 border-b border-border/60">
+        <div className="flex items-center justify-between pb-4 mb-4 border-b border-[var(--love-border-subtle)]">
           {title ? (
-            <h2 id="dialog-title" className="font-display text-2xl font-normal text-text">
+            <h2 id="dialog-title" className="font-serif text-2xl font-bold text-[var(--love-text-heading)]">
               {title}
             </h2>
           ) : <div />}

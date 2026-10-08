@@ -235,7 +235,7 @@ export default function TemplateGalleryClient({
                 setFilter("all");
                 setSearchQuery("");
               }}
-              className="rounded-full bg-[#b05765] px-5 py-2 text-xs font-bold text-white shadow-xs hover:bg-[#964552]"
+              className="rounded-full bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] px-5 py-2 text-xs font-bold text-white shadow-love-lift hover:opacity-95 cursor-pointer"
             >
               Clear Search Filters
             </button>
@@ -245,12 +245,12 @@ export default function TemplateGalleryClient({
 
       {/* Quick Preview Modal using DeviceFramePreview */}
       {previewTemplate && (
-        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 animate-in fade-in duration-300">
-          <div className="bg-white w-full max-w-4xl h-[88vh] rounded-3xl overflow-hidden shadow-2xl flex flex-col border border-white/20">
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 animate-in fade-in duration-300">
+          <div className="bg-white w-full max-w-4xl h-[88vh] rounded-3xl overflow-hidden shadow-love-card flex flex-col border border-[var(--love-border)]">
             {/* Modal Header */}
-            <div className="h-14 px-6 bg-white border-b border-[#e8d5cf] flex items-center justify-between shrink-0">
+            <div className="h-14 px-6 bg-white border-b border-[var(--love-border)] flex items-center justify-between shrink-0">
               <div className="flex items-center gap-3">
-                <span className="text-sm font-serif font-bold text-[#b05765]">
+                <span className="text-sm font-serif font-bold text-[var(--love-crimson)]">
                   {previewTemplate.name} — Interactive Viewport Preview
                 </span>
               </div>
@@ -263,13 +263,13 @@ export default function TemplateGalleryClient({
                       ? "/wedding/create?template=luxury"
                       : "/wedding/create"
                   }
-                  className="px-4 py-1.5 rounded-full bg-[#b05765] text-white text-xs font-semibold hover:bg-[#964552] transition-colors"
+                  className="px-4 py-1.5 rounded-full bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white text-xs font-semibold shadow-love-lift hover:opacity-95 transition-all"
                 >
                   Use This Template ✨
                 </Link>
                 <button
                   onClick={() => setPreviewTemplate(null)}
-                  className="px-3.5 py-1.5 rounded-full bg-neutral-100 hover:bg-neutral-200 text-xs font-bold text-neutral-700 transition-colors cursor-pointer"
+                  className="px-3.5 py-1.5 rounded-full bg-[var(--love-surface-blush)] hover:bg-[var(--love-surface-rose)] text-xs font-bold text-[var(--love-text-heading)] border border-[var(--love-border)] transition-colors cursor-pointer"
                 >
                   ✕
                 </button>
@@ -277,7 +277,7 @@ export default function TemplateGalleryClient({
             </div>
 
             {/* Modal Body with Multi-Device Frame View */}
-            <div className="flex-1 overflow-y-auto bg-[#110e14] p-4 flex justify-center">
+            <div className="flex-1 overflow-y-auto bg-gradient-to-b from-[#fffbf8] via-[#fff5f7] to-[#fff0f3] p-4 flex justify-center">
               <DeviceFramePreview defaultDevice="mobile" title={previewTemplate.name}>
                 <CreationRenderer
                   creation={getSampleCreationForTemplate(previewTemplate)}

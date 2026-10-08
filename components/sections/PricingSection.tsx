@@ -88,8 +88,8 @@ export function PricingSection({
               className={cn(
                 "group relative flex flex-col justify-between rounded-3xl p-8 transition-all duration-300",
                 plan.isPopular
-                  ? "bg-white border-2 border-[#b05765] shadow-2xl shadow-[#b05765]/15 scale-105 z-10"
-                  : "bg-white border border-[#e8d5cf] shadow-sm hover:shadow-lg"
+                  ? "bg-white border-2 border-[var(--love-crimson)] shadow-love-lift scale-105 z-10"
+                  : "bg-white border border-[var(--love-border)] shadow-love-card hover:shadow-love-lift"
               )}
             >
               {plan.isPopular && (
@@ -102,25 +102,25 @@ export function PricingSection({
 
               <div>
                 <div className="flex items-center justify-between">
-                  <h3 className="font-serif text-2xl font-bold text-[#2c2224]">{plan.name}</h3>
+                  <h3 className="font-serif text-2xl font-bold text-[var(--love-text-heading)]">{plan.name}</h3>
                   {plan.badge && !plan.isPopular && (
-                    <span className="rounded-full bg-[#f8eeeb] px-3 py-1 text-[10px] font-bold text-[#b05765]">
+                    <span className="rounded-full bg-[var(--love-surface-blush)] border border-[var(--love-border)] px-3 py-1 text-[10px] font-bold text-[var(--love-crimson)]">
                       {plan.badge}
                     </span>
                   )}
                 </div>
 
-                <p className="mt-2 text-xs text-[#6e5d60]">{plan.description}</p>
+                <p className="mt-2 text-xs text-[var(--love-text-muted)]">{plan.description}</p>
 
                 <div className="mt-6 flex items-baseline gap-2">
-                  <span className="font-serif text-4xl font-bold text-[#2c2224]">{plan.priceOneTime}</span>
-                  <span className="text-xs text-[#8e7b7e] font-semibold">/ single creation</span>
+                  <span className="font-serif text-4xl font-bold text-[var(--love-text-heading)]">{plan.priceOneTime}</span>
+                  <span className="text-xs text-[var(--love-text-muted)] font-semibold">/ single creation</span>
                 </div>
 
-                <ul className="mt-8 space-y-3.5 border-t border-[#eedad5]/70 pt-6 text-xs text-[#2c2224]">
+                <ul className="mt-8 space-y-3.5 border-t border-[var(--love-border-subtle)] pt-6 text-xs text-[var(--love-text-body)]">
                   {plan.features.map((feat, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <span className="grid size-5 place-items-center rounded-full bg-[#fceae6] text-[#b05765] text-[10px] font-bold shrink-0 mt-0.5">
+                      <span className="grid size-5 place-items-center rounded-full bg-[var(--love-surface-blush)] text-[var(--love-crimson)] border border-[var(--love-border)] text-[10px] font-bold shrink-0 mt-0.5">
                         ✓
                       </span>
                       <span className="leading-snug">{feat}</span>
@@ -133,10 +133,10 @@ export function PricingSection({
                 <Link
                   href={plan.ctaHref}
                   className={cn(
-                    "block w-full text-center rounded-full py-3.5 text-xs font-bold transition-all shadow-md active:scale-95",
+                    "block w-full text-center rounded-full py-3.5 text-xs font-bold transition-all shadow-love-lift active:scale-95 cursor-pointer",
                     plan.isPopular
-                      ? "bg-[#b05765] text-white hover:bg-[#964552] shadow-[#b05765]/25"
-                      : "bg-[#2c2224] text-white hover:bg-[#3a2c30]"
+                      ? "bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white hover:opacity-95"
+                      : "bg-white text-[var(--love-text-heading)] border border-[var(--love-border)] hover:bg-[var(--love-surface-blush)]"
                   )}
                 >
                   {plan.ctaLabel}

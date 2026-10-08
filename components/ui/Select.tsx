@@ -10,20 +10,20 @@ export function Select({ label, helperText, className, id, children, ...props }:
   const selectId = id ?? props.name;
 
   return (
-    <label className="grid gap-2 text-sm font-medium text-text">
+    <label className="grid gap-2 text-sm font-medium text-[var(--love-text-heading)]">
       {label ? <span>{label}</span> : null}
       <select
         id={selectId}
         className={cn(
-          "min-h-12 rounded-[var(--radius-medium)] border border-border bg-surface px-4 text-base text-text shadow-inner-soft outline-none transition",
-          "focus:border-primary/60 focus:ring-4 focus:ring-primary-soft",
+          "min-h-12 rounded-2xl border border-[var(--love-border)] bg-white px-4 text-base text-[var(--love-text-heading)] shadow-inner-soft outline-none transition",
+          "focus:border-[var(--love-crimson)] focus:ring-4 focus:ring-pink-100",
           className,
         )}
         {...props}
       >
         {children}
       </select>
-      {helperText ? <span className="text-sm font-normal text-text-muted">{helperText}</span> : null}
+      {helperText ? <span className="text-sm font-normal text-[var(--love-text-muted)]">{helperText}</span> : null}
     </label>
   );
 }
