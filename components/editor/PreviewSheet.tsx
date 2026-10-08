@@ -14,16 +14,17 @@ export function PreviewSheet({ isOpen, onClose, data }: PreviewSheetProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-charcoal/80 backdrop-blur-md animate-fade-in">
+    <div className="fixed inset-0 z-50 flex flex-col bg-white/80 backdrop-blur-md animate-fade-in">
       {/* Top Header Bar */}
-      <div className="flex items-center justify-between border-b border-white/10 bg-text/90 px-5 py-3.5 text-white">
-        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
+      <div className="flex items-center justify-between border-b border-[var(--love-border)] bg-white/95 px-5 py-3.5 text-[var(--love-text-heading)] shadow-2xs">
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--love-crimson)]">
+          <span className="size-2 rounded-full bg-[var(--love-crimson)] animate-pulse" />
           <span>Recipient Preview Mode</span>
         </div>
         <button
           type="button"
           onClick={onClose}
-          className="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white hover:bg-white/20"
+          className="rounded-full border border-[var(--love-border)] bg-white px-4 py-1.5 text-xs font-semibold text-[var(--love-text-heading)] hover:bg-[var(--love-surface-blush)] shadow-xs transition"
         >
           ← Back to Editing
         </button>

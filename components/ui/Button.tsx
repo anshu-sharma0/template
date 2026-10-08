@@ -6,14 +6,14 @@ type ButtonSize = "sm" | "md" | "lg";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-primary text-white shadow-soft shadow-primary/15 hover:bg-primary-strong focus-visible:outline-primary",
+    "bg-gradient-to-r from-[var(--love-crimson)] via-[var(--love-rose)] to-[var(--love-pink)] text-white shadow-soft shadow-pink-500/20 hover:opacity-95 focus-visible:outline-primary",
   secondary:
-    "bg-surface text-text shadow-soft ring-1 ring-border hover:bg-surface-soft focus-visible:outline-primary",
+    "bg-white text-[var(--love-text-heading)] shadow-soft ring-1 ring-[var(--love-border)] hover:bg-[var(--love-surface-blush)] focus-visible:outline-primary",
   outline:
-    "border border-border bg-transparent text-text hover:border-primary/50 hover:bg-primary-soft/40 focus-visible:outline-primary",
-  ghost: "bg-transparent text-text-muted hover:bg-surface-soft hover:text-text focus-visible:outline-primary",
-  soft: "bg-primary-soft text-primary-strong hover:bg-primary-soft/75 focus-visible:outline-primary",
-  dark: "bg-text text-white hover:bg-charcoal focus-visible:outline-text",
+    "border border-[var(--love-border)] bg-transparent text-[var(--love-text-heading)] hover:border-[var(--love-crimson)]/50 hover:bg-[var(--love-surface-blush)] focus-visible:outline-primary",
+  ghost: "bg-transparent text-[var(--love-text-muted)] hover:bg-[var(--love-surface-blush)] hover:text-[var(--love-text-heading)] focus-visible:outline-primary",
+  soft: "bg-[var(--love-surface-rose)] text-[var(--love-crimson)] hover:bg-pink-200/60 focus-visible:outline-primary",
+  dark: "bg-gradient-to-r from-[var(--love-text-heading)] to-[#3f2229] text-white hover:opacity-95 focus-visible:outline-[var(--love-text-heading)]",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

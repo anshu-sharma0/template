@@ -30,14 +30,14 @@ export function PhonePreview({
       aria-label={label}
       role="img"
       className={cn(
-        "relative aspect-[9/18.6] rounded-[2rem] border border-white/70 bg-charcoal p-2 shadow-phone",
+        "relative aspect-[9/18.6] rounded-[2rem] border border-[var(--love-border)] bg-gradient-to-b from-white via-[var(--love-surface-blush)] to-[var(--love-surface-rose)] p-2 shadow-love-phone",
         sizes[size],
         floating && "motion-safe:animate-gentle-float",
         className,
       )}
     >
-      <div className="absolute left-1/2 top-2 z-20 h-1.5 w-16 -translate-x-1/2 rounded-[var(--radius-pill)] bg-white/20" />
-      <div className="relative h-full overflow-hidden rounded-[1.55rem] bg-surface">
+      <div className="absolute left-1/2 top-2 z-20 h-1.5 w-16 -translate-x-1/2 rounded-[var(--radius-pill)] bg-pink-300/40" />
+      <div className="relative h-full overflow-hidden rounded-[1.55rem] bg-white">
         {children ? children : <InvitationPreview variant={variant} />}
       </div>
     </div>

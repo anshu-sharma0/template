@@ -91,41 +91,41 @@ export function BirthdayCountdownAndCandles({
         </div>
       )}
 
-      <div className="mx-auto max-w-sm rounded-3xl border border-pink-200/90 bg-linear-to-b from-white to-[#fff8fa] p-5 shadow-lg shadow-pink-500/10 text-center">
+      <div className="mx-auto max-w-sm rounded-3xl border border-[var(--love-border)] bg-gradient-to-b from-white to-[var(--love-surface-blush)] p-5 shadow-love-card text-center">
         {/* Countdown Header */}
         <div className="mb-4">
           {timeLeft.isToday ? (
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-linear-to-r from-amber-400/20 via-pink-400/20 to-amber-400/20 px-3.5 py-1 text-xs font-bold text-[#b45309] border border-amber-200/80">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-linear-to-r from-amber-400/20 via-pink-400/20 to-amber-400/20 px-3.5 py-1 text-xs font-bold text-[var(--love-gold)] border border-amber-200/80">
               <span>🎉</span>
               <span>Today is YOUR Special Day!</span>
             </div>
           ) : (
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#9d3d5e]">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--love-crimson)]">
                 Countdown to Your Birthday
               </span>
               <div className="mt-2 grid grid-cols-3 gap-2">
                 <div className="rounded-2xl bg-white p-2 border border-pink-100 shadow-2xs">
-                  <div className="font-serif text-xl font-bold text-[#e11d48]">
+                  <div className="font-serif text-xl font-bold text-[var(--love-crimson)]">
                     {timeLeft.days}
                   </div>
-                  <div className="text-[9px] font-bold text-[#6b5e62] uppercase">
+                  <div className="text-[9px] font-bold text-[var(--love-text-muted)] uppercase">
                     Days
                   </div>
                 </div>
                 <div className="rounded-2xl bg-white p-2 border border-pink-100 shadow-2xs">
-                  <div className="font-serif text-xl font-bold text-[#e11d48]">
+                  <div className="font-serif text-xl font-bold text-[var(--love-crimson)]">
                     {timeLeft.hours}
                   </div>
-                  <div className="text-[9px] font-bold text-[#6b5e62] uppercase">
+                  <div className="text-[9px] font-bold text-[var(--love-text-muted)] uppercase">
                     Hours
                   </div>
                 </div>
                 <div className="rounded-2xl bg-white p-2 border border-pink-100 shadow-2xs">
-                  <div className="font-serif text-xl font-bold text-[#e11d48]">
+                  <div className="font-serif text-xl font-bold text-[var(--love-crimson)]">
                     {timeLeft.minutes}
                   </div>
-                  <div className="text-[9px] font-bold text-[#6b5e62] uppercase">
+                  <div className="text-[9px] font-bold text-[var(--love-text-muted)] uppercase">
                     Mins
                   </div>
                 </div>
@@ -158,11 +158,11 @@ export function BirthdayCountdownAndCandles({
               )}
             </div>
 
-            <h3 className="font-serif text-lg font-bold text-[#1f1a1c] mt-3">
+            <h3 className="font-serif text-lg font-bold text-[var(--love-text-heading)] mt-3">
               {candlesBlown ? "Wish Sent to the Stars! ✨" : "Make a Birthday Wish"}
             </h3>
 
-            <p className="text-xs text-[#524548] mt-1 leading-relaxed">
+            <p className="text-xs text-[var(--love-text-body)] mt-1 leading-relaxed">
               {candlesBlown
                 ? `May all your deepest dreams come true this year, ${recipientName}! ❤️`
                 : "Close your eyes, make the biggest wish of your heart, and tap below to blow out your candles."}
@@ -171,7 +171,7 @@ export function BirthdayCountdownAndCandles({
             <button
               type="button"
               onClick={handleBlowCandles}
-              className="mt-4 w-full rounded-full bg-linear-to-r from-[#ff3366] via-[#ff4d6d] to-[#ff758f] py-3 text-xs font-bold text-white shadow-md shadow-pink-500/25 hover:scale-[1.02] active:scale-95 transition-all"
+              className="mt-4 w-full rounded-full bg-gradient-to-r from-[var(--love-crimson)] via-[var(--love-rose)] to-[var(--love-pink)] py-3 text-xs font-bold text-white shadow-md shadow-pink-500/25 hover:scale-[1.02] active:scale-95 transition-all"
             >
               {candlesBlown ? "Relight Candles 🕯️" : "Tap to Blow the Candles! 💨✨"}
             </button>

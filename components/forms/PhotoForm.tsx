@@ -116,8 +116,8 @@ export function PhotoForm({ data, onChange }: PhotoFormProps) {
               alt="Main birthday photo preview"
               className="h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-text/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-              <label className="cursor-pointer rounded-full bg-white px-4 py-2 text-xs font-semibold text-text shadow-sm hover:bg-surface-soft">
+            <div className="absolute inset-0 bg-[var(--love-text-heading)]/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 backdrop-blur-xs">
+              <label className="cursor-pointer rounded-full bg-white px-4 py-2 text-xs font-semibold text-[var(--love-text-heading)] shadow-sm hover:bg-[var(--love-surface-blush)]">
                 Replace
                 <input
                   type="file"
@@ -195,7 +195,7 @@ export function PhotoForm({ data, onChange }: PhotoFormProps) {
                 type="button"
                 onClick={() => handleRemoveGalleryPhoto(idx)}
                 aria-label={`Remove photo ${idx + 1}`}
-                className="absolute top-1.5 right-1.5 flex size-6 items-center justify-center rounded-full bg-text/70 text-white text-xs opacity-0 group-hover:opacity-100 transition"
+                className="absolute top-1.5 right-1.5 flex size-6 items-center justify-center rounded-full bg-[var(--love-text-heading)]/75 text-white text-xs opacity-0 group-hover:opacity-100 transition shadow-xs"
               >
                 ✕
               </button>

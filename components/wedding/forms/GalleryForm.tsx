@@ -55,7 +55,7 @@ export function GalleryForm({ data, onChange }: GalleryFormProps) {
                 type="button"
                 onClick={() => handleRemovePhoto(idx)}
                 aria-label={`Remove photo ${idx + 1}`}
-                className="absolute top-1.5 right-1.5 flex size-6 items-center justify-center rounded-full bg-text/70 text-white text-xs opacity-0 group-hover:opacity-100 transition"
+                className="absolute top-1.5 right-1.5 flex size-6 items-center justify-center rounded-full bg-[var(--love-text-heading)]/75 text-white text-xs opacity-0 group-hover:opacity-100 transition shadow-xs"
               >
                 ✕
               </button>

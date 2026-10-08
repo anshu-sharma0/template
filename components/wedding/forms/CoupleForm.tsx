@@ -24,10 +24,10 @@ export function CoupleForm({ data, onChange, errors }: CoupleFormProps) {
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="space-y-1">
-        <h2 className="font-display text-3xl font-normal text-text">
+        <h2 className="font-display text-3xl font-bold text-[var(--love-text-heading)]">
           Let&apos;s start with the two of you.
         </h2>
-        <p className="text-sm text-text-muted">
+        <p className="text-sm text-[var(--love-text-body)]">
           Add couple names, your photo, and your wedding date.
         </p>
       </div>
@@ -35,8 +35,8 @@ export function CoupleForm({ data, onChange, errors }: CoupleFormProps) {
       {/* Bride & Groom Names */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <label htmlFor="brideName" className="block text-xs font-semibold uppercase tracking-wider text-text">
-            Bride / Partner 1 <span className="text-primary">*</span>
+          <label htmlFor="brideName" className="block text-xs font-bold uppercase tracking-wider text-[var(--love-text-heading)]">
+            Bride / Partner 1 <span className="text-[var(--love-crimson)]">*</span>
           </label>
           <Input
             id="brideName"
@@ -80,8 +80,8 @@ export function CoupleForm({ data, onChange, errors }: CoupleFormProps) {
               alt="Couple photo preview"
               className="h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-text/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-              <label className="cursor-pointer rounded-full bg-white px-4 py-2 text-xs font-semibold text-text shadow-sm hover:bg-surface-soft">
+            <div className="absolute inset-0 bg-[var(--love-text-heading)]/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 backdrop-blur-xs">
+              <label className="cursor-pointer rounded-full bg-white px-4 py-2 text-xs font-semibold text-[var(--love-text-heading)] shadow-sm hover:bg-[var(--love-surface-blush)]">
                 Replace
                 <input type="file" accept="image/*" onChange={handlePhotoChange} className="sr-only" />
               </label>

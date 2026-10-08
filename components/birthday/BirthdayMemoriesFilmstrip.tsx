@@ -51,14 +51,14 @@ export function BirthdayMemoriesFilmstrip({
   return (
     <section className="relative my-8 px-4">
       <div className="mx-auto max-w-sm text-center mb-4">
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-pink-200/90 bg-white px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#e11d48] shadow-2xs mb-2">
+        <div className="inline-flex items-center gap-1.5 rounded-full border border-[var(--love-border)] bg-white px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--love-crimson)] shadow-2xs mb-2">
           <span>📸</span>
           <span>Our Cherished Memories</span>
         </div>
-        <h2 className="font-serif text-2xl font-bold text-[#1f1a1c]">
+        <h2 className="font-serif text-2xl font-bold text-[var(--love-text-heading)]">
           Moments we hold forever.
         </h2>
-        <p className="text-xs text-[#524548] mt-1 leading-relaxed">
+        <p className="text-xs text-[var(--love-text-body)] mt-1 leading-relaxed">
           Swipe through a few of the sweet chapters that make our journey so unforgettable.
         </p>
       </div>
@@ -79,7 +79,7 @@ export function BirthdayMemoriesFilmstrip({
           >
             <div className="relative rounded-3xl border-4 border-white bg-white p-3 shadow-lg shadow-pink-500/10 transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-xl">
               {/* Photo Box */}
-              <div className="relative aspect-4/3 overflow-hidden rounded-2xl bg-linear-to-tr from-[#ffe4ea] via-[#fff0f3] to-[#ffd6e0] flex items-center justify-center">
+              <div className="relative aspect-4/3 overflow-hidden rounded-2xl bg-gradient-to-tr from-[var(--love-surface-rose)] via-[var(--love-surface-cream)] to-[var(--love-surface-blush)] flex items-center justify-center">
                 {item.photoUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -90,14 +90,14 @@ export function BirthdayMemoriesFilmstrip({
                 ) : (
                   <div className="p-4 text-center">
                     <span className="text-3xl mb-1 block">💑</span>
-                    <span className="font-serif italic text-xs text-[#9d3d5e] font-semibold">
+                    <span className="font-serif italic text-xs text-[var(--love-crimson)] font-semibold">
                       Chapter {index + 1}
                     </span>
                   </div>
                 )}
 
                 {/* Floating Heart Pin */}
-                <div className="absolute top-2.5 right-2.5 size-7 rounded-full bg-white/90 text-[#ff3366] text-xs font-bold grid place-items-center shadow-xs">
+                <div className="absolute top-2.5 right-2.5 size-7 rounded-full bg-white/90 text-[var(--love-crimson)] text-xs font-bold grid place-items-center shadow-xs">
                   ♥
                 </div>
               </div>
@@ -105,14 +105,14 @@ export function BirthdayMemoriesFilmstrip({
               {/* Polaroid Footer */}
               <div className="mt-3 text-left px-1">
                 {item.dateOrLocation && (
-                  <div className="text-[10px] font-bold text-[#e11d48] uppercase tracking-wider mb-1">
+                  <div className="text-[10px] font-bold text-[var(--love-crimson)] uppercase tracking-wider mb-1">
                     📍 {item.dateOrLocation}
                   </div>
                 )}
-                <p className="font-serif italic text-xs text-[#1f1a1c] leading-relaxed line-clamp-2">
+                <p className="font-serif italic text-xs text-[var(--love-text-heading)] leading-relaxed line-clamp-2">
                   &ldquo;{item.caption}&rdquo;
                 </p>
-                <div className="mt-2 text-[9px] text-[#8e7b7e] font-semibold">
+                <div className="mt-2 text-[9px] text-[var(--love-text-muted)] font-semibold">
                   Tap to view photo 🔍
                 </div>
               </div>
@@ -123,7 +123,7 @@ export function BirthdayMemoriesFilmstrip({
 
       {/* Swipe Hint */}
       <div className="text-center mt-1">
-        <span className="text-[10px] text-[#8e7b7e] font-semibold">
+        <span className="text-[10px] text-[var(--love-text-muted)] font-semibold">
           ← Swipe to explore memories →
         </span>
       </div>
@@ -141,12 +141,12 @@ export function BirthdayMemoriesFilmstrip({
             <button
               type="button"
               onClick={() => setSelectedPhoto(null)}
-              className="absolute top-3 right-3 size-8 rounded-full bg-pink-100 text-[#1f1a1c] font-bold text-sm grid place-items-center hover:bg-pink-200"
+              className="absolute top-3 right-3 size-8 rounded-full bg-pink-100 text-[var(--love-text-heading)] font-bold text-sm grid place-items-center hover:bg-pink-200"
             >
               ✕
             </button>
 
-            <div className="aspect-4/3 rounded-2xl overflow-hidden bg-linear-to-br from-[#ffe4ea] to-[#fff0f3] flex items-center justify-center">
+            <div className="aspect-4/3 rounded-2xl overflow-hidden bg-gradient-to-br from-[var(--love-surface-rose)] to-[var(--love-surface-blush)] flex items-center justify-center">
               {selectedPhoto.url ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -157,7 +157,7 @@ export function BirthdayMemoriesFilmstrip({
               ) : (
                 <div className="text-center p-6">
                   <span className="text-5xl block mb-2">📸 ✨</span>
-                  <p className="font-serif italic text-base text-[#1f1a1c]">
+                  <p className="font-serif italic text-base text-[var(--love-text-heading)]">
                     {selectedPhoto.caption}
                   </p>
                 </div>
@@ -166,11 +166,11 @@ export function BirthdayMemoriesFilmstrip({
 
             <div className="mt-4 text-center">
               {selectedPhoto.tag && (
-                <span className="text-[10px] font-bold text-[#e11d48] uppercase tracking-wider block mb-1">
+                <span className="text-[10px] font-bold text-[var(--love-crimson)] uppercase tracking-wider block mb-1">
                   {selectedPhoto.tag}
                 </span>
               )}
-              <p className="font-serif italic text-sm text-[#1f1a1c]">
+              <p className="font-serif italic text-sm text-[var(--love-text-heading)]">
                 &ldquo;{selectedPhoto.caption}&rdquo;
               </p>
             </div>

@@ -13,7 +13,7 @@ export function Tooltip({ label, children, className }: TooltipProps) {
       {children}
       <span
         role="tooltip"
-        className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-max max-w-56 -translate-x-1/2 rounded-[var(--radius-small)] bg-text px-3 py-2 text-xs text-white opacity-0 shadow-soft transition group-hover:opacity-100 group-focus-within:opacity-100"
+        className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-max max-w-56 -translate-x-1/2 rounded-[var(--radius-small)] bg-[var(--love-text-heading)] px-3 py-2 text-xs text-white opacity-0 shadow-love-card transition group-hover:opacity-100 group-focus-within:opacity-100"
       >
         {label}
       </span>

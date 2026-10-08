@@ -236,6 +236,32 @@ select {
   }
 }
 
+/* Light Love Theme Utilities Powered by CSS Variables */
+.bg-love-primary {
+  background: var(--love-grad-primary);
+}
+.bg-love-soft {
+  background: var(--love-grad-soft);
+}
+.bg-love-canvas {
+  background: var(--love-grad-canvas);
+}
+.bg-love-gold {
+  background: var(--love-grad-gold);
+}
+.bg-love-champagne {
+  background: var(--love-grad-champagne);
+}
+.shadow-love-card {
+  box-shadow: var(--love-shadow-card);
+}
+.shadow-love-lift {
+  box-shadow: var(--love-shadow-lift);
+}
+.shadow-love-phone {
+  box-shadow: var(--love-shadow-phone);
+}
+
 @media (min-width: 768px) {
   :root {
     --type-display: 6rem;

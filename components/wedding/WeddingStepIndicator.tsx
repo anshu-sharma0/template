@@ -41,10 +41,10 @@ export function WeddingStepIndicator({
                   onClick={() => onStepClick(step.number)}
                   className={`flex size-7 items-center justify-center rounded-full text-xs font-semibold transition ${
                     isActive
-                      ? "bg-text text-white shadow-soft"
+                      ? "bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-rose)] text-white shadow-love-card"
                       : isCompleted
-                      ? "bg-primary-soft text-primary-strong font-bold"
-                      : "bg-surface-soft text-text-muted hover:text-text"
+                      ? "bg-[var(--love-surface-rose)] text-[var(--love-crimson)] font-bold"
+                      : "bg-[var(--love-surface-blush)] text-[var(--love-text-muted)] hover:text-[var(--love-text-heading)]"
                   }`}
                 >
                   {isCompleted ? "✓" : step.number}
@@ -52,14 +52,14 @@ export function WeddingStepIndicator({
 
                 <span
                   className={`text-xs font-medium ${
-                    isActive ? "text-text font-bold" : "text-text-muted"
+                    isActive ? "text-[var(--love-text-heading)] font-bold" : "text-[var(--love-text-muted)]"
                   }`}
                 >
                   {step.label}
                 </span>
 
                 {step.number < STEPS.length && (
-                  <span className="ml-1 h-px w-4 bg-border/80" />
+                  <span className="ml-1 h-px w-4 bg-[var(--love-border)]" />
                 )}
               </li>
             );
@@ -69,17 +69,17 @@ export function WeddingStepIndicator({
 
       {/* Mobile Step Progress Bar */}
       <div className="lg:hidden space-y-2 pb-2">
-        <div className="flex justify-between items-center text-xs text-text-muted">
-          <span className="font-semibold text-text uppercase tracking-wider">
+        <div className="flex justify-between items-center text-xs text-[var(--love-text-muted)]">
+          <span className="font-semibold text-[var(--love-text-heading)] uppercase tracking-wider">
             Step {currentStep} of {STEPS.length}
           </span>
-          <span className="font-serif italic text-primary">
+          <span className="font-serif italic text-[var(--love-crimson)]">
             {STEPS[currentStep - 1]?.label}
           </span>
         </div>
-        <div className="h-1.5 w-full rounded-full bg-surface-soft overflow-hidden">
+        <div className="h-1.5 w-full rounded-full bg-[var(--love-surface-blush)] overflow-hidden">
           <div
-            className="h-full bg-text transition-all duration-300 rounded-full"
+            className="h-full bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] transition-all duration-300 rounded-full"
             style={{ width: `${progressPercent}%` }}
           />
         </div>

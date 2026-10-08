@@ -8,9 +8,9 @@ type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const variants = {
-  light: "bg-surface text-text shadow-soft hover:bg-surface-soft",
-  dark: "bg-text text-white hover:bg-charcoal",
-  outline: "border border-border bg-transparent text-text hover:bg-surface-soft",
+  light: "bg-white text-[var(--love-text-heading)] shadow-soft hover:bg-[var(--love-surface-blush)]",
+  dark: "bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-rose)] text-white hover:opacity-95 shadow-soft",
+  outline: "border border-[var(--love-border)] bg-transparent text-[var(--love-text-heading)] hover:bg-[var(--love-surface-blush)]",
 };
 
 export function IconButton({

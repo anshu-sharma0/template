@@ -12,18 +12,18 @@ export function RecipientForm({ data, onChange, errors }: RecipientFormProps) {
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="space-y-1">
-        <h2 className="font-display text-3xl font-normal text-text">
+        <h2 className="font-display text-3xl font-bold text-[var(--love-text-heading)]">
           Who is this special wish for?
         </h2>
-        <p className="text-sm text-text-muted">
+        <p className="text-sm text-[var(--love-text-body)]">
           Start with their name so we can personalize every detail of their surprise.
         </p>
       </div>
 
       {/* Recipient Name (Required) */}
       <div className="space-y-2">
-        <label htmlFor="recipientName" className="block text-xs font-semibold uppercase tracking-wider text-text">
-          Their Name <span className="text-primary">*</span>
+        <label htmlFor="recipientName" className="block text-xs font-bold uppercase tracking-wider text-[var(--love-text-heading)]">
+          Their Name <span className="text-[var(--love-crimson)]">*</span>
         </label>
         <Input
           id="recipientName"
@@ -34,15 +34,15 @@ export function RecipientForm({ data, onChange, errors }: RecipientFormProps) {
           autoFocus
         />
         {errors?.recipientName ? (
-          <p className="text-xs text-primary font-medium">{errors.recipientName}</p>
+          <p className="text-xs text-[var(--love-crimson)] font-medium">{errors.recipientName}</p>
         ) : (
-          <p className="text-xs text-text-muted">This will appear prominently on their birthday surprise.</p>
+          <p className="text-xs text-[var(--love-text-muted)]">This will appear prominently on their birthday surprise.</p>
         )}
       </div>
 
       {/* Relationship Preset Selection */}
       <div className="space-y-2.5">
-        <label className="block text-xs font-semibold uppercase tracking-wider text-text">
+        <label className="block text-xs font-bold uppercase tracking-wider text-[var(--love-text-heading)]">
           Relationship <span className="text-text-muted font-normal">(Optional)</span>
         </label>
         <div className="flex flex-wrap gap-2">

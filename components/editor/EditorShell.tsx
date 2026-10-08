@@ -78,22 +78,22 @@ export function EditorShell() {
     <div className="flex min-h-screen flex-col bg-background text-text">
       {/* Top Toast Banner */}
       {toastMessage && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-full border border-primary/20 bg-text text-white px-5 py-2 text-xs font-semibold shadow-lift animate-fade-in">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-full bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-rose)] text-white px-5 py-2 text-xs font-bold shadow-love-lift animate-fade-in border border-pink-200/50">
           {toastMessage}
         </div>
       )}
 
       {/* Top Header */}
-      <header className="sticky top-0 z-30 border-b border-border/80 bg-background/90 py-3.5 backdrop-blur-md">
+      <header className="sticky top-0 z-30 border-b border-[var(--love-border)] bg-white/95 py-3.5 backdrop-blur-md shadow-2xs">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <a href="/birthday" className="flex items-center gap-3">
-            <span className="grid size-9 place-items-center rounded-full bg-text font-display text-sm font-semibold text-white">
+            <span className="grid size-9 place-items-center rounded-full bg-gradient-to-tr from-[var(--love-crimson)] to-[var(--love-pink)] font-display text-sm font-bold text-white shadow-xs">
               {brand.logo}
             </span>
-            <span className="font-display text-xl tracking-tight text-text hidden xs:inline">
+            <span className="font-display text-xl tracking-tight text-[var(--love-text-heading)] hidden xs:inline">
               {brand.name}
             </span>
-            <span className="text-xs text-text-muted">/ Birthday Wish</span>
+            <span className="text-xs text-[var(--love-text-muted)]">/ Birthday Wish</span>
           </a>
 
           <div className="flex items-center gap-4">
@@ -128,7 +128,7 @@ export function EditorShell() {
             <div className="space-y-8">
               <BirthdayStepIndicator currentStep={currentStep} onStepClick={setCurrentStep} />
 
-              <div className="rounded-3xl border border-border/80 bg-surface p-6 sm:p-8 shadow-soft">
+              <div className="rounded-3xl border border-[var(--love-border)] bg-white p-6 sm:p-8 shadow-love-card">
                 {currentStep === 1 && (
                   <RecipientForm data={data} onChange={updateData} errors={activeErrors} />
                 )}
@@ -196,16 +196,16 @@ export function EditorShell() {
 
           {/* Right Column: Live Sticky Device Preview (Desktop) */}
           <div className="hidden lg:block sticky top-24">
-            <div className="rounded-3xl border border-border bg-surface-soft/60 p-6 shadow-soft text-center space-y-3">
-              <div className="flex items-center justify-between text-xs text-text-muted">
-                <span className="font-semibold uppercase tracking-widest text-primary">
+            <div className="rounded-3xl border border-[var(--love-border)] bg-gradient-to-b from-white via-[var(--love-surface-blush)] to-[var(--love-surface-peach)] p-6 shadow-love-card text-center space-y-3">
+              <div className="flex items-center justify-between text-xs text-[var(--love-text-muted)]">
+                <span className="font-bold uppercase tracking-widest text-[var(--love-crimson)]">
                   Live Interactive Preview
                 </span>
-                <span className="text-[11px] text-text-muted">Updates live</span>
+                <span className="text-[11px] text-[var(--love-text-muted)]">Updates live</span>
               </div>
 
               <div className="flex justify-center py-2">
-                <PhonePreview size="md" className="shadow-phone">
+                <PhonePreview size="md" className="shadow-love-phone">
                   <CreationRenderer creation={creation} autoOpen={false} />
                 </PhonePreview>
               </div>

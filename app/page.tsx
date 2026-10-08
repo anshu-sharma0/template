@@ -29,7 +29,7 @@ export default function Home() {
         <RomanticProcess />
 
         {/* 6. Real Love Stories & Verified Metrics Ribbon */}
-        {/* <LoveStoriesAndStats /> */}
+        <LoveStoriesAndStats />
 
         {/* 7. Romantic FAQ & Reassurance */}
         <RomanticFAQ />

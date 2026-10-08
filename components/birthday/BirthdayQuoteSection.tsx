@@ -17,23 +17,23 @@ export function BirthdayQuoteSection({
 
   return (
     <section className="relative my-8 px-4 text-center">
-      <div className="mx-auto max-w-sm rounded-3xl bg-linear-to-br from-[#fff0f3] via-[#ffe5ec] to-[#fff5f7] p-6 sm:p-7 border border-pink-200/90 shadow-lg shadow-pink-500/10 relative overflow-hidden">
+      <div className="mx-auto max-w-sm rounded-3xl bg-gradient-to-br from-[var(--love-surface-blush)] via-[var(--love-surface-rose)] to-[var(--love-surface-cream)] p-6 sm:p-7 border border-[var(--love-border)] shadow-love-card relative overflow-hidden">
         {/* Decorative Quote Mark */}
-        <span className="font-serif text-5xl leading-none text-[#ff758f]/40 block select-none -mb-2">
+        <span className="font-serif text-5xl leading-none text-[var(--love-pink)]/40 block select-none -mb-2">
           “
         </span>
 
-        <p className="font-serif italic text-base sm:text-lg text-[#1f1a1c] leading-relaxed font-medium">
+        <p className="font-serif italic text-base sm:text-lg text-[var(--love-text-heading)] leading-relaxed font-medium">
           {quoteText}
         </p>
 
         {/* Small Golden Sparkle */}
-        <div className="mt-4 flex items-center justify-center gap-1.5 text-xs text-[#b45309] font-bold">
-          <Sparkle className="text-[#f59e0b] text-xs" />
+        <div className="mt-4 flex items-center justify-center gap-1.5 text-xs text-[var(--love-gold)] font-bold">
+          <Sparkle className="text-[var(--love-gold)] text-xs" />
           <span className="uppercase tracking-widest text-[10px]">
             Forever Cherished
           </span>
-          <Sparkle className="text-[#f59e0b] text-xs" />
+          <Sparkle className="text-[var(--love-gold)] text-xs" />
         </div>
       </div>
     </section>

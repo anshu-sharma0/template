@@ -57,24 +57,24 @@ export function BirthdayWishRenderer({
 
   // Phase 2: Full Living Keepsake Digital Gift Experience
   return (
-    <div className="relative min-h-full overflow-y-auto bg-linear-to-b from-[#fffbf8] via-[#fff5f7] to-[#fff0f3] text-[#1f1a1c] select-none transition-all duration-700 animate-in fade-in zoom-in-95">
+    <div className="relative min-h-full overflow-y-auto bg-gradient-to-b from-[var(--love-canvas-ivory)] via-[var(--love-surface-blush)] to-[var(--love-surface-peach)] text-[var(--love-text-heading)] select-none transition-all duration-700 animate-in fade-in zoom-in-95">
       {/* Sticky Top Audio Control Bar */}
-      <div className="sticky top-0 z-40 flex items-center justify-between px-4 py-2.5 bg-white/80 backdrop-blur-md border-b border-pink-100/80">
-        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#e11d48]">
-          <span className="size-2 rounded-full bg-[#ff3366] animate-ping" />
+      <div className="sticky top-0 z-40 flex items-center justify-between px-4 py-2.5 bg-white/80 backdrop-blur-md border-b border-[var(--love-border-subtle)]">
+        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[var(--love-crimson)]">
+          <span className="size-2 rounded-full bg-[var(--love-crimson)] animate-ping" />
           <span>Birthday Surprise</span>
         </div>
 
         <button
           type="button"
           onClick={handleToggleMusic}
-          className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 border border-pink-200 text-[10px] font-bold text-[#e11d48] shadow-2xs hover:bg-pink-50 transition-colors"
+          className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 border border-[var(--love-border)] text-[10px] font-bold text-[var(--love-crimson)] shadow-2xs hover:bg-[var(--love-surface-blush)] transition-colors"
         >
           {isPlayingMusic ? (
             <div className="flex items-center gap-0.5 h-3 px-0.5">
-              <span className="w-0.5 h-2 bg-[#ff3366] rounded-full animate-pulse" />
-              <span className="w-0.5 h-3 bg-[#e11d48] rounded-full animate-bounce" />
-              <span className="w-0.5 h-1.5 bg-[#ff758f] rounded-full animate-pulse" />
+              <span className="w-0.5 h-2 bg-[var(--love-rose)] rounded-full animate-pulse" />
+              <span className="w-0.5 h-3 bg-[var(--love-crimson)] rounded-full animate-bounce" />
+              <span className="w-0.5 h-1.5 bg-[var(--love-pink)] rounded-full animate-pulse" />
             </div>
           ) : (
             <span>🔈</span>

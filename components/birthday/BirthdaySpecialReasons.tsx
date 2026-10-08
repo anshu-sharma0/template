@@ -45,14 +45,14 @@ export function BirthdaySpecialReasons({
   return (
     <section className="relative my-8 px-4">
       <div className="mx-auto max-w-sm text-center mb-5">
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-pink-200/90 bg-white px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#e11d48] shadow-2xs mb-2">
+        <div className="inline-flex items-center gap-1.5 rounded-full border border-[var(--love-border)] bg-white px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--love-crimson)] shadow-2xs mb-2">
           <span>💫</span>
           <span>What Makes You So Rare</span>
         </div>
-        <h2 className="font-serif text-2xl font-bold text-[#1f1a1c]">
+        <h2 className="font-serif text-2xl font-bold text-[var(--love-text-heading)]">
           Why you mean the world.
         </h2>
-        <p className="text-xs text-[#524548] mt-1 leading-relaxed">
+        <p className="text-xs text-[var(--love-text-body)] mt-1 leading-relaxed">
           Four of the countless reasons why having you in my life is the greatest blessing.
         </p>
       </div>
@@ -65,7 +65,7 @@ export function BirthdaySpecialReasons({
               key={idx}
               onClick={() => setActiveIdx(isSelected ? null : idx)}
               className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 text-left ${isSelected
-                  ? "bg-linear-to-r from-white to-[#fff5f8] border-pink-300 shadow-md shadow-pink-500/10 scale-[1.01]"
+                  ? "bg-gradient-to-r from-white to-[var(--love-surface-blush)] border-[var(--love-border)] shadow-love-card scale-[1.01]"
                   : "bg-white/90 border-pink-100 hover:border-pink-200 shadow-xs"
                 }`}
             >
@@ -75,10 +75,10 @@ export function BirthdaySpecialReasons({
                     {item.emoji}
                   </span>
                   <div>
-                    <h3 className="font-serif text-base font-bold text-[#1f1a1c]">
+                    <h3 className="font-serif text-base font-bold text-[var(--love-text-heading)]">
                       {item.title}
                     </h3>
-                    <span className="text-[10px] text-[#e11d48] font-bold">
+                    <span className="text-[10px] text-[var(--love-crimson)] font-bold">
                       {isSelected ? "Tap to collapse" : "Tap to read reason ↓"}
                     </span>
                   </div>
@@ -86,8 +86,8 @@ export function BirthdaySpecialReasons({
 
                 <span
                   className={`size-6 rounded-full text-xs font-bold grid place-items-center transition-transform duration-300 ${isSelected
-                      ? "rotate-180 bg-linear-to-r from-[#ff3366] to-[#ff758f] text-white"
-                      : "bg-pink-50 text-[#e11d48]"
+                      ? "rotate-180 bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white"
+                      : "bg-pink-50 text-[var(--love-crimson)]"
                     }`}
                 >
                   ▼
@@ -96,7 +96,7 @@ export function BirthdaySpecialReasons({
 
               {isSelected && (
                 <div className="mt-3 pt-3 border-t border-pink-100 animate-in fade-in duration-200">
-                  <p className="text-xs sm:text-sm text-[#524548] leading-relaxed font-sans">
+                  <p className="text-xs sm:text-sm text-[var(--love-text-body)] leading-relaxed font-sans">
                     {item.description}
                   </p>
                 </div>

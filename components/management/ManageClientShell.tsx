@@ -158,16 +158,16 @@ export default function ManageClientShell({
 
         {/* SUCCESS STATE */}
         {isPublished ? (
-          <div className="bg-white rounded-3xl p-8 md:p-10 border border-[#e8d5cf] shadow-xl text-center space-y-6 animate-fade-in">
+          <div className="bg-white rounded-3xl p-8 md:p-10 border border-[var(--love-border)] shadow-love-lift text-center space-y-6 animate-fade-in">
             <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto text-3xl shadow-sm">
               ❤️
             </div>
 
             <div className="space-y-2 max-w-lg mx-auto">
-              <h1 className="text-3xl md:text-4xl font-serif font-bold text-[#2c2224]">
+              <h1 className="text-3xl md:text-4xl font-serif font-bold text-[var(--love-text-heading)]">
                 Your digital card is ready ❤️
               </h1>
-              <p className="text-sm text-[#6e5d60]">
+              <p className="text-sm text-[var(--love-text-body)]">
                 Your personalized {creation.type === "birthday" ? "birthday surprise" : "wedding invitation"} has been published successfully. Anyone with the link can open it instantly!
               </p>
             </div>
@@ -201,7 +201,7 @@ export default function ManageClientShell({
                   href={publicPath}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-xl border border-[var(--love-border)] bg-white text-xs font-bold text-[var(--love-text-heading)] hover:bg-[#fff5f8] hover:text-[var(--love-crimson)] transition-colors flex items-center gap-1 shadow-2xs"
+                  className="px-5 py-2.5 rounded-xl border border-[var(--love-border)] bg-white text-xs font-bold text-[var(--love-text-heading)] hover:bg-[var(--love-surface-blush)] hover:text-[var(--love-crimson)] transition-colors flex items-center gap-1 shadow-2xs"
                 >
                   <span>👁️ View Live Card ↗</span>
                 </a>
@@ -212,14 +212,14 @@ export default function ManageClientShell({
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-[var(--love-border)]">
               <button
                 onClick={() => setShowPreviewModal(true)}
-                className="px-5 py-2.5 rounded-xl border border-[var(--love-border)] bg-white text-xs font-bold text-[var(--love-text-heading)] hover:bg-[#fff5f8] hover:text-[var(--love-crimson)] shadow-2xs cursor-pointer"
+                className="px-5 py-2.5 rounded-xl border border-[var(--love-border)] bg-white text-xs font-bold text-[var(--love-text-heading)] hover:bg-[var(--love-surface-blush)] hover:text-[var(--love-crimson)] shadow-2xs cursor-pointer"
               >
                 Preview Experience
               </button>
 
               <Link
                 href={editUrl}
-                className="px-5 py-2.5 rounded-xl border border-[var(--love-border)] bg-white text-xs font-bold text-[var(--love-text-heading)] hover:bg-[#fff5f8] hover:text-[var(--love-crimson)] shadow-2xs"
+                className="px-5 py-2.5 rounded-xl border border-[var(--love-border)] bg-white text-xs font-bold text-[var(--love-text-heading)] hover:bg-[var(--love-surface-blush)] hover:text-[var(--love-crimson)] shadow-2xs"
               >
                 ✏️ Edit Content
               </Link>
@@ -234,50 +234,50 @@ export default function ManageClientShell({
           </div>
         ) : (
           /* REVIEW & CHECKOUT PREPARATION STATE */
-          <div className="bg-white rounded-3xl p-8 md:p-10 border border-[#e8d5cf] shadow-xl space-y-8">
-            <div className="text-center space-y-2 border-b border-[#f3e6e3] pb-6">
-              <span className="text-xs font-semibold text-[#b05765] uppercase tracking-widest bg-[#fceae6] px-3 py-1 rounded-full border border-[#eedad5]">
+          <div className="bg-white rounded-3xl p-8 md:p-10 border border-[var(--love-border)] shadow-love-lift space-y-8">
+            <div className="text-center space-y-2 border-b border-[var(--love-border-subtle)] pb-6">
+              <span className="text-xs font-bold text-[var(--love-crimson)] uppercase tracking-widest bg-[var(--love-surface-blush)] px-3 py-1 rounded-full border border-[var(--love-border)]">
                 Final Review
               </span>
-              <h1 className="text-3xl md:text-4xl font-serif font-bold text-[#2c2224]">
+              <h1 className="text-3xl md:text-4xl font-serif font-bold text-[var(--love-text-heading)]">
                 Everything looks perfect?
               </h1>
-              <p className="text-sm text-[#6e5d60]">
+              <p className="text-sm text-[var(--love-text-body)]">
                 Review your personalized details before publishing your live digital card.
               </p>
             </div>
 
             {/* Personalized Summary Card */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-6 rounded-2xl bg-[#fffdfa] border border-[#ebdcd8] space-y-4">
-                <h3 className="text-xs font-bold text-[#8e7b7e] uppercase tracking-wider">
+              <div className="p-6 rounded-2xl bg-white border border-[var(--love-border)] space-y-4 shadow-2xs">
+                <h3 className="text-xs font-bold text-[var(--love-text-muted)] uppercase tracking-wider">
                   Personalization Summary
                 </h3>
 
                 <div className="space-y-2 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-[#8e7b7e]">Type:</span>
-                    <span className="font-semibold capitalize text-[#2c2224]">
+                    <span className="text-[var(--love-text-muted)]">Type:</span>
+                    <span className="font-semibold capitalize text-[var(--love-text-heading)]">
                       {creation.type}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#8e7b7e]">Template:</span>
-                    <span className="font-semibold text-[#2c2224]">
+                    <span className="text-[var(--love-text-muted)]">Template:</span>
+                    <span className="font-semibold text-[var(--love-text-heading)]">
                       {pricingTier.name}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#8e7b7e]">Recipient / Couple:</span>
-                    <span className="font-semibold text-[#2c2224]">
+                    <span className="text-[var(--love-text-muted)]">Recipient / Couple:</span>
+                    <span className="font-semibold text-[var(--love-text-heading)]">
                       {creation.type === "birthday"
                         ? creation.data?.recipientName || "Someone Special"
                         : `${creation.data?.brideName || "Bride"} & ${creation.data?.groomName || "Groom"}`}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#8e7b7e]">Background Music:</span>
-                    <span className="font-semibold capitalize text-[#2c2224]">
+                    <span className="text-[var(--love-text-muted)]">Background Music:</span>
+                    <span className="font-semibold capitalize text-[var(--love-text-heading)]">
                       {creation.data?.music || "Romantic Track"}
                     </span>
                   </div>
@@ -285,22 +285,22 @@ export default function ManageClientShell({
               </div>
 
               {/* Pricing & What's Included Card */}
-              <div className="p-6 rounded-2xl bg-[#fcf6f3] border border-[#eedad5] space-y-4">
+              <div className="p-6 rounded-2xl bg-[var(--love-surface-blush)] border border-[var(--love-border)] space-y-4 shadow-2xs">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-xs font-bold text-[#b05765] uppercase tracking-wider">
+                  <h3 className="text-xs font-bold text-[var(--love-crimson)] uppercase tracking-wider">
                     Price Summary
                   </h3>
-                  <span className="font-serif font-bold text-[#b05765] text-2xl">
+                  <span className="font-serif font-bold text-[var(--love-crimson)] text-2xl">
                     {formattedPrice}
                   </span>
                 </div>
 
-                <div className="space-y-1.5 pt-2 border-t border-[#f3e6e3]">
-                  <p className="text-xs font-semibold text-[#2c2224] mb-2">
+                <div className="space-y-1.5 pt-2 border-t border-[var(--love-border-subtle)]">
+                  <p className="text-xs font-bold text-[var(--love-text-heading)] mb-2">
                     What&apos;s Included:
                   </p>
                   {pricingTier.includes.map((item, i) => (
-                    <div key={i} className="flex items-center gap-2 text-xs text-[#6e5d60]">
+                    <div key={i} className="flex items-center gap-2 text-xs text-[var(--love-text-body)]">
                       <span className="text-emerald-600 font-bold">✓</span>
                       <span>{item}</span>
                     </div>
@@ -310,18 +310,18 @@ export default function ManageClientShell({
             </div>
 
             {/* Actions */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-[#f3e6e3]">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-[var(--love-border-subtle)]">
               <div className="flex gap-3 w-full sm:w-auto">
                 <button
                   onClick={() => setShowPreviewModal(true)}
-                  className="flex-1 sm:flex-none py-3.5 px-5 rounded-2xl border border-[var(--love-border)] bg-white text-[var(--love-text-heading)] text-xs font-bold hover:bg-[#fff5f8] hover:text-[var(--love-crimson)] shadow-2xs cursor-pointer"
+                  className="flex-1 sm:flex-none py-3.5 px-5 rounded-2xl border border-[var(--love-border)] bg-white text-[var(--love-text-heading)] text-xs font-bold hover:bg-[var(--love-surface-blush)] hover:text-[var(--love-crimson)] shadow-2xs cursor-pointer"
                 >
                   👁️ Full Preview
                 </button>
 
                 <Link
                   href={editUrl}
-                  className="flex-1 sm:flex-none py-3.5 px-5 rounded-2xl border border-[var(--love-border)] bg-white text-[var(--love-text-heading)] text-xs font-bold hover:bg-[#fff5f8] hover:text-[var(--love-crimson)] text-center shadow-2xs"
+                  className="flex-1 sm:flex-none py-3.5 px-5 rounded-2xl border border-[var(--love-border)] bg-white text-[var(--love-text-heading)] text-xs font-bold hover:bg-[var(--love-surface-blush)] hover:text-[var(--love-crimson)] text-center shadow-2xs"
                 >
                   ✏️ Edit Card
                 </Link>
