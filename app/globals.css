@@ -31,7 +31,8 @@
   --ds-shadow-lift: 0 28px 70px rgba(44, 37, 36, 0.13);
   --ds-shadow-phone: 0 32px 90px rgba(44, 37, 36, 0.22);
   --ds-shadow-inner-soft: inset 0 1px 0 rgba(255, 255, 255, 0.72);
-  --font-display-family: Georgia, "Times New Roman", serif;
+  --font-display-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-serif-romantic: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
   --type-display: 4.5rem;
   --type-h1: 3.75rem;
   --type-h2: 3rem;
@@ -65,8 +66,10 @@
   --color-success: var(--success);
   --color-error: var(--error);
   --color-foreground: var(--text);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
   --font-display: var(--font-display-family);
+  --font-romantic: var(--font-serif-romantic);
   --font-mono: var(--font-geist-mono);
   --shadow-soft: var(--ds-shadow-soft);
   --shadow-lift: var(--ds-shadow-lift);
@@ -77,6 +80,7 @@
   --animate-petal-drift: petal-drift 12s ease-in-out infinite;
   --animate-petal-drift-delayed: petal-drift 14s ease-in-out 1.6s infinite;
   --animate-fade-in: fade-in 900ms ease-out both;
+  --animate-romantic-pulse: romantic-pulse 3s ease-in-out infinite;
 }
 
 * {
@@ -90,13 +94,13 @@ html {
 body {
   background: var(--background);
   color: var(--text);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   text-rendering: geometricPrecision;
 }
 
 ::selection {
   background: var(--primary-soft);
-  color: var(--text);
+  color: #571424;
 }
 
 a {
@@ -133,6 +137,17 @@ select {
   }
   50% {
     transform: translate3d(16px, 18px, 0) rotate(28deg);
+  }
+}
+
+@keyframes romantic-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
   }
 }
 

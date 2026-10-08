@@ -57,7 +57,7 @@ export function HeroSection({
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-8">
-          
+
           {/* Left Column: Text & Actions */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             {eyebrow && (
@@ -134,7 +134,7 @@ export function HeroSection({
                       <div className="inline-block rounded-full bg-[#fceae6] px-3 py-1 text-[10px] font-bold text-[#b05765]">
                         SURPRISE UNLOCKED 🎁
                       </div>
-                      <h3 className="mt-3 font-serif text-2xl font-bold text-[#2c2224]">Happy Birthday, Sarah! 🎂</h3>
+                      <h3 className="mt-3 font-serif text-2xl font-bold text-[#2c2224]">Happy Birthday, Khushi! 🎂</h3>
                       <p className="mt-2 text-xs text-[#6e5d60]">Make a wish & blow the candles!</p>
                     </div>
 

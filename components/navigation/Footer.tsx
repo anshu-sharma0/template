@@ -7,16 +7,16 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Column */}
           <div className="space-y-4 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="grid size-8 place-items-center rounded-full bg-[#b05765] text-white text-xs font-serif font-bold">
-                ✨
+            <Link href="/" className="flex items-center gap-2 group">
+              <span className="grid size-8 place-items-center rounded-full bg-gradient-to-tr from-[#873d4d] to-[#b05765] text-white text-xs font-serif font-bold shadow-xs">
+                ♥
               </span>
-              <span className="font-serif text-lg font-bold text-[#2c2224]">
+              <span className="font-serif text-lg font-bold text-[#2c2224] group-hover:text-[#873d4d] transition-colors">
                 Digital Moments
               </span>
             </Link>
             <p className="text-xs leading-relaxed text-[#8e7b7e]">
-              Create unforgettable digital birthday surprises & elegant wedding invitations with personalized music, galleries, and countdowns.
+              Handcrafted digital love surprises &amp; wedding keepsakes. Personalized with romantic melodies, cherished photo storybooks, and heartfelt notes.
             </p>
           </div>
 

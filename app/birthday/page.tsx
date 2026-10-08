@@ -45,7 +45,7 @@ export default function BirthdayLandingPage() {
   const birthdayFaqs = [
     {
       question: "How does the recipient open their birthday surprise?",
-      answer: "You get a private shareable link (e.g. digitalmoments.com/birthday/sarah). When they click it on WhatsApp or SMS, it opens directly in their phone browser without installing any app.",
+      answer: "You get a private shareable link (e.g. digitalmoments.com/birthday/khushi). When they click it on WhatsApp or Instagram DM, it opens directly in their phone browser without installing any app.",
     },
     {
       question: "Can I edit the photos or message after sharing?",
