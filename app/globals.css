@@ -43,6 +43,31 @@
   --type-body-sm: 0.875rem;
   --type-caption: 0.75rem;
   --type-label: 0.875rem;
+
+  /* Light Love Theme Core Palette & Gradients */
+  --love-canvas: #ffffff;
+  --love-canvas-ivory: #fffbf8;
+  --love-surface-blush: #fff5f7;
+  --love-surface-rose: #ffe4ea;
+  --love-surface-cream: #fff0f3;
+  --love-border: #ffe0e6;
+  --love-border-subtle: #fceae6;
+  --love-text-heading: #1f1a1c;
+  --love-text-body: #524548;
+  --love-text-muted: #8e7b7e;
+  --love-crimson: #e11d48;
+  --love-rose: #ff3366;
+  --love-pink: #ff758f;
+  --love-gold: #b45309;
+  --love-gold-light: #fef3c7;
+  --love-grad-primary: linear-gradient(135deg, #ff2a5f 0%, #ff4d6d 50%, #ff758f 100%);
+  --love-grad-soft: linear-gradient(135deg, #fff0f3 0%, #ffe4ea 50%, #ffd6e0 100%);
+  --love-grad-canvas: linear-gradient(180deg, #fffbf8 0%, #fff5f7 50%, #fff0f3 100%);
+  --love-grad-gold: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #d97706 100%);
+  --love-grad-champagne: linear-gradient(180deg, #ffffff 0%, #faf4ea 50%, #f7eee0 100%);
+  --love-shadow-card: 0 10px 30px rgba(255, 42, 95, 0.08);
+  --love-shadow-lift: 0 20px 50px rgba(255, 42, 95, 0.12);
+  --love-shadow-phone: 0 24px 60px rgba(255, 42, 95, 0.14);
 }
 
 @theme inline {
@@ -66,6 +91,24 @@
   --color-success: var(--success);
   --color-error: var(--error);
   --color-foreground: var(--text);
+
+  /* Light Love Theme Theme Mappings */
+  --color-love-canvas: var(--love-canvas);
+  --color-love-ivory: var(--love-canvas-ivory);
+  --color-love-blush: var(--love-surface-blush);
+  --color-love-rose: var(--love-surface-rose);
+  --color-love-cream: var(--love-surface-cream);
+  --color-love-border: var(--love-border);
+  --color-love-border-subtle: var(--love-border-subtle);
+  --color-love-heading: var(--love-text-heading);
+  --color-love-body: var(--love-text-body);
+  --color-love-muted: var(--love-text-muted);
+  --color-love-crimson: var(--love-crimson);
+  --color-love-primary: var(--love-rose);
+  --color-love-pink: var(--love-pink);
+  --color-love-gold: var(--love-gold);
+  --color-love-gold-light: var(--love-gold-light);
+
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
   --font-display: var(--font-display-family);
@@ -75,6 +118,9 @@
   --shadow-lift: var(--ds-shadow-lift);
   --shadow-phone: var(--ds-shadow-phone);
   --shadow-inner-soft: var(--ds-shadow-inner-soft);
+  --shadow-love-card: var(--love-shadow-card);
+  --shadow-love-lift: var(--love-shadow-lift);
+  --shadow-love-phone: var(--love-shadow-phone);
   --breakpoint-xs: 30rem;
   --animate-gentle-float: gentle-float 7s ease-in-out infinite;
   --animate-petal-drift: petal-drift 12s ease-in-out infinite;

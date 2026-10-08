@@ -29,7 +29,7 @@ export default function WeddingPreviewStandalonePage({ searchParams }: PageProps
   const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen flex-col bg-charcoal text-white">
+    <div className="flex min-h-screen flex-col bg-linear-to-b from-[#fffdf9] via-[#faf5ee] to-[#fff5f7] text-[var(--love-text-heading)]">
       {/* Reusable Preview Toolbar */}
       <PreviewToolbar
         creation={creation}
@@ -37,6 +37,7 @@ export default function WeddingPreviewStandalonePage({ searchParams }: PageProps
         onTemplateChange={setTemplate}
         onRestartExperience={() => setRestartKey((prev) => prev + 1)}
         onPublishClick={() => setIsPublishModalOpen(true)}
+        theme="light"
       />
 
       {/* Main Fullscreen Preview Stage */}

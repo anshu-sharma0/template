@@ -51,30 +51,30 @@ export default function TemplateGalleryClient({
         <div className="flex flex-wrap items-center justify-center gap-2">
           <button
             onClick={() => setFilter("all")}
-            className={`px-6 py-2.5 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer ${
+            className={`px-6 py-2.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
               filter === "all"
-                ? "bg-[#b05765] text-white shadow-lg shadow-[#b05765]/20 scale-105"
-                : "bg-white text-[#6e5d60] border border-[#e8d5cf] hover:bg-[#fff9f6] hover:text-[#2c2224]"
+                ? "bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white shadow-md shadow-pink-500/25 scale-105"
+                : "bg-white text-[var(--love-text-body)] border border-[var(--love-border)] hover:bg-[#fff5f8] hover:text-[var(--love-crimson)]"
             }`}
           >
             All Collection ({initialTemplates.length})
           </button>
           <button
             onClick={() => setFilter("birthday")}
-            className={`px-6 py-2.5 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer ${
+            className={`px-6 py-2.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
               filter === "birthday"
-                ? "bg-[#b05765] text-white shadow-lg shadow-[#b05765]/20 scale-105"
-                : "bg-white text-[#6e5d60] border border-[#e8d5cf] hover:bg-[#fff9f6] hover:text-[#2c2224]"
+                ? "bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white shadow-md shadow-pink-500/25 scale-105"
+                : "bg-white text-[var(--love-text-body)] border border-[var(--love-border)] hover:bg-[#fff5f8] hover:text-[var(--love-crimson)]"
             }`}
           >
             🎂 Birthday Surprise
           </button>
           <button
             onClick={() => setFilter("wedding")}
-            className={`px-6 py-2.5 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer ${
+            className={`px-6 py-2.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
               filter === "wedding"
-                ? "bg-[#b05765] text-white shadow-lg shadow-[#b05765]/20 scale-105"
-                : "bg-white text-[#6e5d60] border border-[#e8d5cf] hover:bg-[#fff9f6] hover:text-[#2c2224]"
+                ? "bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white shadow-md shadow-pink-500/25 scale-105"
+                : "bg-white text-[var(--love-text-body)] border border-[var(--love-border)] hover:bg-[#fff5f8] hover:text-[var(--love-crimson)]"
             }`}
           >
             💍 Wedding Keepsakes
@@ -83,18 +83,18 @@ export default function TemplateGalleryClient({
 
         {/* Search Input */}
         <div className="relative w-full max-w-xs">
-          <span className="absolute inset-y-0 left-3.5 flex items-center text-[#8e7b7e]">🔍</span>
+          <span className="absolute inset-y-0 left-3.5 flex items-center text-[var(--love-text-muted)]">🔍</span>
           <input
             type="text"
             placeholder="Search templates..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-full border border-[#e8d5cf] bg-white pl-10 pr-4 py-2 text-xs text-[#2c2224] focus:border-[#b05765] focus:outline-none shadow-xs"
+            className="w-full rounded-full border border-[var(--love-border)] bg-white pl-10 pr-4 py-2.5 text-xs text-[var(--love-text-heading)] focus:border-[var(--love-crimson)] focus:outline-none shadow-2xs"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery("")}
-              className="absolute inset-y-0 right-3.5 flex items-center text-xs text-[#8e7b7e] hover:text-[#2c2224]"
+              className="absolute inset-y-0 right-3.5 flex items-center text-xs text-[var(--love-text-muted)] hover:text-[var(--love-text-heading)]"
             >
               ✕
             </button>
@@ -118,19 +118,19 @@ export default function TemplateGalleryClient({
             return (
               <div
                 key={template.id}
-                className="bg-white rounded-3xl border border-[#e8d5cf] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
+                className="bg-white rounded-3xl border border-[var(--love-border)] overflow-hidden shadow-lg shadow-pink-500/5 hover:shadow-xl hover:shadow-pink-500/10 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
               >
                 {/* Header Visual Box with Mini Phone Preview */}
                 <div
-                  className={`p-6 flex flex-col items-center justify-center relative overflow-hidden ${template.theme.background} border-b border-[#e8d5cf]`}
+                  className={`p-6 flex flex-col items-center justify-center relative overflow-hidden ${template.theme.background} border-b border-[var(--love-border)]`}
                 >
                   {/* Palette Badge */}
                   <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
-                    <span className="capitalize text-[10px] font-bold px-3 py-1 rounded-full bg-white/90 text-[#2c2224] backdrop-blur-md shadow-xs border border-white/40">
+                    <span className="capitalize text-[10px] font-bold px-3 py-1 rounded-full bg-white/95 text-[var(--love-text-heading)] backdrop-blur-md shadow-xs border border-white/60">
                       {template.category}
                     </span>
 
-                    <div className="flex items-center gap-1.5 bg-white/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/40">
+                    <div className="flex items-center gap-1.5 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/60">
                       <span
                         className="size-3 rounded-full border border-white/60 shadow-xs"
                         style={{ backgroundColor: template.theme.primary }}
@@ -161,42 +161,42 @@ export default function TemplateGalleryClient({
                 <div className="p-6 space-y-6 flex-1 flex flex-col justify-between bg-white">
                   <div className="space-y-3">
                     <div>
-                      <h3 className="text-2xl font-serif font-bold text-[#2c2224] group-hover:text-[#b05765] transition-colors">
+                      <h3 className="text-2xl font-serif font-bold text-[var(--love-text-heading)] group-hover:text-[var(--love-crimson)] transition-colors">
                         {template.name}
                       </h3>
-                      <p className="text-xs text-[#8e7b7e] mt-0.5">
+                      <p className="text-xs text-[var(--love-text-muted)] mt-0.5">
                         {template.description}
                       </p>
                     </div>
 
-                    <p className="text-xs text-[#6e5d60] leading-relaxed">
+                    <p className="text-xs text-[var(--love-text-body)] leading-relaxed">
                       {template.detail}
                     </p>
 
                     {/* Capability Badges */}
                     <div className="flex flex-wrap gap-1.5 pt-2">
                       {template.capabilities.music && (
-                        <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[#f8eeeb] text-[#8e7b7e] border border-[#eedad5]">
+                        <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[var(--love-surface-blush)] text-[var(--love-crimson)] border border-[var(--love-border)]">
                           🎵 Ambient Music
                         </span>
                       )}
                       {template.capabilities.gallery && (
-                        <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[#f8eeeb] text-[#8e7b7e] border border-[#eedad5]">
+                        <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[var(--love-surface-blush)] text-[var(--love-crimson)] border border-[var(--love-border)]">
                           📸 Photo Gallery
                         </span>
                       )}
                       {template.capabilities.countdown && (
-                        <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[#f8eeeb] text-[#8e7b7e] border border-[#eedad5]">
+                        <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[var(--love-surface-blush)] text-[var(--love-crimson)] border border-[var(--love-border)]">
                           ⏳ Live Ticker
                         </span>
                       )}
                       {template.capabilities.story && (
-                        <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[#f8eeeb] text-[#8e7b7e] border border-[#eedad5]">
+                        <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[var(--love-surface-blush)] text-[var(--love-crimson)] border border-[var(--love-border)]">
                           💍 Couple Story
                         </span>
                       )}
                       {template.capabilities.rsvp && (
-                        <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[#f8eeeb] text-[#8e7b7e] border border-[#eedad5]">
+                        <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[var(--love-surface-blush)] text-[var(--love-crimson)] border border-[var(--love-border)]">
                           💌 RSVP Section
                         </span>
                       )}
@@ -204,17 +204,17 @@ export default function TemplateGalleryClient({
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center gap-3 pt-4 border-t border-[#f3e6e3]">
+                  <div className="flex items-center gap-3 pt-4 border-t border-[var(--love-border)]">
                     <button
                       onClick={() => setPreviewTemplate(template)}
-                      className="flex-1 py-2.5 text-center rounded-xl border border-[#e8d5cf] bg-white text-xs font-semibold text-[#2c2224] hover:bg-[#fff9f6] transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="flex-1 py-2.5 text-center rounded-xl border border-[var(--love-border)] bg-white text-xs font-bold text-[var(--love-text-heading)] hover:bg-[#fff5f8] hover:text-[var(--love-crimson)] transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       👁️ Quick Preview
                     </button>
 
                     <Link
                       href={createUrl}
-                      className="flex-1 py-2.5 text-center rounded-xl bg-[#b05765] text-white text-xs font-semibold hover:bg-[#964552] transition-colors shadow-sm flex items-center justify-center gap-1.5"
+                      className="flex-1 py-2.5 text-center rounded-xl bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white text-xs font-bold hover:shadow-md hover:scale-[1.02] transition-all shadow-xs flex items-center justify-center gap-1.5"
                     >
                       ✨ Customize
                     </Link>

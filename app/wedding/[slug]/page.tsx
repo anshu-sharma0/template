@@ -58,15 +58,17 @@ export default async function PublicWeddingPage({
   }
 
   return (
-    <main className="min-h-screen w-full bg-[#0d090a]">
-      <CreationRenderer
-        creation={{
-          type: "wedding",
-          templateId: creation.templateId,
-          data: creation.data as WeddingInvitationData,
-        }}
-        autoOpen
-      />
+    <main className="min-h-screen w-full bg-linear-to-b from-[#fffdf9] via-[#fcf5ec] to-[#fffbf8] flex justify-center">
+      <div className="w-full max-w-md min-h-screen shadow-2xl bg-white">
+        <CreationRenderer
+          creation={{
+            type: "wedding",
+            templateId: creation.templateId,
+            data: creation.data as WeddingInvitationData,
+          }}
+          autoOpen
+        />
+      </div>
     </main>
   );
 }

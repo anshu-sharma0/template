@@ -32,16 +32,16 @@ export function PageHeader({
   className,
 }: PageHeaderProps) {
   const bgStyles = {
-    soft: "bg-[#fcf7f2] border-b border-[#e8d5cf]/60",
-    gradient: "bg-gradient-to-b from-[#fff5f0] via-[#fffaf5] to-[#fffaf5] border-b border-[#eedad5]/60",
-    glass: "bg-white/60 backdrop-blur-md border-b border-[#e8d5cf]/40",
+    soft: "bg-[#fffbf8] border-b border-[var(--love-border)]/60",
+    gradient: "bg-gradient-to-b from-white via-[var(--love-surface-blush)] to-[#fff0f3] border-b border-[var(--love-border)]",
+    glass: "bg-white/80 backdrop-blur-md border-b border-[var(--love-border)]/60",
   };
 
   return (
     <section className={cn("relative overflow-hidden py-12 sm:py-16 lg:py-20", bgStyles[bgVariant], className)}>
       {/* Decorative background glows */}
-      <div aria-hidden="true" className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 size-96 rounded-full bg-gradient-to-tr from-[#b05765]/10 via-[#e09f87]/15 to-transparent blur-3xl" />
-      <div aria-hidden="true" className="pointer-events-none absolute -bottom-10 right-10 size-64 rounded-full bg-[#c6a15b]/10 blur-2xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 size-96 rounded-full bg-gradient-to-tr from-[var(--love-crimson)]/10 via-[var(--love-pink)]/15 to-transparent blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute -bottom-10 right-10 size-64 rounded-full bg-[#ffccd5]/20 blur-2xl" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Breadcrumbs */}

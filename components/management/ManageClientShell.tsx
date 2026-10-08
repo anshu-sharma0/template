@@ -113,19 +113,22 @@ export default function ManageClientShell({
       : `/wedding/create?token=${rawToken}`;
 
   return (
-    <div className="min-h-screen bg-[#fffaf5] text-[#2c2224] flex flex-col justify-between selection:bg-[#fceae6]">
+    <div className="min-h-screen bg-gradient-to-b from-[#fffbf8] via-[#fff5f7] to-[#ffffff] text-[var(--love-text-heading)] flex flex-col justify-between selection:bg-[#ffe4ea]">
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
 
       {/* Header */}
-      <header className="border-b border-[#e8d5cf] bg-white/80 backdrop-blur-md sticky top-0 z-40">
+      <header className="border-b border-[var(--love-border)] bg-white/90 backdrop-blur-md sticky top-0 z-40">
         <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <span className="font-serif font-bold text-xl text-[#b05765] tracking-tight">
-              Digital Moments
+            <span className="font-serif font-bold text-xl text-[var(--love-crimson)] tracking-tight flex items-center gap-2">
+              <span className="grid size-8 place-items-center rounded-full bg-gradient-to-tr from-[var(--love-crimson)] to-[var(--love-pink)] text-white text-xs">
+                ♥
+              </span>
+              <span>Digital Moments</span>
             </span>
           </Link>
-          <span className="text-xs uppercase tracking-widest font-semibold text-[#8e7b7e] bg-[#f8eeeb] px-3 py-1 rounded-full border border-[#eedad5]">
-            Review & Control
+          <span className="text-xs uppercase tracking-widest font-bold text-[var(--love-crimson)] bg-[var(--love-surface-blush)] px-3.5 py-1 rounded-full border border-[var(--love-border)] shadow-2xs">
+            Review &amp; Control
           </span>
         </div>
       </header>
@@ -170,17 +173,17 @@ export default function ManageClientShell({
             </div>
 
             {/* Public Link Share Box */}
-            <div className="p-6 rounded-2xl bg-[#fffdfa] border border-[#ebdcd8] max-w-2xl mx-auto space-y-4">
+            <div className="p-6 rounded-2xl bg-white border border-[var(--love-border)] max-w-2xl mx-auto space-y-4 shadow-sm">
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <input
                   type="text"
                   readOnly
                   value={fullPublicUrl}
-                  className="flex-1 bg-white border border-[#e8d5cf] px-4 py-3 rounded-xl text-sm font-mono text-[#2c2224] focus:outline-none"
+                  className="flex-1 bg-[var(--love-surface-blush)] border border-[var(--love-border)] px-4 py-3 rounded-xl text-sm font-mono text-[var(--love-text-heading)] focus:outline-none"
                 />
                 <button
                   onClick={handleCopyLink}
-                  className="px-6 py-3 rounded-xl bg-[#b05765] text-white text-sm font-semibold hover:bg-[#964552] transition-all flex items-center justify-center gap-2 active:scale-95"
+                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white text-sm font-bold hover:shadow-md transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs cursor-pointer"
                 >
                   {copied ? "Link Copied ❤️" : "Copy Link"}
                 </button>
@@ -189,7 +192,7 @@ export default function ManageClientShell({
               <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                 <button
                   onClick={handleWhatsAppShare}
-                  className="px-5 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 transition-colors flex items-center gap-2 shadow-xs cursor-pointer"
                 >
                   <span>💬 Share on WhatsApp</span>
                 </button>
@@ -198,7 +201,7 @@ export default function ManageClientShell({
                   href={publicPath}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-xl border border-[#e8d5cf] bg-white text-xs font-semibold text-[#2c2224] hover:bg-[#fff9f6] transition-colors flex items-center gap-1"
+                  className="px-5 py-2.5 rounded-xl border border-[var(--love-border)] bg-white text-xs font-bold text-[var(--love-text-heading)] hover:bg-[#fff5f8] hover:text-[var(--love-crimson)] transition-colors flex items-center gap-1 shadow-2xs"
                 >
                   <span>👁️ View Live Card ↗</span>
                 </a>
@@ -206,24 +209,24 @@ export default function ManageClientShell({
             </div>
 
             {/* Actions */}
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-[#f3e6e3]">
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-[var(--love-border)]">
               <button
                 onClick={() => setShowPreviewModal(true)}
-                className="px-5 py-2.5 rounded-xl border border-[#e8d5cf] bg-white text-xs font-semibold text-[#2c2224] hover:bg-[#fff9f6]"
+                className="px-5 py-2.5 rounded-xl border border-[var(--love-border)] bg-white text-xs font-bold text-[var(--love-text-heading)] hover:bg-[#fff5f8] hover:text-[var(--love-crimson)] shadow-2xs cursor-pointer"
               >
                 Preview Experience
               </button>
 
               <Link
                 href={editUrl}
-                className="px-5 py-2.5 rounded-xl border border-[#e8d5cf] bg-white text-xs font-semibold text-[#2c2224] hover:bg-[#fff9f6]"
+                className="px-5 py-2.5 rounded-xl border border-[var(--love-border)] bg-white text-xs font-bold text-[var(--love-text-heading)] hover:bg-[#fff5f8] hover:text-[var(--love-crimson)] shadow-2xs"
               >
                 ✏️ Edit Content
               </Link>
 
               <Link
                 href={creation.type === "birthday" ? "/birthday/create" : "/wedding/create"}
-                className="px-5 py-2.5 rounded-xl bg-[#c6a15b] text-white text-xs font-semibold hover:bg-[#b08d48]"
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#d97706] to-[#b45309] text-white text-xs font-bold hover:opacity-90 shadow-2xs"
               >
                 ✨ Create Another
               </Link>
@@ -311,14 +314,14 @@ export default function ManageClientShell({
               <div className="flex gap-3 w-full sm:w-auto">
                 <button
                   onClick={() => setShowPreviewModal(true)}
-                  className="flex-1 sm:flex-none py-3.5 px-5 rounded-2xl border border-[#e8d5cf] bg-white text-[#2c2224] text-xs font-semibold hover:bg-[#fff9f6]"
+                  className="flex-1 sm:flex-none py-3.5 px-5 rounded-2xl border border-[var(--love-border)] bg-white text-[var(--love-text-heading)] text-xs font-bold hover:bg-[#fff5f8] hover:text-[var(--love-crimson)] shadow-2xs cursor-pointer"
                 >
                   👁️ Full Preview
                 </button>
 
                 <Link
                   href={editUrl}
-                  className="flex-1 sm:flex-none py-3.5 px-5 rounded-2xl border border-[#e8d5cf] bg-white text-[#2c2224] text-xs font-semibold hover:bg-[#fff9f6] text-center"
+                  className="flex-1 sm:flex-none py-3.5 px-5 rounded-2xl border border-[var(--love-border)] bg-white text-[var(--love-text-heading)] text-xs font-bold hover:bg-[#fff5f8] hover:text-[var(--love-crimson)] text-center shadow-2xs"
                 >
                   ✏️ Edit Card
                 </Link>
@@ -327,7 +330,7 @@ export default function ManageClientShell({
               <button
                 onClick={handleAutoPublish}
                 disabled={isLoading}
-                className="w-full sm:w-auto py-3.5 px-8 rounded-2xl bg-[#b05765] text-white text-sm font-semibold hover:bg-[#964552] transition-colors shadow-md disabled:opacity-50"
+                className="w-full sm:w-auto py-3.5 px-8 rounded-2xl bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white text-sm font-bold hover:shadow-lg transition-all shadow-md disabled:opacity-50 active:scale-95 cursor-pointer"
               >
                 {isLoading ? "Publishing Card..." : `🚀 Publish Digital Card (${formattedPrice})`}
               </button>
@@ -337,8 +340,8 @@ export default function ManageClientShell({
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-[#e8d5cf] bg-white/60 py-6 text-center text-xs text-[#8e7b7e]">
-        Digital Moments Platform • Built with Love
+      <footer className="border-t border-[var(--love-border)] bg-white/70 py-6 text-center text-xs text-[var(--love-text-muted)] font-medium">
+        Digital Moments Platform • Handcrafted with Love ♥
       </footer>
 
       {/* Preview Modal */}

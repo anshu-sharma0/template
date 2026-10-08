@@ -86,38 +86,38 @@ export default function BirthdayLandingPage() {
               badgeTone="rose"
             />
 
-            <div className="mt-8 max-w-5xl mx-auto grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center rounded-3xl border border-[#e8d5cf] bg-white p-6 sm:p-10 shadow-xl">
+            <div className="mt-8 max-w-5xl mx-auto grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center rounded-3xl border border-[var(--love-border)] bg-white p-6 sm:p-10 shadow-xl shadow-pink-500/5">
               <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 rounded-full border border-[#b05765]/20 bg-[#fceae6] px-3.5 py-1.5 text-xs font-semibold text-[#b05765]">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[var(--love-border)] bg-[var(--love-surface-blush)] px-3.5 py-1.5 text-xs font-bold text-[var(--love-crimson)] shadow-2xs">
                   <Heart className="text-sm" />
                   <span>What They Experience</span>
                 </div>
 
-                <h3 className="font-serif text-3xl font-bold text-[#2c2224] leading-tight">
+                <h3 className="font-serif text-3xl font-bold text-[var(--love-text-heading)] leading-tight">
                   &quot;Someone made something special for you ❤️&quot;
                 </h3>
 
-                <p className="text-sm text-[#6e5d60] leading-relaxed">
+                <p className="text-sm text-[var(--love-text-body)] leading-relaxed">
                   When they tap the private link, an intimate cover invites them to reveal their birthday surprise.
                 </p>
 
-                <ul className="space-y-3 text-xs text-[#2c2224]">
+                <ul className="space-y-3 text-xs text-[var(--love-text-heading)]">
                   <li className="flex items-center gap-3">
-                    <span className="flex size-5 items-center justify-center rounded-full bg-[#fceae6] text-[#b05765] font-bold text-xs">✓</span>
-                    <span>Personal birthday greeting & portrait</span>
+                    <span className="flex size-5 items-center justify-center rounded-full bg-[var(--love-surface-blush)] text-[var(--love-crimson)] font-bold text-xs border border-[var(--love-border)]">✓</span>
+                    <span>Personal birthday greeting &amp; portrait</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="flex size-5 items-center justify-center rounded-full bg-[#fceae6] text-[#b05765] font-bold text-xs">✓</span>
+                    <span className="flex size-5 items-center justify-center rounded-full bg-[var(--love-surface-blush)] text-[var(--love-crimson)] font-bold text-xs border border-[var(--love-border)]">✓</span>
                     <span>Heartfelt personal note from you</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="flex size-5 items-center justify-center rounded-full bg-[#fceae6] text-[#b05765] font-bold text-xs">✓</span>
-                    <span>Sweet photo memories gallery & music</span>
+                    <span className="flex size-5 items-center justify-center rounded-full bg-[var(--love-surface-blush)] text-[var(--love-crimson)] font-bold text-xs border border-[var(--love-border)]">✓</span>
+                    <span>Sweet photo memories gallery &amp; music</span>
                   </li>
                 </ul>
 
                 <div className="pt-2">
-                  <Button href="/birthday/create" size="lg" className="bg-[#b05765] text-white hover:bg-[#964552]">
+                  <Button href="/birthday/create" size="lg" className="bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white shadow-md shadow-pink-500/20 hover:scale-[1.02] active:scale-95">
                     Create a Birthday Wish ✨
                   </Button>
                 </div>

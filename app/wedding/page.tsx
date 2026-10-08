@@ -88,18 +88,18 @@ export default function WeddingLandingPage() {
 
             <div className="mt-8 grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
               {/* Template 01 — Elegant Wedding */}
-              <article className="overflow-hidden rounded-3xl border border-[#e8d5cf] bg-white shadow-xl text-center p-6 sm:p-8 flex flex-col justify-between">
+              <article className="overflow-hidden rounded-3xl border border-[var(--love-border)] bg-white shadow-xl shadow-pink-500/5 text-center p-6 sm:p-8 flex flex-col justify-between">
                 <div>
-                  <span className="inline-block rounded-full bg-[#fceae6] px-3.5 py-1 text-xs font-bold text-[#b05765] uppercase">
+                  <span className="inline-block rounded-full bg-[var(--love-surface-blush)] px-3.5 py-1 text-xs font-bold text-[var(--love-crimson)] border border-[var(--love-border)] uppercase">
                     Template 01 — Elegant
                   </span>
 
-                  <h3 className="mt-4 font-serif text-3xl font-bold text-[#2c2224]">
+                  <h3 className="mt-4 font-serif text-3xl font-bold text-[var(--love-text-heading)]">
                     Elegant Botanical
                   </h3>
 
-                  <p className="mt-2 text-xs text-[#6e5d60] leading-relaxed">
-                    Timeless, graceful, and beautifully understated design with soft champagne accents.
+                  <p className="mt-2 text-xs text-[var(--love-text-body)] leading-relaxed">
+                    Timeless, graceful, and beautifully understated design with soft champagne and rose accents.
                   </p>
 
                   <div className="my-6">
@@ -109,26 +109,26 @@ export default function WeddingLandingPage() {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row justify-center gap-3 pt-4 border-t border-[#eedad5]">
-                  <Button href="/wedding/create?template=elegant" size="lg" className="flex-1 bg-[#b05765] text-white hover:bg-[#964552]">
+                <div className="flex flex-col sm:flex-row justify-center gap-3 pt-4 border-t border-[var(--love-border)]">
+                  <Button href="/wedding/create?template=elegant" size="lg" className="flex-1 bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white shadow-md shadow-pink-500/20 hover:scale-[1.02] active:scale-95">
                     Use Elegant Theme ✨
                   </Button>
                 </div>
               </article>
 
-              {/* Template 02 — Luxury Wedding */}
-              <article className="overflow-hidden rounded-3xl border border-[#4a3a3e] bg-gradient-to-b from-[#191514] via-[#2c2224] to-[#3d282c] text-white shadow-2xl text-center p-6 sm:p-8 flex flex-col justify-between">
+              {/* Template 02 — Luxury Wedding (Royal Champagne Light Luxury) */}
+              <article className="overflow-hidden rounded-3xl border border-amber-200/90 bg-gradient-to-b from-white via-amber-50/40 to-[#faf4ea] text-[var(--love-text-heading)] shadow-xl shadow-amber-500/10 text-center p-6 sm:p-8 flex flex-col justify-between">
                 <div>
-                  <span className="inline-block rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold text-[#c6a15b] border border-[#c6a15b]/40 uppercase">
-                    Template 02 — Luxury
+                  <span className="inline-block rounded-full bg-amber-100/80 px-3.5 py-1 text-xs font-bold text-amber-900 border border-amber-300/80 uppercase">
+                    Template 02 — Royal Luxury
                   </span>
 
-                  <h3 className="mt-4 font-serif text-3xl font-bold text-white">
-                    Royal Luxury
+                  <h3 className="mt-4 font-serif text-3xl font-bold text-[var(--love-text-heading)]">
+                    Royal Champagne &amp; Gold
                   </h3>
 
-                  <p className="mt-2 text-xs text-white/70 leading-relaxed">
-                    Sophisticated, romantic, dark mode design with gold foil details & ambient music.
+                  <p className="mt-2 text-xs text-[var(--love-text-body)] leading-relaxed">
+                    Luminous, regal, ivory-gold aesthetic with warm champagne foil details &amp; sensory audio.
                   </p>
 
                   <div className="my-6">
@@ -138,9 +138,9 @@ export default function WeddingLandingPage() {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row justify-center gap-3 pt-4 border-t border-white/10">
-                  <Button href="/wedding/create?template=luxury" size="lg" className="flex-1 bg-gradient-to-r from-[#c6a15b] to-[#a07c39] text-white hover:opacity-90">
-                    Use Luxury Theme 👑
+                <div className="flex flex-col sm:flex-row justify-center gap-3 pt-4 border-t border-amber-200/60">
+                  <Button href="/wedding/create?template=luxury" size="lg" className="flex-1 bg-gradient-to-r from-[#d97706] to-[#b45309] text-white hover:opacity-90 shadow-md shadow-amber-500/20 hover:scale-[1.02] active:scale-95">
+                    Use Royal Luxury Theme 👑
                   </Button>
                 </div>
               </article>

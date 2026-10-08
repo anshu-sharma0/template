@@ -1,54 +1,119 @@
 import { brand } from "@/lib/brand";
 import { Container } from "./Container";
-import { Divider } from "@/components/ui/Divider";
+import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-text text-white">
-      <Container className="py-12 md:py-16">
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-10">
+    <footer className="border-t border-[var(--love-border)] bg-gradient-to-b from-white via-[var(--love-surface-blush)] to-[#fff0f3] text-[var(--love-text-heading)]">
+      <Container className="py-14 md:py-20">
+        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr]">
           {/* Brand Column */}
-          <div className="max-w-md space-y-4">
+          <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <span className="grid size-9 place-items-center rounded-full bg-white font-display text-sm font-semibold text-text shadow-sm">
+              <span className="grid size-10 place-items-center rounded-full bg-gradient-to-tr from-[var(--love-crimson)] to-[var(--love-pink)] font-display text-base font-bold text-white shadow-md shadow-pink-500/20">
                 {brand.logo}
               </span>
-              <span className="font-display text-2xl tracking-tight">{brand.name}</span>
+              <span className="font-display text-2xl font-bold tracking-tight text-[var(--love-text-heading)]">
+                {brand.name}
+              </span>
             </div>
-            <p className="text-sm leading-relaxed text-white/75 font-serif italic">
-              For the wishes, invitations and little moments that should feel personal.
+            <p className="text-sm leading-relaxed text-[var(--love-text-body)] font-serif italic max-w-sm">
+              Handcrafted digital love surprises, birthday keepsakes, and timeless wedding invitations. Made to be felt, shared, and remembered.
             </p>
+
+            {/* Romantic Guarantee Badges */}
+            <div className="pt-2 flex flex-wrap gap-2 text-xs font-semibold text-[var(--love-crimson)]">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 border border-[var(--love-border)] shadow-2xs">
+                <span>🔒</span>
+                <span>Private &amp; Permanent Links</span>
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 border border-[var(--love-border)] shadow-2xs">
+                <span>📱</span>
+                <span>Mobile-First Magic</span>
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 border border-[var(--love-border)] shadow-2xs">
+                <span>🎵</span>
+                <span>Sensory Soundscapes</span>
+              </span>
+            </div>
           </div>
 
-          {/* Quick Links Column */}
-          <div className="flex flex-wrap gap-8 text-sm text-white/80">
-            <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-wider text-white">Navigation</p>
-              <ul className="space-y-2.5">
-                <li><a href="#occasions" className="transition hover:text-white">Create</a></li>
-                <li><a href="#templates" className="transition hover:text-white">Designs</a></li>
-                <li><a href="#how-it-works" className="transition hover:text-white">How It Works</a></li>
-                <li><a href="#faq" className="transition hover:text-white">FAQ</a></li>
-              </ul>
-            </div>
+          {/* Experience Quick Links */}
+          <div className="space-y-3.5">
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--love-crimson)]">
+              Digital Experiences
+            </p>
+            <ul className="space-y-2.5 text-sm text-[var(--love-text-body)]">
+              <li>
+                <Link href="/birthday" className="transition-colors hover:text-[var(--love-crimson)] flex items-center gap-1.5">
+                  <span>🎂</span>
+                  <span>Birthday Surprise</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/wedding" className="transition-colors hover:text-[var(--love-crimson)] flex items-center gap-1.5">
+                  <span>💍</span>
+                  <span>Wedding Invitations</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/templates" className="transition-colors hover:text-[var(--love-crimson)] flex items-center gap-1.5">
+                  <span>✨</span>
+                  <span>Explore All Templates</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/birthday/create" className="transition-colors hover:text-[var(--love-crimson)] flex items-center gap-1.5">
+                  <span>💌</span>
+                  <span>Create Birthday Keepsake</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-            <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-wider text-white">Legal</p>
-              <ul className="space-y-2.5">
-                <li><a href="#" className="transition hover:text-white">Privacy</a></li>
-                <li><a href="#" className="transition hover:text-white">Terms</a></li>
-              </ul>
-            </div>
+          {/* Platform & Navigation */}
+          <div className="space-y-3.5">
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--love-crimson)]">
+              Quick Navigation
+            </p>
+            <ul className="space-y-2.5 text-sm text-[var(--love-text-body)]">
+              <li>
+                <Link href="/" className="transition-colors hover:text-[var(--love-crimson)]">
+                  Home Experience
+                </Link>
+              </li>
+              <li>
+                <Link href="/#how-it-works" className="transition-colors hover:text-[var(--love-crimson)]">
+                  How It Works
+                </Link>
+              </li>
+              <li>
+                <Link href="/#faq" className="transition-colors hover:text-[var(--love-crimson)]">
+                  Frequently Asked Questions
+                </Link>
+              </li>
+              <li>
+                <Link href="/birthday/demo" className="transition-colors hover:text-[var(--love-crimson)]">
+                  Live Recipient Demo ✨
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <Divider className="my-8 border-white/15" />
-
-        <div className="flex flex-col gap-3 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 {brand.name}. All rights reserved.</p>
-          <a href={`mailto:${brand.email}`} className="transition hover:text-white">
-            {brand.email}
-          </a>
+        {/* Bottom Bar */}
+        <div className="mt-12 pt-6 border-t border-[var(--love-border)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--love-text-muted)]">
+          <p className="flex items-center gap-1 font-medium">
+            <span>© 2026 {brand.name}. Handcrafted with love</span>
+            <span className="text-[var(--love-crimson)] animate-heart-beat">♥</span>
+          </p>
+          <div className="flex items-center gap-4">
+            <span className="text-[var(--love-text-muted)] font-medium">All moments encrypted &amp; private</span>
+            <span>•</span>
+            <a href={`mailto:${brand.email}`} className="text-[var(--love-crimson)] font-semibold hover:underline">
+              {brand.email}
+            </a>
+          </div>
         </div>
       </Container>
     </footer>

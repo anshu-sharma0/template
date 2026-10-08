@@ -59,26 +59,26 @@ export function WeddingRenderer({
         className={cn(
           "relative flex min-h-full flex-col items-center justify-between overflow-hidden p-6 text-center select-none",
           isLuxury
-            ? "bg-[linear-gradient(180deg,#191514_0%,#4a3136_60%,#191514_100%)] text-white"
-            : "bg-[linear-gradient(180deg,#fffdf9_0%,#f5ead7_50%,#fffdf9_100%)] text-text"
+            ? "bg-[linear-gradient(180deg,#ffffff_0%,#faf5ee_50%,#f5ebe0_100%)] text-[var(--love-text-heading)]"
+            : "bg-[linear-gradient(180deg,#fffdf9_0%,#fdf5f7_50%,#fff0f3_100%)] text-[var(--love-text-heading)]"
         )}
       >
         <Floral className="opacity-80 mt-2" />
 
         <div className="my-auto grid gap-6 max-w-xs">
-          <p className={isLuxury ? "text-xs uppercase tracking-widest text-accent font-medium" : "text-xs uppercase tracking-widest text-text-muted font-medium"}>
+          <p className={isLuxury ? "text-xs uppercase tracking-widest text-amber-700 font-semibold" : "text-xs uppercase tracking-widest text-[var(--love-crimson)] font-semibold"}>
             Together with their families
           </p>
 
           <div className="space-y-1">
-            <p className="font-display text-4xl leading-none">{bride}</p>
-            <p className={isLuxury ? "font-display text-2xl text-accent" : "font-display text-2xl text-primary"}>
+            <p className="font-display text-4xl leading-none text-[var(--love-text-heading)]">{bride}</p>
+            <p className={isLuxury ? "font-display text-2xl text-amber-600 font-serif" : "font-display text-2xl text-[var(--love-crimson)] font-serif"}>
               &
             </p>
-            <p className="font-display text-4xl leading-none">{groom}</p>
+            <p className="font-display text-4xl leading-none text-[var(--love-text-heading)]">{groom}</p>
           </div>
 
-          <p className={isLuxury ? "text-xs font-semibold text-accent tracking-widest" : "text-xs font-semibold text-primary tracking-widest"}>
+          <p className={isLuxury ? "text-xs font-semibold text-amber-800 tracking-widest" : "text-xs font-semibold text-[var(--love-crimson)] tracking-widest"}>
             {data.weddingDate || "24 FEBRUARY 2027"}
           </p>
 
@@ -86,19 +86,19 @@ export function WeddingRenderer({
             type="button"
             onClick={() => setIsOpen(true)}
             className={cn(
-              "mt-4 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-xs font-semibold uppercase tracking-wider shadow-lift transition-transform hover:scale-105 active:scale-95",
+              "mt-4 inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-xs font-bold uppercase tracking-wider shadow-md transition-all hover:scale-105 active:scale-95 cursor-pointer",
               isLuxury
-                ? "bg-[linear-gradient(135deg,#c6a15b,#8a6934)] text-white"
-                : "bg-text text-white"
+                ? "bg-[linear-gradient(135deg,#d97706,#b45309)] text-white shadow-amber-500/20"
+                : "bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white shadow-pink-500/20"
             )}
           >
             <span>Open Invitation</span>
-            <Sparkle className={isLuxury ? "text-white text-xs" : "text-accent text-xs"} />
+            <Sparkle className="text-white text-xs" />
           </button>
         </div>
 
-        <p className={isLuxury ? "text-[10px] text-white/50 tracking-widest uppercase" : "text-[10px] text-text-muted tracking-widest uppercase"}>
-          Wedding Microsite • Luma Vows
+        <p className={isLuxury ? "text-[10px] text-amber-800/70 tracking-widest uppercase font-semibold" : "text-[10px] text-[var(--love-text-muted)] tracking-widest uppercase font-semibold"}>
+          Wedding Microsite • Made With Love ♥
         </p>
       </div>
     );
@@ -110,32 +110,32 @@ export function WeddingRenderer({
       className={cn(
         "relative grid min-h-full overflow-y-auto p-5 text-center transition-all duration-700 animate-fade-in",
         isLuxury
-          ? "bg-[linear-gradient(180deg,#191514_0%,#3d282c_40%,#191514_100%)] text-white"
-          : "bg-[linear-gradient(180deg,#fffdf9_0%,#f9f3e8_40%,#fffdf9_100%)] text-text"
+          ? "bg-[linear-gradient(180deg,#ffffff_0%,#fbf6ee_40%,#f6ede0_100%)] text-[var(--love-text-heading)]"
+          : "bg-[linear-gradient(180deg,#fffdf9_0%,#fdf5f7_40%,#fff0f3_100%)] text-[var(--love-text-heading)]"
       )}
     >
       <div className="relative z-10 flex flex-col justify-between gap-8 py-2">
         {/* Couple Hero Header */}
         <div className="space-y-3 pt-2">
-          <p className={isLuxury ? "text-[10px] uppercase tracking-widest text-accent font-semibold" : "text-[10px] uppercase tracking-widest text-text-muted font-semibold"}>
+          <p className={isLuxury ? "text-[10px] uppercase tracking-widest text-amber-700 font-bold" : "text-[10px] uppercase tracking-widest text-[var(--love-crimson)] font-bold"}>
             Together with their families
           </p>
           <Floral className="mx-auto opacity-80" />
           <div className="space-y-1">
-            <h1 className="font-display text-5xl leading-none">{bride}</h1>
-            <p className={isLuxury ? "font-display text-2xl text-accent font-serif" : "font-display text-2xl text-primary font-serif"}>
+            <h1 className="font-display text-5xl leading-none text-[var(--love-text-heading)]">{bride}</h1>
+            <p className={isLuxury ? "font-display text-2xl text-amber-600 font-serif" : "font-display text-2xl text-[var(--love-crimson)] font-serif"}>
               &
             </p>
-            <h1 className="font-display text-5xl leading-none">{groom}</h1>
+            <h1 className="font-display text-5xl leading-none text-[var(--love-text-heading)]">{groom}</h1>
           </div>
-          <p className={isLuxury ? "text-xs font-semibold text-accent tracking-widest" : "text-xs font-semibold text-primary tracking-widest"}>
+          <p className={isLuxury ? "text-xs font-semibold text-amber-800 tracking-widest" : "text-xs font-semibold text-[var(--love-crimson)] tracking-widest"}>
             {data.weddingDate || "24.02.2027"} {data.weddingTime ? `• ${data.weddingTime}` : ""}
           </p>
         </div>
 
         {/* Couple Photo */}
         <div className={compact ? "mx-auto w-36" : "mx-auto w-44"}>
-          <div className={cn("group relative overflow-hidden rounded-2xl border-4 p-2 shadow-lift", isLuxury ? "border-accent/40 bg-surface/30" : "border-white bg-white")}>
+          <div className={cn("group relative overflow-hidden rounded-2xl border-4 p-2 shadow-md", isLuxury ? "border-amber-200 bg-white" : "border-pink-100 bg-white")}>
             {data.couplePhoto ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -156,41 +156,41 @@ export function WeddingRenderer({
         </div>
 
         {/* Invitation Message & Blessings */}
-        <div className={cn("mx-auto w-full max-w-[17rem] rounded-2xl p-5 text-center shadow-soft", isLuxury ? "border border-white/15 bg-white/5 text-white/90" : "border border-border/80 bg-surface/90 text-text")}>
-          <p className="font-serif italic text-sm leading-relaxed whitespace-pre-line">
+        <div className={cn("mx-auto w-full max-w-[17rem] rounded-2xl p-5 text-center shadow-soft", isLuxury ? "border border-amber-200/80 bg-white/95 text-[var(--love-text-heading)]" : "border border-[var(--love-border)] bg-white/95 text-[var(--love-text-heading)]")}>
+          <p className="font-serif italic text-sm leading-relaxed whitespace-pre-line font-medium text-[var(--love-text-heading)]">
             &ldquo;{data.invitationMessage || "We invite you to share in the joy of our wedding celebration."}&rdquo;
           </p>
 
           {data.showFamily && (data.brideFamily || data.groomFamily) && (
-            <div className="mt-4 pt-3 border-t border-border/50 text-xs space-y-1 text-text-muted">
-              {data.brideFamily && <p className={isLuxury ? "text-white/70" : ""}>{data.brideFamily}</p>}
-              {data.groomFamily && <p className={isLuxury ? "text-white/70" : ""}>{data.groomFamily}</p>}
+            <div className="mt-4 pt-3 border-t border-[var(--love-border)]/60 text-xs space-y-1 text-[var(--love-text-muted)]">
+              {data.brideFamily && <p className={isLuxury ? "text-amber-900/80 font-medium" : "text-[var(--love-text-body)] font-medium"}>{data.brideFamily}</p>}
+              {data.groomFamily && <p className={isLuxury ? "text-amber-900/80 font-medium" : "text-[var(--love-text-body)] font-medium"}>{data.groomFamily}</p>}
             </div>
           )}
         </div>
 
         {/* Countdown */}
         {data.showCountdown && data.weddingDate && (
-          <div className={cn("mx-auto w-full max-w-[17rem] rounded-2xl p-4 text-center", isLuxury ? "bg-white/5 border border-accent/30" : "bg-surface-soft/80 border border-border")}>
-            <p className={isLuxury ? "text-[10px] font-semibold uppercase tracking-widest text-accent mb-3" : "text-[10px] font-semibold uppercase tracking-widest text-text-muted mb-3"}>
+          <div className={cn("mx-auto w-full max-w-[17rem] rounded-2xl p-4 text-center shadow-2xs", isLuxury ? "bg-amber-50/70 border border-amber-200/90 text-amber-950" : "bg-[var(--love-surface-blush)] border border-[var(--love-border)] text-[var(--love-text-heading)]")}>
+            <p className={isLuxury ? "text-[10px] font-bold uppercase tracking-widest text-amber-800 mb-3" : "text-[10px] font-bold uppercase tracking-widest text-[var(--love-crimson)] mb-3"}>
               Countdown to Forever
             </p>
             <div className="grid grid-cols-4 gap-2 text-center">
-              <div>
-                <span className="font-display text-2xl font-semibold leading-none">{timeLeft.days}</span>
-                <span className={isLuxury ? "block text-[9px] text-white/60 uppercase mt-1" : "block text-[9px] text-text-muted uppercase mt-1"}>Days</span>
+              <div className="rounded-xl bg-white p-2 border border-amber-100 shadow-2xs">
+                <span className="font-display text-2xl font-bold leading-none text-amber-800">{timeLeft.days}</span>
+                <span className="block text-[9px] text-amber-900/70 uppercase mt-1 font-semibold">Days</span>
               </div>
-              <div>
-                <span className="font-display text-2xl font-semibold leading-none">{timeLeft.hours}</span>
-                <span className={isLuxury ? "block text-[9px] text-white/60 uppercase mt-1" : "block text-[9px] text-text-muted uppercase mt-1"}>Hours</span>
+              <div className="rounded-xl bg-white p-2 border border-amber-100 shadow-2xs">
+                <span className="font-display text-2xl font-bold leading-none text-amber-800">{timeLeft.hours}</span>
+                <span className="block text-[9px] text-amber-900/70 uppercase mt-1 font-semibold">Hours</span>
               </div>
-              <div>
-                <span className="font-display text-2xl font-semibold leading-none">{timeLeft.minutes}</span>
-                <span className={isLuxury ? "block text-[9px] text-white/60 uppercase mt-1" : "block text-[9px] text-text-muted uppercase mt-1"}>Mins</span>
+              <div className="rounded-xl bg-white p-2 border border-amber-100 shadow-2xs">
+                <span className="font-display text-2xl font-bold leading-none text-amber-800">{timeLeft.minutes}</span>
+                <span className="block text-[9px] text-amber-900/70 uppercase mt-1 font-semibold">Mins</span>
               </div>
-              <div>
-                <span className="font-display text-2xl font-semibold leading-none">{timeLeft.seconds}</span>
-                <span className={isLuxury ? "block text-[9px] text-white/60 uppercase mt-1" : "block text-[9px] text-text-muted uppercase mt-1"}>Secs</span>
+              <div className="rounded-xl bg-white p-2 border border-amber-100 shadow-2xs">
+                <span className="font-display text-2xl font-bold leading-none text-amber-800">{timeLeft.seconds}</span>
+                <span className="block text-[9px] text-amber-900/70 uppercase mt-1 font-semibold">Secs</span>
               </div>
             </div>
           </div>
@@ -200,25 +200,25 @@ export function WeddingRenderer({
         {data.story && data.story.timeline && data.story.timeline.length > 0 && (
           <div className="mx-auto w-full max-w-[17rem] space-y-4 text-left">
             <div className="text-center">
-              <p className={isLuxury ? "text-[10px] uppercase tracking-widest font-semibold text-accent" : "text-[10px] uppercase tracking-widest font-semibold text-primary"}>
+              <p className={isLuxury ? "text-[10px] uppercase tracking-widest font-bold text-amber-800" : "text-[10px] uppercase tracking-widest font-bold text-[var(--love-crimson)]"}>
                 {data.story.title || "Our Story"}
               </p>
               {data.story.description && (
-                <p className={isLuxury ? "text-xs text-white/70 italic mt-1 font-serif" : "text-xs text-text-muted italic mt-1 font-serif"}>
+                <p className="text-xs text-[var(--love-text-muted)] italic mt-1 font-serif">
                   {data.story.description}
                 </p>
               )}
             </div>
 
-            <div className="relative border-l border-primary/30 pl-4 space-y-4 ml-2">
+            <div className="relative border-l border-amber-300/60 pl-4 space-y-4 ml-2">
               {data.story.timeline.map((item) => (
                 <div key={item.id} className="relative">
-                  <div className="absolute -left-[1.35rem] top-1 size-2 rounded-full bg-primary" />
-                  <span className={isLuxury ? "text-[10px] font-bold text-accent" : "text-[10px] font-bold text-primary"}>
+                  <div className="absolute -left-[1.35rem] top-1 size-2 rounded-full bg-amber-600" />
+                  <span className={isLuxury ? "text-[10px] font-bold text-amber-800" : "text-[10px] font-bold text-[var(--love-crimson)]"}>
                     {item.date}
                   </span>
-                  <h4 className="font-display text-base font-normal">{item.title}</h4>
-                  <p className={isLuxury ? "text-xs text-white/70 mt-0.5 leading-relaxed" : "text-xs text-text-muted mt-0.5 leading-relaxed"}>
+                  <h4 className="font-display text-base font-bold text-[var(--love-text-heading)]">{item.title}</h4>
+                  <p className="text-xs text-[var(--love-text-body)] mt-0.5 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -230,7 +230,7 @@ export function WeddingRenderer({
         {/* Wedding Events Schedule */}
         {data.events && data.events.length > 0 && (
           <div className="mx-auto w-full max-w-[17rem] space-y-3 text-center">
-            <p className={isLuxury ? "text-[10px] uppercase tracking-widest font-semibold text-accent" : "text-[10px] uppercase tracking-widest font-semibold text-primary"}>
+            <p className={isLuxury ? "text-[10px] uppercase tracking-widest font-bold text-amber-800" : "text-[10px] uppercase tracking-widest font-bold text-[var(--love-crimson)]"}>
               Wedding Celebrations
             </p>
 
@@ -239,35 +239,36 @@ export function WeddingRenderer({
                 <div
                   key={evt.id}
                   className={cn(
-                    "rounded-xl p-3.5 text-left border transition",
+                    "rounded-xl p-3.5 text-left border transition shadow-2xs",
                     isLuxury
-                      ? "border-white/10 bg-white/5"
-                      : "border-border/80 bg-surface shadow-xs"
+                      ? "border-amber-200/80 bg-white/95"
+                      : "border-[var(--love-border)] bg-white/95"
                   )}
                 >
                   <div className="flex items-center justify-between">
-                    <h4 className="font-display text-lg font-normal text-text">{evt.title}</h4>
+                    <h4 className="font-display text-lg font-bold text-[var(--love-text-heading)]">{evt.title}</h4>
                     {evt.time && (
-                      <span className={isLuxury ? "text-[10px] text-accent font-semibold" : "text-[10px] text-primary font-semibold"}>
+                      <span className={isLuxury ? "text-[10px] text-amber-700 font-bold" : "text-[10px] text-[var(--love-crimson)] font-bold"}>
                         {evt.time}
                       </span>
                     )}
                   </div>
 
                   {evt.date && (
-                    <p className={isLuxury ? "text-xs text-white/80 font-medium mt-0.5" : "text-xs text-text font-medium mt-0.5"}>
+                    <p className="text-xs text-[var(--love-text-heading)] font-semibold mt-0.5">
                       {evt.date}
                     </p>
                   )}
 
                   {evt.venue && (
-                    <p className={isLuxury ? "text-[11px] text-white/60 mt-1" : "text-[11px] text-text-muted mt-1"}>
-                      📍 {evt.venue}
+                    <p className="text-[11px] text-[var(--love-text-body)] mt-1 flex items-center gap-1 font-medium">
+                      <span>📍</span>
+                      <span>{evt.venue}</span>
                     </p>
                   )}
 
                   {evt.description && (
-                    <p className={isLuxury ? "text-[11px] text-white/50 italic mt-1 font-serif" : "text-[11px] text-text-muted italic mt-1 font-serif"}>
+                    <p className="text-[11px] text-[var(--love-text-muted)] italic mt-1 font-serif">
                       {evt.description}
                     </p>
                   )}
@@ -279,11 +280,11 @@ export function WeddingRenderer({
 
         {/* Venue Information */}
         {data.venue && data.venue.name && (
-          <div className={cn("mx-auto w-full max-w-[17rem] rounded-2xl p-4 text-center border", isLuxury ? "border-accent/30 bg-white/5" : "border-border bg-surface shadow-soft")}>
+          <div className={cn("mx-auto w-full max-w-[17rem] rounded-2xl p-4 text-center border shadow-soft", isLuxury ? "border-amber-200/80 bg-white/95" : "border-[var(--love-border)] bg-white/95")}>
             <span className="text-xl">📍</span>
-            <h4 className="font-display text-xl font-normal mt-1">{data.venue.name}</h4>
+            <h4 className="font-display text-xl font-bold mt-1 text-[var(--love-text-heading)]">{data.venue.name}</h4>
             {data.venue.address && (
-              <p className={isLuxury ? "text-xs text-white/70 mt-1" : "text-xs text-text-muted mt-1"}>
+              <p className="text-xs text-[var(--love-text-body)] mt-1">
                 {data.venue.address}
               </p>
             )}
@@ -292,7 +293,7 @@ export function WeddingRenderer({
                 href={data.venue.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn("mt-3 inline-block rounded-full px-4 py-1.5 text-xs font-semibold transition", isLuxury ? "bg-accent text-white hover:bg-accent-strong" : "bg-primary text-white hover:bg-primary-strong")}
+                className={cn("mt-3 inline-block rounded-full px-5 py-2 text-xs font-bold transition shadow-sm", isLuxury ? "bg-[linear-gradient(135deg,#d97706,#b45309)] text-white hover:opacity-90" : "bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white hover:opacity-90")}
               >
                 View Location →
               </a>
@@ -303,14 +304,14 @@ export function WeddingRenderer({
         {/* Gallery */}
         {data.gallery && data.gallery.length > 0 && (
           <div className="mx-auto w-full max-w-[17rem] space-y-2">
-            <p className={isLuxury ? "text-[10px] uppercase tracking-widest font-semibold text-accent" : "text-[10px] uppercase tracking-widest font-semibold text-text-muted"}>
+            <p className={isLuxury ? "text-[10px] uppercase tracking-widest font-bold text-amber-800" : "text-[10px] uppercase tracking-widest font-bold text-[var(--love-crimson)]"}>
               Pre-Wedding Gallery
             </p>
             <div className="grid grid-cols-2 gap-2">
               {data.gallery.map((imgUrl, idx) => (
                 <div
                   key={idx}
-                  className="aspect-square overflow-hidden rounded-xl border-2 border-white/80 bg-surface shadow-xs"
+                  className="aspect-square overflow-hidden rounded-xl border-2 border-white bg-white shadow-sm"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -326,21 +327,21 @@ export function WeddingRenderer({
 
         {/* RSVP Section */}
         {data.showRSVP && data.rsvp && (
-          <div className={cn("mx-auto w-full max-w-[17rem] rounded-2xl p-5 text-center border shadow-soft", isLuxury ? "border-accent/40 bg-[linear-gradient(135deg,rgba(198,161,91,0.2),rgba(74,49,54,0.4))]" : "border-primary/20 bg-surface-soft/80")}>
-            <Heart className="mx-auto text-primary text-lg mb-2" />
-            <h4 className="font-display text-xl font-normal leading-snug">
+          <div className={cn("mx-auto w-full max-w-[17rem] rounded-2xl p-5 text-center border shadow-soft", isLuxury ? "border-amber-200/90 bg-gradient-to-br from-white via-amber-50/50 to-[#faf3e8]" : "border-[var(--love-border)] bg-gradient-to-br from-white via-[#fff5f7] to-[#ffeef2]")}>
+            <Heart className={isLuxury ? "mx-auto text-amber-700 text-lg mb-2" : "mx-auto text-[var(--love-crimson)] text-lg mb-2"} />
+            <h4 className="font-display text-xl font-bold leading-snug text-[var(--love-text-heading)]">
               {data.rsvp.heading || "We Would Love to Celebrate With You"}
             </h4>
 
             <button
               type="button"
-              className={cn("mt-4 w-full rounded-full py-2.5 text-xs font-semibold tracking-wider uppercase transition shadow-sm", isLuxury ? "bg-accent text-white" : "bg-primary text-white")}
+              className={cn("mt-4 w-full rounded-full py-3 text-xs font-bold tracking-wider uppercase transition shadow-md", isLuxury ? "bg-[linear-gradient(135deg,#d97706,#b45309)] text-white shadow-amber-500/20" : "bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] text-white shadow-pink-500/20")}
             >
               Confirm Your Presence
             </button>
 
             {data.rsvp.contact && (
-              <p className={isLuxury ? "text-[10px] text-white/70 mt-3" : "text-[10px] text-text-muted mt-3"}>
+              <p className="text-[10px] text-[var(--love-text-muted)] mt-3">
                 {data.rsvp.contact}
               </p>
             )}
@@ -359,10 +360,10 @@ export function WeddingRenderer({
           )}
 
           <div className="space-y-1">
-            <p className="font-serif italic text-xs text-text-muted">
+            <p className="font-serif italic text-xs text-[var(--love-text-muted)]">
               We can&apos;t wait to celebrate our special day with you.
             </p>
-            <p className={isLuxury ? "text-[11px] font-semibold uppercase tracking-widest text-accent" : "text-[11px] font-semibold uppercase tracking-widest text-primary"}>
+            <p className={isLuxury ? "text-[11px] font-bold uppercase tracking-widest text-amber-800" : "text-[11px] font-bold uppercase tracking-widest text-[var(--love-crimson)]"}>
               Together in celebration ❤️
             </p>
           </div>

@@ -24,20 +24,20 @@ export function Header() {
       className={cn(
         "sticky top-0 z-40 w-full transition-all duration-300",
         scrolled
-          ? "border-b border-border/80 bg-background/90 py-3 shadow-soft backdrop-blur-md"
-          : "border-b border-transparent bg-background/60 py-4 backdrop-blur-sm",
+          ? "border-b border-[var(--love-border)] bg-white/90 py-3 shadow-[var(--love-shadow-card)] backdrop-blur-md"
+          : "border-b border-transparent bg-white/60 py-4 backdrop-blur-sm",
       )}
     >
       <Container className="flex items-center justify-between gap-4">
         {/* Brand / Logo */}
         <a
-          href="#"
-          className="flex items-center gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+          href="/"
+          className="flex items-center gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--love-crimson)]"
         >
-          <span className="grid size-9 place-items-center rounded-full bg-text font-display text-sm font-semibold text-white shadow-sm">
+          <span className="grid size-9 place-items-center rounded-full bg-gradient-to-tr from-[var(--love-crimson)] to-[var(--love-pink)] font-display text-sm font-bold text-white shadow-md shadow-pink-500/20">
             {brand.logo}
           </span>
-          <span className="font-display text-xl tracking-tight text-text">
+          <span className="font-display text-xl tracking-tight text-[var(--love-text-heading)]">
             {brand.name}
           </span>
         </a>
