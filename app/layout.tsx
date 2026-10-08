@@ -28,7 +28,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full flex flex-col overflow-x-hidden bg-[#fffaf5] text-[#2c2224] selection:bg-[#f6dce0] selection:text-[#571424]">
+      <body className="min-h-full flex flex-col overflow-x-hidden bg-[#ffffff] text-[#1f1a1c] selection:bg-[#ffe4ea] selection:text-[#e11d48]">
         <Header />
         <div className="flex-1">{children}</div>
         <Footer />

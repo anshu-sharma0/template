@@ -21,24 +21,24 @@ export function WeddingPreview({
     <div
       className={
         luxury
-          ? "relative grid min-h-full overflow-hidden bg-[linear-gradient(180deg,#2c2524,#5b3d43_58%,#fff9ef)] p-5 text-center text-white"
-          : "relative grid min-h-full overflow-hidden bg-[linear-gradient(180deg,#fffdf9,#f3e8d8_54%,#fff8f0)] p-5 text-center text-text"
+          ? "relative grid min-h-full overflow-hidden bg-linear-to-b from-[#fff5f8] via-[#fce4ec] to-[#fff8fa] p-5 text-center text-[#1f1a1c]"
+          : "relative grid min-h-full overflow-hidden bg-linear-to-b from-[#fffbf7] via-[#fff0f3] to-[#fff8f5] p-5 text-center text-[#1f1a1c]"
       }
     >
       <div className="relative z-10 grid content-between gap-4">
         <div className="space-y-3">
-          <p className={luxury ? "text-xs text-white/70" : "text-xs text-text-muted"}>
+          <p className="text-xs font-semibold uppercase tracking-wider text-[#9d3d5e]">
             Together with their families
           </p>
           <Floral className="mx-auto justify-center opacity-80" />
           <div className="space-y-1">
-            <p className="font-display text-5xl leading-none">{firstName}</p>
-            <p className={luxury ? "font-display text-2xl text-accent" : "font-display text-2xl text-primary"}>
+            <p className="font-display text-5xl leading-none text-[#1f1a1c]">{firstName}</p>
+            <p className="font-display text-2xl text-[#e11d48]">
               &
             </p>
-            <p className="font-display text-5xl leading-none">{secondName}</p>
+            <p className="font-display text-5xl leading-none text-[#1f1a1c]">{secondName}</p>
           </div>
-          <p className={luxury ? "text-sm font-medium text-accent" : "text-sm font-medium text-primary"}>
+          <p className="text-sm font-semibold text-[#e11d48]">
             {date}
           </p>
         </div>
@@ -50,8 +50,8 @@ export function WeddingPreview({
         />
 
         <div className="space-y-2">
-          <p className="font-display text-2xl leading-tight">You are invited</p>
-          <p className={luxury ? "text-sm leading-6 text-white/70" : "text-sm leading-6 text-text-muted"}>
+          <p className="font-display text-2xl leading-tight text-[#1f1a1c]">You are invited</p>
+          <p className="text-sm leading-6 text-[#6b5e62]">
             to celebrate our beginning.
           </p>
         </div>

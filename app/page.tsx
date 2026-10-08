@@ -7,11 +7,12 @@ import { RomanticProcess } from "@/components/home/RomanticProcess";
 import { LoveStoriesAndStats } from "@/components/home/LoveStoriesAndStats";
 import { RomanticFAQ } from "@/components/home/RomanticFAQ";
 import { RomanticCTA } from "@/components/home/RomanticCTA";
+import { FloatingLoveSpark } from "@/components/interactive/FloatingLoveSpark";
 
 export default function Home() {
   return (
     <PageWrapper>
-      <main className="relative selection:bg-[#f6dce0] selection:text-[#571424]">
+      <main className="relative selection:bg-[#ffe4ea] selection:text-[#e11d48]">
         {/* 1. Romantic Hero Section with Interactive Envelope Showcase */}
         <RomanticHero />
 
@@ -35,6 +36,9 @@ export default function Home() {
 
         {/* 8. Grand Romantic Closing CTA */}
         <RomanticCTA />
+
+        {/* 9. Floating Love Spark Interactivity */}
+        <FloatingLoveSpark />
       </main>
     </PageWrapper>
   );

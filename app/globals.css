@@ -1,36 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fffaf5;
-  --surface: #fffdf9;
-  --surface-soft: #fff2ec;
-  --ivory: #fff7ed;
-  --cream: #f8efe2;
-  --primary: #b05765;
-  --primary-strong: #873d4d;
-  --primary-soft: #f6dce0;
-  --accent: #c6a15b;
-  --accent-strong: #8a6934;
-  --accent-soft: #f4ead4;
-  --lavender: #eee7f5;
-  --peach: #f6cfc2;
-  --text: #2c2524;
-  --text-muted: #7c6b67;
-  --charcoal: #191514;
-  --border: #eadbd2;
-  --success: #4f7a63;
-  --error: #a34848;
-  --radius-small: 4px;
-  --radius-medium: 8px;
-  --radius-large: 12px;
+  --background: #ffffff;
+  --surface: #ffffff;
+  --surface-soft: #fff5f7;
+  --ivory: #fffbf7;
+  --cream: #fff0f3;
+  --primary: #ff3366;
+  --primary-strong: #e11d48;
+  --primary-soft: #ffe4ea;
+  --accent: #ff6b6b;
+  --accent-strong: #d90429;
+  --accent-soft: #fff0f3;
+  --lavender: #f7edfc;
+  --peach: #ffe5ec;
+  --text: #1f1a1c;
+  --text-muted: #6b5e62;
+  --charcoal: #141113;
+  --border: #ffe0e6;
+  --success: #10b981;
+  --error: #ef4444;
+  --radius-small: 6px;
+  --radius-medium: 12px;
+  --radius-large: 20px;
   --radius-pill: 999px;
   --space-section-sm: 3rem;
   --space-section-md: 5rem;
   --space-section-lg: 7rem;
-  --ds-shadow-soft: 0 18px 48px rgba(44, 37, 36, 0.08);
-  --ds-shadow-lift: 0 28px 70px rgba(44, 37, 36, 0.13);
-  --ds-shadow-phone: 0 32px 90px rgba(44, 37, 36, 0.22);
-  --ds-shadow-inner-soft: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  --ds-shadow-soft: 0 10px 30px rgba(255, 51, 102, 0.08);
+  --ds-shadow-lift: 0 20px 50px rgba(255, 51, 102, 0.12);
+  --ds-shadow-phone: 0 24px 60px rgba(255, 51, 102, 0.15);
+  --ds-shadow-inner-soft: inset 0 1px 0 rgba(255, 255, 255, 0.9);
   --font-display-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
   --font-serif-romantic: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
   --type-display: 4.5rem;
@@ -81,6 +81,7 @@
   --animate-petal-drift-delayed: petal-drift 14s ease-in-out 1.6s infinite;
   --animate-fade-in: fade-in 900ms ease-out both;
   --animate-romantic-pulse: romantic-pulse 3s ease-in-out infinite;
+  --animate-heart-beat: heart-beat 1.6s ease-in-out infinite;
 }
 
 * {
@@ -99,8 +100,8 @@ body {
 }
 
 ::selection {
-  background: var(--primary-soft);
-  color: #571424;
+  background: #ffe4ea;
+  color: #e11d48;
 }
 
 a {
@@ -160,6 +161,19 @@ select {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.15); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.15); }
+  70% { transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
 @media (min-width: 768px) {

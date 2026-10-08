@@ -40,12 +40,15 @@ export function ImageFrame({
       role="img"
       aria-label={label}
       className={cn(
-        "relative overflow-hidden bg-[linear-gradient(135deg,#f7d8d4,#fff9ef_46%,#d8c3a4)]",
+        "relative overflow-hidden bg-linear-to-br from-[#ffe4ea] via-[#fff0f3] to-[#ffd6e0] border border-pink-200/60",
         variants[variant],
         className,
       )}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_18%,rgba(255,255,255,0.75),transparent_34%),linear-gradient(155deg,transparent_52%,rgba(44,37,36,0.16))]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_18%,rgba(255,255,255,0.85),transparent_40%),linear-gradient(155deg,transparent_52%,rgba(255,105,180,0.08))]" />
+      <div className="absolute inset-0 flex items-center justify-center text-pink-300/80 text-lg font-serif select-none pointer-events-none">
+        ♥
+      </div>
       {children ? <div className="relative z-10 h-full">{children}</div> : null}
     </div>
   );

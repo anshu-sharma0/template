@@ -54,7 +54,7 @@ export const templates = [
     name: "Luxury Wedding",
     category: "Wedding",
     description: "Sophisticated, dramatic and unforgettable.",
-    detail: "A dramatic dark-mode luxury wedding keepsake with rich gold accents, editorial photography presentation and event details.",
+    detail: "An opulent champagne rose luxury wedding keepsake with gold accents, editorial photography presentation and event details.",
     cta: "Preview Design",
     href: "#templates",
     preview: "luxuryWedding" as const,

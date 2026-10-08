@@ -80,7 +80,7 @@ export const TEMPLATE_REGISTRY: Record<string, TemplateConfig> = {
     category: "Wedding",
     description: "Sophisticated, dramatic and unforgettable.",
     detail:
-      "A dramatic dark-mode luxury wedding keepsake with rich gold accents, editorial photography presentation and event details.",
+      "An opulent champagne rose luxury wedding keepsake with gold accents, editorial photography presentation and event details.",
     theme: {
       palette: "luxury",
       background: "bg-[linear-gradient(180deg,#191514,#3d282c)]",
