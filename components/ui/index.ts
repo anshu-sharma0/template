@@ -18,3 +18,4 @@ export * from "./Skeleton";
 export * from "./UploadArea";
 export * from "./EmptyState";
 export * from "./StatCard";
+export * from "./PhoneMockup";

@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
+import { PhoneMockup, type PhonePresetData, type FloatingBadgeItem } from "@/components/ui/PhoneMockup";
 import { cn } from "@/lib/cn";
 
 export interface HeroMetric {
@@ -26,7 +27,10 @@ export interface HeroSectionProps {
   };
   metrics?: HeroMetric[];
   visualContent?: ReactNode;
-  floatingBadges?: Array<{ text: string; icon: string; position?: string }>;
+  phonePreset?: "birthday" | "romantic-letter" | "wedding" | "custom";
+  phoneTheme?: "pearl-silver" | "rose-gold" | "titanium";
+  phonePresetData?: PhonePresetData;
+  floatingBadges?: FloatingBadgeItem[];
   className?: string;
 }
 
@@ -43,6 +47,9 @@ export function HeroSection({
     { value: "100%", label: "Free Instant Draft" },
   ],
   visualContent,
+  phonePreset = "birthday",
+  phoneTheme = "pearl-silver",
+  phonePresetData,
   floatingBadges = [
     { text: "Interactive Music 🎵", icon: "✨", position: "top-4 -left-6" },
     { text: "RSVP & Map Ready 📍", icon: "💌", position: "bottom-8 -right-6" },
@@ -125,50 +132,12 @@ export function HeroSection({
             {visualContent ? (
               <div className="w-full">{visualContent}</div>
             ) : (
-              <div className="relative w-full max-w-md">
-                {/* Phone mockup container */}
-                <div className="relative mx-auto w-[280px] sm:w-[320px] rounded-[40px] border-[8px] border-[var(--love-border)] bg-white p-3 shadow-love-phone">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 h-4 w-28 rounded-b-xl bg-pink-300/40 z-20" />
-                  <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-b from-white via-[var(--love-surface-blush)] to-[var(--love-surface-rose)] p-5 text-center min-h-[460px] flex flex-col justify-between border border-[var(--love-border)]">
-                    <div className="mt-4">
-                      <div className="inline-block rounded-full bg-[var(--love-surface-blush)] border border-[var(--love-border)] px-3 py-1 text-[10px] font-bold text-[var(--love-crimson)]">
-                        SURPRISE UNLOCKED 🎁
-                      </div>
-                      <h3 className="mt-3 font-serif text-2xl font-bold text-[var(--love-text-heading)]">Happy Birthday, Khushi! 🎂</h3>
-                      <p className="mt-2 text-xs text-[var(--love-text-muted)]">Make a wish & blow the candles!</p>
-                    </div>
-
-                    <div className="my-6 space-y-3">
-                      <div className="rounded-2xl bg-white/95 p-4 shadow-love-card border border-[var(--love-border)] backdrop-blur-xs">
-                        <div className="text-3xl">🕯️ 🎂 ✨</div>
-                        <div className="mt-2 text-xs font-semibold text-[var(--love-crimson)]">Tap to Blow Candles</div>
-                      </div>
-                      <div className="rounded-2xl bg-white/95 p-3 shadow-love-card border border-[var(--love-border)] flex items-center justify-between text-xs">
-                        <span className="font-semibold text-[var(--love-text-heading)]">🎵 Playing: Perfect Day</span>
-                        <span className="size-2 rounded-full bg-emerald-500 animate-ping" />
-                      </div>
-                    </div>
-
-                    <button className="w-full rounded-full bg-gradient-to-r from-[var(--love-crimson)] to-[var(--love-pink)] py-2.5 text-xs font-bold text-white shadow-love-lift cursor-pointer">
-                      Open Memory Gallery 💌
-                    </button>
-                  </div>
-                </div>
-
-                {/* Floating pill badges */}
-                {floatingBadges.map((badge, idx) => (
-                  <div
-                    key={idx}
-                    className={cn(
-                      "hidden sm:flex items-center gap-2 absolute rounded-2xl bg-white/95 px-4 py-2.5 shadow-love-card border border-[var(--love-border)] backdrop-blur-md z-30 animate-bounce duration-1000",
-                      badge.position || "top-10 -left-8"
-                    )}
-                  >
-                    <span className="text-base">{badge.icon}</span>
-                    <span className="text-xs font-semibold text-[var(--love-text-heading)]">{badge.text}</span>
-                  </div>
-                ))}
-              </div>
+              <PhoneMockup
+                preset={phonePreset}
+                theme={phoneTheme}
+                presetData={phonePresetData}
+                floatingBadges={floatingBadges}
+              />
             )}
           </div>
 

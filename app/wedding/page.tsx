@@ -73,6 +73,11 @@ export default function WeddingLandingPage() {
             { value: "99.8%", label: "RSVP Response Rate" },
             { value: "Free", label: "Instant Draft" },
           ]}
+          phonePreset="wedding"
+          floatingBadges={[
+            { text: "Live RSVP Tracker 💌", icon: "✨", position: "top-4 -left-6" },
+            { text: "Google Maps Venue 📍", icon: "💍", position: "bottom-8 -right-6" },
+          ]}
         />
 
         {/* 2. Template Showcase Section */}
