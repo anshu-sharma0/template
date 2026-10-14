@@ -55,6 +55,8 @@ export type BirthdayWishData = {
   specialReasons?: SpecialReasonItem[];
   quote?: string;
   music: string; // "romantic" | "acoustic" | "ambient" | "none"
+  cakeFlavor?: string;
+  videoUrl?: string;
 };
 
 export type BirthdayTemplateConfig = {

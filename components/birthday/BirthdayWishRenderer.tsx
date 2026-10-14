@@ -1,134 +1,188 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import type { BirthdayWishData } from "@/lib/birthday-types";
-import { playRomanticChime } from "@/lib/romanticAudio";
+import { playBirthdayMelody, stopBirthdayMelody } from "@/lib/romanticAudio";
 
-import { BirthdayUnboxingGate } from "./BirthdayUnboxingGate";
-import { BirthdayHeroSection } from "./BirthdayHeroSection";
-import { BirthdayCountdownAndCandles } from "./BirthdayCountdownAndCandles";
-import { BirthdayMemoriesFilmstrip } from "./BirthdayMemoriesFilmstrip";
-import { BirthdaySpecialReasons } from "./BirthdaySpecialReasons";
-import { BirthdayPersonalLetter } from "./BirthdayPersonalLetter";
-import { BirthdayQuoteSection } from "./BirthdayQuoteSection";
-import { BirthdayFinaleCelebration } from "./BirthdayFinaleCelebration";
+import { BirthdayTopBar } from "./BirthdayTopBar";
+import { BirthdayCraftingStage } from "./BirthdayCraftingStage";
+import { BirthdayCupidStage } from "./BirthdayCupidStage";
+import { BirthdayWishFlashStage } from "./BirthdayWishFlashStage";
+import { BirthdayBloomingTreeStage } from "./BirthdayBloomingTreeStage";
+import { BirthdayCakeStage } from "./BirthdayCakeStage";
+import { BirthdayBalloonsStage } from "./BirthdayBalloonsStage";
+import { BirthdayLetterStage } from "./BirthdayLetterStage";
+import { BirthdayVideoStage } from "./BirthdayVideoStage";
+import { BirthdayFinaleStage } from "./BirthdayFinaleStage";
 
-type BirthdayWishRendererProps = {
+export interface BirthdayWishRendererProps {
   data: BirthdayWishData;
   compact?: boolean;
   autoOpen?: boolean;
-};
+  onBack?: () => void;
+  onShare?: () => void;
+  isPreview?: boolean;
+}
 
 export function BirthdayWishRenderer({
   data,
   compact = false,
   autoOpen = false,
+  onBack,
+  onShare,
+  isPreview = true,
 }: BirthdayWishRendererProps) {
-  const [isOpen, setIsOpen] = useState(autoOpen);
+  // Stages: 0 (Crafting), 1 (Cupid), 2 (Wish Flash), 3 (Blooming Tree), 4 (Cake), 5 (Balloons), 6 (Letter), 7 (Video), 8 (Finale)
+  const [stage, setStage] = useState(autoOpen ? 1 : 0);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
 
-  const recipient = data.recipientName || "Khushi";
-  const sender = data.senderName || "Akshat";
+  const recipient = data.recipientName || "Clarke Foley";
+  const sender = data.senderName || "Mohammed Anthony";
+  const age = data.age || "8";
+  const cakeFlavor = data.cakeFlavor || "Strawberry Blush";
 
-  const handleOpenExperience = () => {
-    setIsOpen(true);
-    setIsPlayingMusic(true);
-    playRomanticChime();
+  const toggleMusic = useCallback(() => {
+    setIsPlayingMusic((prev) => {
+      const next = !prev;
+      if (next) {
+        playBirthdayMelody();
+      } else {
+        stopBirthdayMelody();
+      }
+      return next;
+    });
+  }, []);
+
+  // Cleanup music when component unmounts
+  useEffect(() => {
+    return () => {
+      stopBirthdayMelody();
+    };
+  }, []);
+
+  // Keyboard navigation support (Arrow Right / Space -> next stage, Arrow Left -> prev stage)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") {
+        setStage((prev) => Math.min(prev + 1, 8));
+      } else if (e.key === "ArrowLeft") {
+        setStage((prev) => Math.max(prev - 1, 0));
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  const handleNextStage = () => {
+    setStage((prev) => Math.min(prev + 1, 8));
   };
 
-  const handleToggleMusic = () => {
-    const next = !isPlayingMusic;
-    if (next) {
-      playRomanticChime();
+  const handlePrevStage = () => {
+    if (stage > 0) {
+      setStage((prev) => prev - 1);
+    } else if (onBack) {
+      onBack();
     }
-    setIsPlayingMusic(next);
   };
 
-  // Phase 1: Sealed Unboxing Gatekeeper Screen
-  if (!isOpen) {
-    return (
-      <BirthdayUnboxingGate
-        recipientName={recipient}
-        senderName={sender}
-        onOpen={handleOpenExperience}
-      />
-    );
-  }
+  const handleRestart = () => {
+    setStage(0);
+  };
 
-  // Phase 2: Full Living Keepsake Digital Gift Experience
   return (
-    <div className="relative min-h-full overflow-y-auto bg-gradient-to-b from-[var(--love-canvas-ivory)] via-[var(--love-surface-blush)] to-[var(--love-surface-peach)] text-[var(--love-text-heading)] select-none transition-all duration-700 animate-in fade-in zoom-in-95">
-      {/* Sticky Top Audio Control Bar */}
-      <div className="sticky top-0 z-40 flex items-center justify-between px-4 py-2.5 bg-white/80 backdrop-blur-md border-b border-[var(--love-border-subtle)]">
-        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[var(--love-crimson)]">
-          <span className="size-2 rounded-full bg-[var(--love-crimson)] animate-ping" />
-          <span>Birthday Surprise</span>
-        </div>
-
-        <button
-          type="button"
-          onClick={handleToggleMusic}
-          className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 border border-[var(--love-border)] text-[10px] font-bold text-[var(--love-crimson)] shadow-2xs hover:bg-[var(--love-surface-blush)] transition-colors"
-        >
-          {isPlayingMusic ? (
-            <div className="flex items-center gap-0.5 h-3 px-0.5">
-              <span className="w-0.5 h-2 bg-[var(--love-rose)] rounded-full animate-pulse" />
-              <span className="w-0.5 h-3 bg-[var(--love-crimson)] rounded-full animate-bounce" />
-              <span className="w-0.5 h-1.5 bg-[var(--love-pink)] rounded-full animate-pulse" />
-            </div>
-          ) : (
-            <span>🔈</span>
-          )}
-          <span>{isPlayingMusic ? "Playing Melody" : "Muted"}</span>
-        </button>
-      </div>
-
-      {/* Chapter 1: Birthday Hero & Radiant Identity */}
-      <BirthdayHeroSection
-        recipientName={recipient}
-        relationship={data.relationship || ""}
-        age={data.age}
-        birthDate={data.birthDate}
-        mainPhoto={data.mainPhoto}
+    <div
+      className={`relative w-full h-full min-h-full overflow-hidden select-none transition-colors duration-700 ${
+        compact ? "rounded-3xl" : ""
+      }`}
+    >
+      {/* Universal Top Nav Bar Matching Reference Video */}
+      <BirthdayTopBar
+        currentStage={stage}
+        totalStages={9}
+        isPlayingMusic={isPlayingMusic}
+        onToggleMusic={toggleMusic}
+        onBack={handlePrevStage}
+        isPreview={isPreview}
       />
 
-      {/* Chapter 2: Dynamic Countdown & Interactive Candle Ritual */}
-      <BirthdayCountdownAndCandles
-        birthDate={data.birthDate}
-        recipientName={recipient}
-      />
+      {/* Chapter 0: Crafting Surprise Checklist Screen (00:00 - 00:04) */}
+      {stage === 0 && (
+        <BirthdayCraftingStage
+          recipientName={recipient}
+          senderName={sender}
+          age={age}
+          cakeFlavor={cakeFlavor}
+          balloonsCount={data.specialReasons?.length || 5}
+          onComplete={handleNextStage}
+        />
+      )}
 
-      {/* Chapter 3: "Our Memories" Polaroid Film-strip */}
-      <BirthdayMemoriesFilmstrip
-        memories={data.memories}
-        fallbackPhotos={data.photos}
-        recipientName={recipient}
-      />
+      {/* Chapter 1: Cupid's Bow & Heart Shoot (00:05 - 00:10) */}
+      {stage === 1 && (
+        <BirthdayCupidStage onComplete={handleNextStage} />
+      )}
 
-      {/* Chapter 4: "Why You're Special" Soul Cards */}
-      <BirthdaySpecialReasons
-        reasons={data.specialReasons}
-        recipientName={recipient}
-      />
+      {/* Chapter 2: Make a Wish Flash Reveal (00:11 - 00:13) */}
+      {stage === 2 && (
+        <BirthdayWishFlashStage onComplete={handleNextStage} />
+      )}
 
-      {/* Chapter 5: "From My Heart" Personal Love Letter */}
-      <BirthdayPersonalLetter
-        message={data.message}
-        senderName={sender}
-        recipientName={recipient}
-      />
+      {/* Chapter 3: The Blooming Heart Tree (00:14 - 00:20) */}
+      {stage === 3 && (
+        <BirthdayBloomingTreeStage
+          recipientName={recipient}
+          age={age}
+          onComplete={handleNextStage}
+        />
+      )}
 
-      {/* Chapter 6: The Timeless Birthday Quote */}
-      <BirthdayQuoteSection
-        quote={data.quote}
-        recipientName={recipient}
-      />
+      {/* Chapter 4: Cake Baking & Candle Ritual (00:21 - 00:32) */}
+      {stage === 4 && (
+        <BirthdayCakeStage
+          recipientName={recipient}
+          onComplete={handleNextStage}
+        />
+      )}
 
-      {/* Chapter 7: Emotional Climax & Love Reciprocation Finale */}
-      <BirthdayFinaleCelebration
-        recipientName={recipient}
-        senderName={sender}
-      />
+      {/* Chapter 5: Balloon Popping Reasons (00:33 - 00:39) */}
+      {stage === 5 && (
+        <BirthdayBalloonsStage
+          reasons={data.specialReasons}
+          onComplete={handleNextStage}
+        />
+      )}
+
+      {/* Chapter 6: The Golden Wax-Sealed Letter (00:40 - 00:49) */}
+      {stage === 6 && (
+        <BirthdayLetterStage
+          recipientName={recipient}
+          senderName={sender}
+          message={data.message}
+          onComplete={handleNextStage}
+        />
+      )}
+
+      {/* Chapter 7: Surprise Memory Video Clip (00:50 - 01:03) */}
+      {stage === 7 && (
+        <BirthdayVideoStage
+          recipientName={recipient}
+          videoUrl={data.videoUrl || "/template.webm"}
+          mainPhoto={data.mainPhoto}
+          onComplete={handleNextStage}
+        />
+      )}
+
+      {/* Chapter 8: Grand Birthday Finale Celebration (01:04 - 01:09) */}
+      {stage === 8 && (
+        <BirthdayFinaleStage
+          recipientName={recipient}
+          senderName={sender}
+          onRestart={handleRestart}
+          onShare={onShare}
+          isPreview={isPreview}
+        />
+      )}
     </div>
   );
 }

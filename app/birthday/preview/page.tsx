@@ -23,9 +23,10 @@ function BirthdayPreviewContent() {
 
   const [restartKey, setRestartKey] = useState(0);
   const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<"fullscreen" | "phone">("fullscreen");
 
   return (
-    <div className="flex min-h-screen flex-col bg-linear-to-b from-[#fffbf8] via-[#fff5f7] to-[#fff0f3] text-[#1f1a1c]">
+    <div className="flex min-h-screen flex-col bg-[#130b24] text-white">
       {/* Reusable Preview Toolbar */}
       <PreviewToolbar
         creation={creation}
@@ -33,20 +34,60 @@ function BirthdayPreviewContent() {
         onTemplateChange={setTemplate}
         onRestartExperience={() => setRestartKey((prev) => prev + 1)}
         onPublishClick={() => setIsPublishModalOpen(true)}
-        theme="light"
+        theme="dark"
       />
 
-      {/* Main Fullscreen Preview Stage */}
-      <main className="flex flex-1 items-center justify-center p-4 sm:p-8 overflow-y-auto">
-        <div className="relative w-full max-w-88">
-          <PhonePreview size="lg" className="mx-auto shadow-phone">
+      {/* View Mode Toggle Pill Bar */}
+      <div className="flex items-center justify-center gap-2 py-2 px-4 bg-white/5 border-b border-white/10 text-xs">
+        <span className="text-white/60 font-medium">Display Mode:</span>
+        <button
+          type="button"
+          onClick={() => setViewMode("fullscreen")}
+          className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
+            viewMode === "fullscreen"
+              ? "bg-amber-400 text-amber-950 shadow-xs"
+              : "bg-white/10 text-white/80 hover:bg-white/20"
+          }`}
+        >
+          🖥️ Fullscreen (Reference Style)
+        </button>
+        <button
+          type="button"
+          onClick={() => setViewMode("phone")}
+          className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
+            viewMode === "phone"
+              ? "bg-amber-400 text-amber-950 shadow-xs"
+              : "bg-white/10 text-white/80 hover:bg-white/20"
+          }`}
+        >
+          📱 Phone Bezel Mockup
+        </button>
+      </div>
+
+      {/* Main Preview Stage */}
+      <main className="flex flex-1 items-center justify-center overflow-hidden">
+        {viewMode === "fullscreen" ? (
+          <div className="w-full h-full min-h-[calc(100vh-6.5rem)] flex items-center justify-center">
             <CreationRenderer
               key={restartKey}
               creation={creation}
               autoOpen={shouldAutoOpen}
             />
-          </PhonePreview>
-        </div>
+          </div>
+        ) : (
+          <div className="p-4 sm:p-8">
+            <div className="relative w-full max-w-88">
+              <PhonePreview size="lg" className="mx-auto shadow-phone">
+                <CreationRenderer
+                  key={restartKey}
+                  creation={creation}
+                  autoOpen={shouldAutoOpen}
+                  compact
+                />
+              </PhonePreview>
+            </div>
+          </div>
+        )}
       </main>
 
       {/* Publish Ready Modal */}

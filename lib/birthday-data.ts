@@ -64,13 +64,14 @@ export const MUSIC_TRACKS: MusicTrackOption[] = [
 ];
 
 export const DEFAULT_BIRTHDAY_DATA: BirthdayWishData = {
-  recipientName: "Khushi",
+  recipientName: "Clarke Foley",
   relationship: "Partner",
-  age: "25",
-  birthDate: "2026-10-14",
-  senderName: "Akshat",
+  age: "8",
+  birthDate: "2018-10-14",
+  senderName: "Mohammed Anthony",
+  cakeFlavor: "Strawberry Blush",
   message:
-    "Happy birthday to the person who makes my world feel a little softer and brighter every single day.\n\nLooking back at our journey, I realize that every ordinary day becomes an adventure simply because you are in it. Thank you for your warmth, your unwavering patience, and for loving me so purely.\n\nI hope this year brings you as much unconditional happiness as you bring into my life every single moment.",
+    "Every year I try to find the perfect words and every year I fall short, so here is the honest version. You make my most ordinary days feel worth remembering. Happy birthday, my favourite person. I keep thinking about how lucky I got with you. You have seen me at my worst and stayed anyway, and I do not say thank you nearly enough for that. This year, I hope life is gentle with you...",
   messageStyle: "Romantic",
   mainPhoto: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
   photos: [
@@ -97,29 +98,35 @@ export const DEFAULT_BIRTHDAY_DATA: BirthdayWishData = {
   ],
   specialReasons: [
     {
-      emoji: "🌹",
-      title: "Your Gentle Heart",
-      description: "The way you notice the smallest details and make everyone around you feel deeply valued and safe.",
+      emoji: "💖",
+      title: "Reason No. 1",
+      description: "You make every room brighter and warmer the second you walk into it.",
+    },
+    {
+      emoji: "🌸",
+      title: "Reason No. 2",
+      description: "The way you laugh until your cheeks hurt and make everyone laugh with you.",
     },
     {
       emoji: "✨",
-      title: "Your Radiant Smile",
-      description: "The one thing that instantly turns any stressful day into comfort, warmth, and pure sunshine.",
+      title: "Reason No. 3",
+      description: "How deeply and purely you care about everyone around you.",
     },
     {
-      emoji: "💫",
-      title: "Your Inspiring Spirit",
-      description: "The quiet determination and passionate energy you pour into every single dream you chase.",
+      emoji: "🌟",
+      title: "Reason No. 4",
+      description: "Your gentle patience and the comforting peace you bring to my soul.",
     },
     {
-      emoji: "💖",
-      title: "Your Unconditional Love",
-      description: "The sweet, calming reassurance of knowing that no matter what happens, with you I am always home.",
+      emoji: "🌹",
+      title: "Reason No. 5",
+      description: "Because simply having you in this world is the greatest blessing.",
     },
   ],
   quote:
     "Another year of you means another year of making the world a little softer, a little brighter, and infinitely more beautiful.",
   music: "romantic",
+  videoUrl: "/template.webm",
 };
 
 export const STORAGE_KEY = "lumavows_birthday_wish_draft";

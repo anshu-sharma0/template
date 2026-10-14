@@ -67,8 +67,8 @@ export default async function PublicBirthdayPage({
 
   if (slug === "demo" || slug === "sample") {
     return (
-      <main className="min-h-screen w-full bg-linear-to-b from-[#fffbf8] via-[#fff5f7] to-[#fff0f3] flex justify-center">
-        <div className="w-full max-w-md min-h-screen shadow-2xl bg-white">
+      <main className="min-h-screen w-full bg-[#130b24] flex justify-center">
+        <div className="w-full min-h-screen">
           <CreationRenderer
             creation={{
               type: "birthday",
@@ -89,8 +89,8 @@ export default async function PublicBirthdayPage({
   }
 
   return (
-    <main className="min-h-screen w-full bg-linear-to-b from-[#fffbf8] via-[#fff5f7] to-[#fff0f3] flex justify-center">
-      <div className="w-full max-w-md min-h-screen shadow-2xl bg-white">
+    <main className="min-h-screen w-full bg-[#130b24] flex justify-center">
+      <div className="w-full min-h-screen">
         <CreationRenderer
           creation={{
             type: "birthday",
